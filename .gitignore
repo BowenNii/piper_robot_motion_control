@@ -1,0 +1,27 @@
+# Build
+build/
+install/
+log/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Compiled files
+*.o
+*.a
+*.so
+
+# IDE
+.vscode/
+
+# MATLAB
+*.asv
+*.m~
+
+# Temporary
+*.tmp
+*.swp

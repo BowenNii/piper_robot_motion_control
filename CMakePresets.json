@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/debug",
+            "installDir": "${sourceDir}/install/debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/release",
+            "installDir": "${sourceDir}/install/release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS_RELEASE": "-O3 -march=native -Wall -Wextra"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug-build",
+            "displayName": "Build Debug",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release-build",
+            "displayName": "Build Release",
+            "configurePreset": "release"
+        }
+    ]
+}

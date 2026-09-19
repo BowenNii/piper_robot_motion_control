@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - -I/home/nbw/piper_robot_motion_control/core/include
+    - -isystem/usr/include/eigen3
