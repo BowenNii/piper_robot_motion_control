@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(piper_robot_motion_control LANGUAGES CXX)
 
-# 所有可执行文件输出到build根目录
+# 所有可执行文件输出到 build 根目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(CMAKE_CXX_STANDARD 17)
@@ -19,15 +19,19 @@ add_library(piper_control
     core/src/kinematics/singularity.cpp
     core/src/kinematics/ik_solver.cpp
 )
+
 target_include_directories(piper_control
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/core/include
 )
+
 target_link_libraries(piper_control
     PUBLIC
         Eigen3::Eigen
 )
+
 target_compile_features(piper_control PUBLIC cxx_std_17)
+
 target_compile_options(piper_control
     PRIVATE
         -Wall
@@ -35,11 +39,25 @@ target_compile_options(piper_control
         -Wpedantic
 )
 
-# ====================== Demo程序 ======================
+# ====================== 现有 FK Demo ======================
 add_executable(fk_demo
     apps/fk_demo/main.cpp
 )
-target_link_libraries(fk_demo PRIVATE piper_control)
+
+target_link_libraries(fk_demo
+    PRIVATE
+        piper_control
+)
+
+# ====================== Project 1 ======================
+add_executable(project1
+    apps/project1/main.cpp
+)
+
+target_link_libraries(project1
+    PRIVATE
+        piper_control
+)
 
 # ====================== 单元测试 + CTest ======================
 enable_testing()
@@ -48,15 +66,25 @@ enable_testing()
 add_executable(test_so3
     tests/unit/test_so3.cpp
 )
-target_link_libraries(test_so3 PRIVATE piper_control)
+
+target_link_libraries(test_so3
+    PRIVATE
+        piper_control
+)
+
 add_test(NAME SO3Test COMMAND test_so3)
 
 # test_se3
-# add_executable(test_se3
-#     tests/unit/test_se3.cpp
-# )
-# target_link_libraries(test_se3 PRIVATE piper_control)
-# add_test(NAME SE3Test COMMAND test_se3)
+add_executable(test_se3
+    tests/unit/test_se3.cpp
+)
+
+target_link_libraries(test_se3
+    PRIVATE
+        piper_control
+)
+
+add_test(NAME SE3Test COMMAND test_se3)
 
 # test_poe_fk
 # add_executable(test_poe_fk
@@ -71,4 +99,3 @@ add_test(NAME SO3Test COMMAND test_so3)
 # )
 # target_link_libraries(test_jacobian PRIVATE piper_control)
 # add_test(NAME JacobianTest COMMAND test_jacobian)
-

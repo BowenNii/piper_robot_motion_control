@@ -1,6 +1,5 @@
 #include "piper_control/lie_group/se3.hpp"
 
-#include <cassert>
 #include <cmath>
 
 #include "piper_control/common/constants.hpp"
@@ -11,10 +10,13 @@ namespace piper_control
 
 Mat4 twist_hat(const Twist& xi)
 {
+    const Vec3 omega = xi.head<3>();
+    const Vec3 v = xi.tail<3>();
+
     Mat4 Xi = Mat4::Zero();
 
-    Xi.block<3, 3>(0, 0) = skew(xi.head<3>());
-    Xi.block<3, 1>(0, 3) = xi.tail<3>();
+    Xi.block<3, 3>(0, 0) = skew(omega);
+    Xi.block<3, 1>(0, 3) = v;
 
     return Xi;
 }
@@ -34,14 +36,10 @@ Mat4 se3_inverse(const Mat4& T)
     const Mat3 R = T.block<3, 3>(0, 0);
     const Vec3 p = T.block<3, 1>(0, 3);
 
-    Mat4 T_inv = Mat4::Identity();
+    const Mat3 R_inv = R.transpose();
+    const Vec3 p_inv = -R_inv * p;
 
-    const Mat3 R_transpose = R.transpose();
-
-    T_inv.block<3, 3>(0, 0) = R_transpose;
-    T_inv.block<3, 1>(0, 3) = -R_transpose * p;
-
-    return T_inv;
+    return se3_from_rt(R_inv, p_inv);
 }
 
 Mat6 adjoint(const Mat4& T)
@@ -52,6 +50,7 @@ Mat6 adjoint(const Mat4& T)
     Mat6 Ad = Mat6::Zero();
 
     Ad.block<3, 3>(0, 0) = R;
+    Ad.block<3, 3>(0, 3).setZero();
     Ad.block<3, 3>(3, 0) = skew(p) * R;
     Ad.block<3, 3>(3, 3) = R;
 
@@ -71,6 +70,7 @@ Mat6 little_ad(const Twist& V)
     Mat6 ad = Mat6::Zero();
 
     ad.block<3, 3>(0, 0) = skew(omega);
+    ad.block<3, 3>(0, 3).setZero();
     ad.block<3, 3>(3, 0) = skew(v);
     ad.block<3, 3>(3, 3) = skew(omega);
 
@@ -84,20 +84,12 @@ Mat4 se3_exp(const Twist& xi)
 
     const double theta = phi.norm();
 
-    Mat3 R;
-    Mat3 V;
+    Mat3 V = Mat3::Identity();
 
     if (theta < kSmallAngle)
     {
         const Mat3 Phi = skew(phi);
-
-        R = Mat3::Identity()
-          + Phi
-          + 0.5 * Phi * Phi;
-
-        V = Mat3::Identity()
-          + 0.5 * Phi
-          + (1.0 / 6.0) * Phi * Phi;
+        V += 0.5 * Phi + (1.0 / 6.0) * Phi * Phi;
     }
     else
     {
@@ -105,15 +97,13 @@ Mat4 se3_exp(const Twist& xi)
         const double theta2 = theta * theta;
         const double theta3 = theta2 * theta;
 
-        R = Mat3::Identity()
-          + (std::sin(theta) / theta) * Phi
-          + ((1.0 - std::cos(theta)) / theta2) * Phi * Phi;
+        const double A = (1.0 - std::cos(theta)) / theta2;
+        const double B = (theta - std::sin(theta)) / theta3;
 
-        V = Mat3::Identity()
-          + ((1.0 - std::cos(theta)) / theta2) * Phi
-          + ((theta - std::sin(theta)) / theta3) * Phi * Phi;
+        V += A * Phi + B * Phi * Phi;
     }
 
+    const Mat3 R = so3_exp(phi);
     const Vec3 p = V * rho;
 
     return se3_from_rt(R, p);
@@ -125,50 +115,34 @@ Twist se3_log(const Mat4& T)
     const Vec3 p = T.block<3, 1>(0, 3);
 
     const Vec3 phi = so3_log(R);
-
     const double theta = phi.norm();
 
-    Twist xi = Twist::Zero();
-
-    if (theta < kSmallAngle)
-    {
-        xi.head<3>().setZero();
-        xi.tail<3>() = p;
-
-        return xi;
-    }
+    Mat3 V_inv = Mat3::Identity();
 
     const Mat3 Phi = skew(phi);
 
-    double A;
-
-    if (theta < 1e-4)
+    if (theta < kSmallAngle)
     {
-        const double theta2 = theta * theta;
-        const double theta4 = theta2 * theta2;
-
-        A = 1.0 / 12.0
-          + theta2 / 720.0
-          + theta4 / 30240.0;
+        V_inv += -0.5 * Phi + (1.0 / 12.0) * Phi * Phi;
     }
     else
     {
         const double half_theta = 0.5 * theta;
 
-        const double cot_half_theta =
-            std::cos(half_theta) / std::sin(half_theta);
+        const double sin_half = std::sin(half_theta);
+        const double cos_half = std::cos(half_theta);
 
-        A = (1.0 - half_theta * cot_half_theta)
-          / (theta * theta);
+        const double cot_half = cos_half / sin_half;
+
+        const double A =
+            (1.0 - 0.5 * theta * cot_half) / (theta * theta);
+
+        V_inv += -0.5 * Phi + A * Phi * Phi;
     }
-
-    const Mat3 V_inv =
-          Mat3::Identity()
-        - 0.5 * Phi
-        + A * Phi * Phi;
 
     const Vec3 rho = V_inv * p;
 
+    Twist xi;
     xi.head<3>() = phi;
     xi.tail<3>() = rho;
 
