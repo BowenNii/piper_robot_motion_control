@@ -8,7 +8,8 @@
             "binaryDir": "${sourceDir}/build/debug",
             "installDir": "${sourceDir}/install/debug",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
@@ -19,7 +20,7 @@
             "installDir": "${sourceDir}/install/release",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_CXX_FLAGS_RELEASE": "-O3 -march=native -Wall -Wextra"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         }
     ],
@@ -33,6 +34,16 @@
             "name": "release-build",
             "displayName": "Build Release",
             "configurePreset": "release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug-test",
+            "displayName": "Test Debug",
+            "configurePreset": "debug",
+            "output": {
+                "outputOnFailure": true
+            }
         }
     ]
 }

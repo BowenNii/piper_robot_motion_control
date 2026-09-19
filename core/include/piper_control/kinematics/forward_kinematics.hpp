@@ -5,10 +5,14 @@
 namespace piper_control
 {
 
-/**
- * @brief POE空间形式正运动学.
+/*【FK-01】
+ * @brief 使用 POE 空间形式计算正运动学。
  *
- * T(q) = exp([S1]q1) ... exp([Sn]qn) M
+ * @param S_list：6×n 空间螺旋轴矩阵，每列为一个 screw axis。
+ * @param q：n×1 关节位置向量。
+ * @param M：home configuration 下的末端齐次变换矩阵。
+ *
+ * @return：当前关节位置 q 下的末端齐次变换矩阵 T(q)。
  */
 Mat4 forward_poe(
     const MatXd& S_list,

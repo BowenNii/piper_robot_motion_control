@@ -5,30 +5,35 @@
 namespace piper_control
 {
 
-/**
- * @brief 根据旋转轴 omega 和轴上一点 q 创建旋转关节 screw axis.
+/*【SCREW-01】
+ * @brief 根据旋转轴和轴上一点构造旋转关节 screw axis。
  *
- * S = [omega; v]
- * v = -omega × q
+ * @param omega：3×1 旋转轴方向向量。
+ * @param point：3×1 旋转轴上一点。
  *
- * omega 不要求单位化，函数内部会单位化。
+ * @return：6×1 旋转关节 screw axis。
  */
 Twist make_revolute_screw_axis(
     const Vec3& omega,
     const Vec3& point);
 
-/**
- * @brief 创建移动关节 screw axis.
+/*【SCREW-02】
+ * @brief 根据移动方向构造移动关节 screw axis。
  *
- * S = [0; v]
+ * @param direction：3×1 移动方向向量。
+ *
+ * @return：6×1 移动关节 screw axis。
  */
 Twist make_prismatic_screw_axis(
     const Vec3& direction);
 
-/**
- * @brief exp([S] * theta)
+/*【SCREW-03】
+ * @brief 计算 screw axis 的指数映射。
  *
- * S 应为单位 screw axis.
+ * @param S：6×1 screw axis。
+ * @param theta：关节变量。
+ *
+ * @return：4×4 齐次变换矩阵 exp([S]theta)。
  */
 Mat4 screw_exp(
     const Twist& S,

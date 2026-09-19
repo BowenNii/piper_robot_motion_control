@@ -30,7 +30,7 @@ int main()
         << std::setprecision(6)
         << "POE FK result:\n"
         << T
-        << "\n\n";
+        << "project2\n\n";
 
     return 0;
 }

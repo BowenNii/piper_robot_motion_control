@@ -1,28 +1,30 @@
 #include "piper_control/kinematics/singularity.hpp"
 
 #include <Eigen/SVD>
-
 #include <cassert>
 #include <cmath>
-#include <limits>
 
 namespace piper_control
 {
 
-Eigen::VectorXd singular_values(
-    const MatXd& J)
+/*【SING-01】
+ * @brief 计算 Jacobian 的奇异值。
+ */
+VecXd singular_values(const MatXd& J)
 {
-    Eigen::JacobiSVD<MatXd> svd(
-        J,
-        Eigen::ComputeThinU | Eigen::ComputeThinV);
+    assert(J.rows() > 0);
+    assert(J.cols() > 0);
 
+    Eigen::JacobiSVD<MatXd> svd(J);
     return svd.singularValues();
 }
 
-double minimum_singular_value(
-    const MatXd& J)
+/*【SING-02】
+ * @brief 计算 Jacobian 的最小奇异值。
+ */
+double minimum_singular_value(const MatXd& J)
 {
-    const Eigen::VectorXd sigma = singular_values(J);
+    const VecXd sigma = singular_values(J);
 
     if (sigma.size() == 0)
     {
@@ -32,14 +34,16 @@ double minimum_singular_value(
     return sigma(sigma.size() - 1);
 }
 
-double condition_number(
-    const MatXd& J)
+/*【SING-03】
+ * @brief 计算 Jacobian 的条件数。
+ */
+double condition_number(const MatXd& J)
 {
-    const Eigen::VectorXd sigma = singular_values(J);
+    const VecXd sigma = singular_values(J);
 
     if (sigma.size() == 0)
     {
-        return std::numeric_limits<double>::infinity();
+        return 0.0;
     }
 
     const double sigma_max = sigma(0);
@@ -47,64 +51,77 @@ double condition_number(
 
     if (sigma_min <= 1e-12)
     {
-        return std::numeric_limits<double>::infinity();
+        return 1e12;
     }
 
     return sigma_max / sigma_min;
 }
 
-double manipulability(
-    const MatXd& J)
+/*【SING-04】
+ * @brief 计算 Jacobian 的可操作度。
+ */
+double manipulability(const MatXd& J)
 {
-    const Eigen::VectorXd sigma = singular_values(J);
+    assert(J.rows() > 0);
+    assert(J.cols() > 0);
+
+    const VecXd sigma = singular_values(J);
 
     if (sigma.size() == 0)
     {
         return 0.0;
     }
 
-    double product = 1.0;
+    double w = 1.0;
 
     for (Eigen::Index i = 0; i < sigma.size(); ++i)
     {
-        product *= sigma(i);
+        w *= sigma(i);
     }
 
-    return product;
+    return w;
 }
 
+/*【SING-05】
+ * @brief 使用 SVD 计算 Jacobian 伪逆。
+ */
 MatXd pseudoinverse_svd(
     const MatXd& J,
     double tolerance)
 {
+    assert(J.rows() > 0);
+    assert(J.cols() > 0);
     assert(tolerance >= 0.0);
 
     Eigen::JacobiSVD<MatXd> svd(
         J,
-        Eigen::ComputeThinU | Eigen::ComputeThinV);
+        Eigen::ComputeFullU | Eigen::ComputeFullV);
 
-    const auto& singular = svd.singularValues();
+    const VecXd sigma = svd.singularValues();
 
-    MatXd Sigma_inv =
-        MatXd::Zero(
-            svd.matrixV().cols(),
-            svd.matrixU().cols());
+    MatXd sigma_inv =
+        MatXd::Zero(svd.matrixV().cols(), svd.matrixU().cols());
 
-    for (Eigen::Index i = 0; i < singular.size(); ++i)
+    for (Eigen::Index i = 0; i < sigma.size(); ++i)
     {
-        if (singular(i) > tolerance)
+        if (sigma(i) > tolerance)
         {
-            Sigma_inv(i, i) = 1.0 / singular(i);
+            sigma_inv(i, i) = 1.0 / sigma(i);
         }
     }
 
-    return svd.matrixV() * Sigma_inv * svd.matrixU().transpose();
+    return svd.matrixV() * sigma_inv * svd.matrixU().transpose();
 }
 
+/*【SING-06】
+ * @brief 使用阻尼最小二乘法计算 Jacobian 伪逆。
+ */
 MatXd dls_pseudoinverse(
     const MatXd& J,
     double lambda)
 {
+    assert(J.rows() > 0);
+    assert(J.cols() > 0);
     assert(lambda >= 0.0);
 
     const Eigen::Index m = J.rows();
@@ -113,10 +130,7 @@ MatXd dls_pseudoinverse(
         J * J.transpose()
         + lambda * lambda * MatXd::Identity(m, m);
 
-    const MatXd A_inv =
-        A.ldlt().solve(MatXd::Identity(m, m));
-
-    return J.transpose() * A_inv;
+    return J.transpose() * A.inverse();
 }
 
 }  // namespace piper_control

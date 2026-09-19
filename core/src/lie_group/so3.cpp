@@ -1,6 +1,5 @@
 #include "piper_control/lie_group/so3.hpp"
 
-#include <algorithm>
 #include <cassert>
 #include <cmath>
 
@@ -10,17 +9,23 @@
 namespace piper_control
 {
 
+/*【SO3-01】
+ * @brief 根据 3×1 向量构造 3×3 反对称矩阵。
+ */
 Mat3 skew(const Vec3& v)
 {
     Mat3 S;
 
-    S << 0.0, -v.z(), v.y(),
-         v.z(), 0.0, -v.x(),
-         -v.y(), v.x(), 0.0;
+    S << 0.0, -v(2), v(1),
+         v(2), 0.0, -v(0),
+        -v(1), v(0), 0.0;
 
     return S;
 }
 
+/*【SO3-02】
+ * @brief 从 3×3 反对称矩阵提取 3×1 向量。
+ */
 Vec3 vee(const Mat3& skew_matrix)
 {
     Vec3 v;
@@ -32,6 +37,9 @@ Vec3 vee(const Mat3& skew_matrix)
     return v;
 }
 
+/*【SO3-03】
+ * @brief 计算绕 X 轴的旋转矩阵。
+ */
 Mat3 rot_x(double theta)
 {
     const double c = std::cos(theta);
@@ -46,6 +54,9 @@ Mat3 rot_x(double theta)
     return R;
 }
 
+/*【SO3-04】
+ * @brief 计算绕 Y 轴的旋转矩阵。
+ */
 Mat3 rot_y(double theta)
 {
     const double c = std::cos(theta);
@@ -55,11 +66,14 @@ Mat3 rot_y(double theta)
 
     R << c, 0.0, s,
          0.0, 1.0, 0.0,
-         -s, 0.0, c;
+        -s, 0.0, c;
 
     return R;
 }
 
+/*【SO3-05】
+ * @brief 计算绕 Z 轴的旋转矩阵。
+ */
 Mat3 rot_z(double theta)
 {
     const double c = std::cos(theta);
@@ -74,94 +88,71 @@ Mat3 rot_z(double theta)
     return R;
 }
 
+/*【SO3-06】
+ * @brief 计算 SO(3) 指数映射。
+ */
 Mat3 so3_exp(const Vec3& rotation_vector)
 {
     const double theta = rotation_vector.norm();
 
     if (theta < kSmallAngle)
     {
-        const Mat3 Phi = skew(rotation_vector);
-
-        return Mat3::Identity()
-             + Phi
-             + 0.5 * Phi * Phi;
+        return Mat3::Identity();
     }
 
-    const Vec3 omega = rotation_vector / theta;
-    const Mat3 Omega = skew(omega);
+    const Vec3 axis = rotation_vector / theta;
+    const Mat3 K = skew(axis);
 
     return Mat3::Identity()
-         + std::sin(theta) * Omega
-         + (1.0 - std::cos(theta)) * Omega * Omega;
+         + std::sin(theta) * K
+         + (1.0 - std::cos(theta)) * K * K;
 }
 
-Mat3 rot_axis_angle(const Vec3& axis, double theta)
-{
-    const double norm = axis.norm();
-
-    assert(norm > kEpsilon);
-
-    const Vec3 omega = axis / norm;
-    const Mat3 Omega = skew(omega);
-
-    return Mat3::Identity()
-         + std::sin(theta) * Omega
-         + (1.0 - std::cos(theta)) * Omega * Omega;
-}
-
+/*【SO3-07】
+ * @brief 计算 SO(3) 对数映射。
+ */
 Vec3 so3_log(const Mat3& R)
 {
-    const double trace_value = R.trace();
-
-    double cos_theta = 0.5 * (trace_value - 1.0);
-
-    cos_theta = clamp(cos_theta, -1.0, 1.0);
+    const double cos_theta =
+        clamp((R.trace() - 1.0) * 0.5, -1.0, 1.0);
 
     const double theta = std::acos(cos_theta);
 
-    // θ ≈ 0
     if (theta < kSmallAngle)
     {
-        return vee(0.5 * (R - R.transpose()));
+        return Vec3::Zero();
     }
 
-    // θ ≈ π
-    if ((kPi - theta) < kSmallAngle)
+    if (kPi - theta < kSmallAngle)
     {
         Vec3 axis;
 
-        const double d0 = std::max(0.0, 0.5 * (R(0, 0) + 1.0));
-        const double d1 = std::max(0.0, 0.5 * (R(1, 1) + 1.0));
-        const double d2 = std::max(0.0, 0.5 * (R(2, 2) + 1.0));
+        const double xx = std::max(0.0, (R(0, 0) + 1.0) * 0.5);
+        const double yy = std::max(0.0, (R(1, 1) + 1.0) * 0.5);
+        const double zz = std::max(0.0, (R(2, 2) + 1.0) * 0.5);
 
-        if (d0 >= d1 && d0 >= d2)
+        if (xx >= yy && xx >= zz)
         {
-            axis.x() = std::sqrt(d0);
+            axis(0) = std::sqrt(xx);
 
-            if (axis.x() > kEpsilon)
+            if (axis(0) > kEpsilon)
             {
-                axis.y() = (R(0, 1) + R(1, 0))
-                         / (4.0 * axis.x());
-
-                axis.z() = (R(0, 2) + R(2, 0))
-                         / (4.0 * axis.x());
+                axis(1) = (R(0, 1) + R(1, 0)) / (4.0 * axis(0));
+                axis(2) = (R(0, 2) + R(2, 0)) / (4.0 * axis(0));
             }
             else
             {
                 axis = Vec3::UnitX();
             }
         }
-        else if (d1 >= d0 && d1 >= d2)
+        else if (yy >= zz)
         {
-            axis.y() = std::sqrt(d1);
+            axis(1) = std::sqrt(yy);
 
-            if (axis.y() > kEpsilon)
+            if (axis(1) > kEpsilon)
             {
-                axis.x() = (R(0, 1) + R(1, 0))
-                         / (4.0 * axis.y());
-
-                axis.z() = (R(1, 2) + R(2, 1))
-                         / (4.0 * axis.y());
+                axis(0) = (R(0, 1) + R(1, 0)) / (4.0 * axis(1));
+                axis(2) = (R(1, 2) + R(2, 1)) / (4.0 * axis(1));
             }
             else
             {
@@ -170,15 +161,12 @@ Vec3 so3_log(const Mat3& R)
         }
         else
         {
-            axis.z() = std::sqrt(d2);
+            axis(2) = std::sqrt(zz);
 
-            if (axis.z() > kEpsilon)
+            if (axis(2) > kEpsilon)
             {
-                axis.x() = (R(0, 2) + R(2, 0))
-                         / (4.0 * axis.z());
-
-                axis.y() = (R(1, 2) + R(2, 1))
-                         / (4.0 * axis.z());
+                axis(0) = (R(0, 2) + R(2, 0)) / (4.0 * axis(2));
+                axis(1) = (R(1, 2) + R(2, 1)) / (4.0 * axis(2));
             }
             else
             {
@@ -191,12 +179,30 @@ Vec3 so3_log(const Mat3& R)
         return theta * axis;
     }
 
-    // 普通情况：
-    // phi = theta / (2 sin(theta)) * vee(R - R^T)
-    const Vec3 axis =
-        vee(R - R.transpose()) / (2.0 * std::sin(theta));
+    const Mat3 S =
+        (R - R.transpose()) / (2.0 * std::sin(theta));
 
-    return theta * axis.normalized();
+    return theta * vee(S);
+}
+
+/*【SO3-08】
+ * @brief 根据旋转轴和旋转角构造 SO(3) 旋转矩阵。
+ */
+Mat3 rot_axis_angle(const Vec3& axis, double theta)
+{
+    const double norm = axis.norm();
+
+    if (norm < kEpsilon)
+    {
+        return Mat3::Identity();
+    }
+
+    const Vec3 unit_axis = axis / norm;
+    const Mat3 K = skew(unit_axis);
+
+    return Mat3::Identity()
+         + std::sin(theta) * K
+         + (1.0 - std::cos(theta)) * K * K;
 }
 
 }  // namespace piper_control
