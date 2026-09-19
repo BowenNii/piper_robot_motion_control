@@ -39,22 +39,42 @@ target_compile_options(piper_control
         -Wpedantic
 )
 
-# ====================== 现有 FK Demo ======================
-add_executable(fk_demo
-    apps/fk_demo/main.cpp
-)
-
-target_link_libraries(fk_demo
-    PRIVATE
-        piper_control
-)
-
 # ====================== Project 1 ======================
 add_executable(project1
     apps/project1/main.cpp
 )
 
 target_link_libraries(project1
+    PRIVATE
+        piper_control
+)
+
+# ====================== Project 2 ======================
+add_executable(project2
+    apps/project2/main.cpp
+)
+
+target_link_libraries(project2
+    PRIVATE
+        piper_control
+)
+
+# ====================== Project 3 ======================
+add_executable(project3
+    apps/project3/main.cpp
+)
+
+target_link_libraries(project3
+    PRIVATE
+        piper_control
+)
+
+# ====================== Project 4 ======================
+add_executable(project4
+    apps/project4/main.cpp
+)
+
+target_link_libraries(project4
     PRIVATE
         piper_control
 )
