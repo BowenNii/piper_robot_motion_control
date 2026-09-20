@@ -23,7 +23,7 @@ int main()
     M(0, 3) = 1.0;
 
     const Mat4 T =
-        forward_poe(S, q, M);
+        forward_poe_space(S, q, M);
 
     std::cout
         << std::fixed

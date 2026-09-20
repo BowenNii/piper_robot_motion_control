@@ -1,4 +1,4 @@
-#include "piper_control/control/pd_controller.hpp"
+#include "piper_control/control/joint_impedance.hpp"
 
 namespace piper_control
 {

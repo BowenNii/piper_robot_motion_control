@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "piper_control/kinematics/singularity.hpp"
+#include "piper_control/common/constants.hpp"
 
 namespace
 {
@@ -81,7 +82,7 @@ int main()
     //【SING-05】 pseudoinverse_svd
     {
         const MatXd J_pinv =
-            pseudoinverse_svd(J);
+            pseudoinverse_svd(J, kEpsilon);
 
         const MatXd expected =
             (MatXd(3, 3) <<
