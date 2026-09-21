@@ -9,7 +9,7 @@ namespace piper_control
  * 【SE3-01】 twist_hat
  *
  * @brief 将 6×1 twist 转换为 4×4 se(3) 矩阵。
- *
+ * hat 算子：把 6 维旋量向量 ξ → 4×4 李代数矩阵
  * 数学定义：
  *
  *     ξ = [ω]

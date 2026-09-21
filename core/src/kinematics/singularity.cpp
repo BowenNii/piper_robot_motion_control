@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <limits>
 
 #include "piper_control/common/constants.hpp"
 
@@ -87,7 +88,7 @@ namespace piper_control
     // 返回有限的大值，避免产生 Inf。
     if (sigma_min <= kEpsilon)
     {
-        return 1.0 / kEpsilon;
+        return std::numeric_limits<double>::infinity();
     }
 
     return sigma_max / sigma_min;
@@ -210,13 +211,18 @@ namespace piper_control
     assert(J.cols() > 0);
     assert(lambda >= 0.0);
 
+    if (lambda == 0.0)
+    {
+        return pseudoinverse_svd(J, kEpsilon);
+    }
+
     const Eigen::Index m = J.rows();
 
     const MatXd A =
         J * J.transpose()
         + lambda * lambda * MatXd::Identity(m, m);
 
-    // 不显式计算 A^{-1}。
+    // 不显式计算 A^{-1}。一定为对称方阵，所以可以用LDLT求逆
     //
     // 求解：
     //

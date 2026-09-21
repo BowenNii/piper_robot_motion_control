@@ -43,6 +43,7 @@ add_library(piper_control
     # -------------------- Control ----------------------
     core/src/control/pd_controller.cpp
     core/src/control/gravity_compensation.cpp
+    core/src/control/cartesian_velocity_controller.cpp  
     core/src/control/computed_torque.cpp
     core/src/control/joint_impedance.cpp
     core/src/control/cartesian_impedance.cpp
@@ -256,6 +257,21 @@ if(BUILD_TESTING)
         COMMAND test_se3_trajectory
     )
 
+    add_executable(test_cartesian_velocity_controller
+    tests/unit/test_cartesian_velocity_controller.cpp
+)
+
+    target_link_libraries(
+        test_cartesian_velocity_controller
+        PRIVATE
+            piper_control
+    )
+
+    add_test(
+        NAME CartesianVelocityControllerTest
+        COMMAND test_cartesian_velocity_controller
+    )
+    
     # -------------------- Command Limiter --------------
     add_executable(test_command_limiter
         tests/unit/test_command_limiter.cpp
