@@ -288,4 +288,20 @@ if(BUILD_TESTING)
         COMMAND test_command_limiter
     )
 
+    # -------------------- PiPER Model -------------------
+    add_executable(test_piper_model
+        tests/unit/test_piper_model.cpp
+    )
+
+    target_link_libraries(
+        test_piper_model
+        PRIVATE
+            piper_control
+    )
+
+    add_test(
+        NAME PiperModelTest
+        COMMAND test_piper_model
+    )
+
 endif()
