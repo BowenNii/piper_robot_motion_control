@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <random>
 
 #include "piper_control/lie_group/se3.hpp"
 #include "piper_control/lie_group/so3.hpp"
@@ -192,6 +193,56 @@ int main()
             T_recovered,
             T));
     }
+
+   //【SE3-RANDOM】固定随机种子：随机合法 Twist 的 SE(3) 批量性质测试
+   {
+       std::mt19937 rng(42);
+
+       // 旋转向量和线速度分量均在 [-1, 1] 内。
+       // 旋转角最大为 sqrt(3) rad，小于 pi，避开 SO(3) Log 在 pi 附近的分支问题。
+       std::uniform_real_distribution<double> value_dist(
+           -1.0,
+           1.0);
+
+       constexpr int kSampleCount = 100;
+       constexpr double kRandomTol = 1e-9;
+
+       for (int sample = 0; sample < kSampleCount; ++sample)
+       {
+           Twist xi_random;
+
+           for (int index = 0; index < 6; ++index)
+           {
+               xi_random(index) = value_dist(rng);
+           }
+
+           // 由 Twist 指数映射生成的 T 必然是合法 SE(3) 位姿。
+           const Mat4 T = se3_exp(xi_random);
+
+           // 性质 1：T * T^{-1} = I。
+           assert(is_matrix_close(
+               T * se3_inverse(T),
+               Mat4::Identity(),
+               kRandomTol));
+
+           // 性质 2：Ad(T) * Ad(T)^{-1} = I。
+           assert(is_matrix_close(
+               adjoint(T) * adjoint_inverse(T),
+               Mat6::Identity(),
+               kRandomTol));
+
+           // 性质 3：Exp(Log(T)) = T。
+           //
+           // 不直接比较 xi_random 与 se3_log(T)，因为 Log 的旋转表示
+           // 可能存在等价分支；比较恢复出的位姿才是正确的几何判据。
+           const Twist xi_recovered = se3_log(T);
+
+           assert(is_matrix_close(
+               se3_exp(xi_recovered),
+               T,
+               kRandomTol));
+       }
+   }
 
     std::cout << "All SE(3) tests passed.\n";
 

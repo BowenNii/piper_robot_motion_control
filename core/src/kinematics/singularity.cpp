@@ -85,7 +85,7 @@ namespace piper_control
     const double sigma_min = sigma(sigma.size() - 1);
 
     // Jacobian 接近奇异状态时，条件数趋于无穷。
-    // 返回有限的大值，避免产生 Inf。
+    // Jacobian 奇异时，条件数按数学定义返回正无穷。
     if (sigma_min <= kEpsilon)
     {
         return std::numeric_limits<double>::infinity();

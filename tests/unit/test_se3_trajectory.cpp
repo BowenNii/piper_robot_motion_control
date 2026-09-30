@@ -80,15 +80,27 @@ int main()
         all_pass &= expect_matrix_close(T, expected, kTol, "TRAJ-04 纯旋转中点");
     }
 
-    // ==================== 测试5：平移+旋转复合插值 ====================
+    // ==================== 测试5：旋转+平移复合插值中点 ====================
     {
-        const Mat4 T0 = se3_from_rt(Mat3::Identity(), Vec3(0.0, 0.0, 0.0));
-        const Mat4 T1 = se3_from_rt(rot_z(kPi / 2.0), Vec3(1.0, 0.0, 0.0));
+        const Mat4 T0 = Mat4::Identity();
+
+        // 绕 Z 轴旋转 90°，同时沿 Z 轴平移 2 m。
+        const Mat4 T1 = se3_from_rt(
+            rot_z(kPi / 2.0),
+            Vec3(0.0, 0.0, 2.0));
+
+        // 中点应为：绕 Z 轴旋转 45°，沿 Z 轴平移 1 m。
+        const Mat4 expected = se3_from_rt(
+            rot_z(kPi / 4.0),
+            Vec3(0.0, 0.0, 1.0));
+
         const Mat4 T_half = interpolate_se3(T0, T1, 0.5);
-        
-        // 验证：再插0.5回到终点
-        const Mat4 T_back = interpolate_se3(T_half, T1, 1.0);
-        all_pass &= expect_matrix_close(T_back, T1, kTol, "TRAJ-05 复合插值一致性");
+
+        all_pass &= expect_matrix_close(
+            T_half,
+            expected,
+            kTol,
+            "TRAJ-05 旋转加轴向平移中点");
     }
 
     // ==================== 测试6：超范围限幅 ====================

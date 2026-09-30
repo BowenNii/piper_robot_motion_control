@@ -49,7 +49,7 @@ bool expect_matrix_close(
     return true;
 }
 
-// ========== 数值法空间雅可比（和你接口一致，无M） ==========
+// ========== 数值法空间雅可比 ==========
 MatXd numerical_jacobian_space(
     const MatXd& S_list,
     const VecXd& q)

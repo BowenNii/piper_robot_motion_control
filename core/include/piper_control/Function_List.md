@@ -90,12 +90,20 @@
 
 * 【IK-01】 solve_ik_newton：机器人运动学模型 + 目标位姿 + 初始关节位置 → Newton 逆运动学结果
 * 【IK-02】 solve_ik_dls：机器人运动学模型 + 目标位姿 + 初始关节位置 → DLS 逆运动学结果
+* 【IK-03】 solve_ik_adaptive_dls：POE模型 + 目标位姿 + 初值 → 自适应阻尼逆运动学结果
+* 【IK-04】 solve_ik_transpose：POE模型 + 目标位姿 + 初值 → 雅可比转置迭代逆运动学结果
 
 ---
 
 ## robot_model
 
-* 【MODEL-01】 make_piper_model：PiPER 机器人参数 → PiPER 机器人模型
+## robot_model
+
+* 【MODEL-01】 make_piper_model：PiPER URDF 的 6 个关节零位参数（`origin xyz/rpy`、局部 `axis`、位置/速度限位）→ `PiperModel`
+  - `S_list`：零位时相对 `world == base_link` 表达的 6×6 空间旋量轴矩阵；
+  - `M`：零位时末端 `link6` 相对 `base_link` 的 SE(3) 位姿；
+  - `B_list`：相对零位末端 `link6` 坐标系表达的 6×6 身体旋量轴矩阵，满足 \(B = \operatorname{Ad}_{M^{-1}}S\)；
+  - `q_min`、`q_max`、`dq_max`：从 URDF 读取的关节位置与速度限制。
 
 ---
 
@@ -148,6 +156,10 @@
 ## control / cartesian_impedance
 
 * 【CTRL-05】 cartesian_impedance：期望末端位姿 + 当前末端状态 → 笛卡尔空间阻抗控制力矩
+
+## control / cartesian_velocity_controller   
+* 【CTRL-06】 cartesian_velocity_controller：Jacobian + 目标末端 Twist + 奇异性配置 → 经自适应 DLS 与奇异降速处理后的关节速度命令、最小奇异值、速度缩放系数和奇异性状态
+
 
 ---
 

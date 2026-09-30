@@ -144,6 +144,9 @@ target_link_libraries(
 include(CTest)
 
 if(BUILD_TESTING)
+    add_executable(test_ik_solver tests/unit/test_ik_solver.cpp)
+    target_link_libraries(test_ik_solver PRIVATE piper_control)
+    add_test(NAME IKSolverTest COMMAND test_ik_solver)
 
     # -------------------- SO(3) ------------------------
     add_executable(test_so3

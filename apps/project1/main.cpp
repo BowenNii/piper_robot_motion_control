@@ -1,32 +1,27 @@
 #include <iomanip>
 #include <iostream>
 
-#include "piper_control/lie_group/se3.hpp"
+#include "piper_control/common/constants.hpp"
+#include "piper_control/common/types.hpp"
+#include "piper_control/robot_model/piper_model.hpp"
 
 using namespace piper_control;
 
 int main()
 {
-    Twist xi;
-    xi << 0.3, -0.2, 0.5, 0.8, -1.1, 0.6;
-
-    const Mat4 T = se3_exp(xi);
-    const Twist xi_recovered = se3_log(T);
-
-    std::cout << std::fixed << std::setprecision(6);
-
-    std::cout << "SE(3) Exp result:\n";
-    std::cout << T << "\n\n";
-
-    std::cout << "Original twist:\n";
-    std::cout << xi.transpose() << "\n\n";
-
-    std::cout << "Recovered twist:\n";
-    std::cout << xi_recovered.transpose() << "\n\n";
-
-    std::cout << "Exp(Log(T)) error: "
-              << (se3_exp(xi_recovered) - T).norm()
-              << "\n";
+    const PiperModel piper = make_piper_model();
+    const Mat4 M = piper.M;
+    std::cout << M << std::endl;
+    const MatXd B_list=piper.B_list;
+    std::cout << B_list << std::endl;
+    const MatXd S_list=piper.S_list;
+    std::cout << S_list << std::endl;
+    const VecXd dq=piper.dq_max;
+    std::cout << dq << std::endl;
+    const VecXd q_max=piper.q_max;
+    std::cout << q_max << std::endl;
+    const VecXd q_min=piper.q_min;
+    std::cout << q_min << std::endl;
 
     return 0;
 }

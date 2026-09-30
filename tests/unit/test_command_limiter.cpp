@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include <random>
 
 #include "piper_control/safety/command_limiter.hpp"
 #include "piper_control/common/types.hpp"
@@ -101,6 +102,93 @@ int main()
         const VecXd result = limit_joint_velocity(q_dot, q_dot_max);
         all_pass &= expect_vector_close(result, VecXd::Zero(4), kTol, "SAFE-05 零速度输入");
     }
+
+    // 【SAFE-06】边界：零速度限值必须输出零
+{
+    VecXd q_dot(3);
+    q_dot << 1.0, -0.5, -2.0;
+
+    VecXd q_dot_max(3);
+    q_dot_max << 0.0, 1.0, 0.0;
+
+    VecXd expected(3);
+    expected << 0.0, -0.5, 0.0;
+
+    const VecXd result =
+        limit_joint_velocity(q_dot, q_dot_max);
+
+    all_pass &= expect_vector_close(
+        result,
+        expected,
+        kTol,
+        "SAFE-06 零速度限值");
+}
+
+// 【SAFE-07】固定随机种子批量限幅性质测试
+{
+    std::mt19937 rng(42);
+
+    std::uniform_real_distribution<double> velocity_dist(
+        -10.0,
+        10.0);
+
+    std::uniform_real_distribution<double> limit_dist(
+        0.0,
+        3.0);
+
+    bool random_pass = true;
+
+    for (int sample = 0; sample < 100; ++sample)
+    {
+        VecXd q_dot(6);
+        VecXd q_dot_max(6);
+
+        for (int i = 0; i < 6; ++i)
+        {
+            q_dot(i) = velocity_dist(rng);
+            q_dot_max(i) = limit_dist(rng);
+        }
+
+        const VecXd result =
+            limit_joint_velocity(q_dot, q_dot_max);
+
+        for (int i = 0; i < 6; ++i)
+        {
+            // 限幅后绝对值不能超过允许速度。
+            if (std::abs(result(i)) > q_dot_max(i) + kTol)
+            {
+                random_pass = false;
+                break;
+            }
+
+            // 原始速度未超限时，输出必须不变。
+            if (std::abs(q_dot(i)) <= q_dot_max(i)
+                && std::abs(result(i) - q_dot(i)) > kTol)
+            {
+                random_pass = false;
+                break;
+            }
+        }
+
+        if (!random_pass)
+        {
+            break;
+        }
+    }
+
+    all_pass &= random_pass;
+
+    if (random_pass)
+    {
+        std::cout
+            << "[PASS] SAFE-07 固定随机种子批量限幅测试\n";
+    }
+    else
+    {
+        std::cerr
+            << "[FAIL] SAFE-07 固定随机种子批量限幅测试\n";
+    }
+}
 
     // ==================== 最终结果 ====================
     if (all_pass)
