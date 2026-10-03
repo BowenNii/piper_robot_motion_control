@@ -17,18 +17,12 @@
 #include "piper_control/lie_group/so3.hpp"
 #include "piper_control/robot_model/piper_model.hpp"
 
-int main(int argc, char* argv[])
+// 实验1（单位形）和实验2（多位形）共用同一套离线 FK 验证逻辑。
+// 本程序仅读取日志，不发送 CAN 指令，也不控制真机。
+int validate_log(const std::string& path, const std::string& csv_path)
 {
     using namespace piper_control;
 
-    // 可从命令行指定日志；不传参数时，读取你昨天保存的真实日志。
-    if (argc > 3)
-    {
-        std::cerr << "Usage: project1 [candump-log-path] [output-csv-path]\n";
-        return 1;
-    }
-    const std::string path = argc >= 2 ? argv[1]
-        : "/home/nbw/piper_can_static_2026-10-01.log";
     std::ifstream file(path);
     if (!file)
     {
@@ -36,9 +30,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // 默认在原日志旁生成 .log.csv，也可以通过第二个命令行参数指定。
     // 不覆盖已有文件，避免误覆盖原始日志或之前的实验结果。
-    const std::string csv_path = argc == 3 ? argv[2] : path + ".csv";
     std::error_code path_error;
     const bool csv_exists = std::filesystem::exists(csv_path, path_error);
     if (path_error || csv_exists)
@@ -117,7 +109,7 @@ int main(int argc, char* argv[])
         }
         const Mat4 T_poe = forward_poe_space(model.S_list, q, model.M);
 
-        // 第四步：根据厂家反馈的 XYZ 和 RPY 构造位姿矩阵。
+        // 第四步：根据 CAN 反馈的 XYZ 和 RPY 构造位姿矩阵。
         const auto& p = sample->end_pose.position_m;
         const auto& rpy = sample->end_pose.rpy_rad;
         const Mat4 T_feedback = se3_from_rt(
@@ -207,4 +199,69 @@ int main(int argc, char* argv[])
               << " / " << max_rotation
               << "\nMax six-frame time span (ms): " << max_span_ms << '\n';
     return 0;
+}
+
+int main(int argc, char* argv[])
+{
+    // 实验2：一次处理十个位形。输出目录必须事先建立；推荐新建目录，
+    // 例如 data_csv_recheck，以保留原实验 CSV，不改变原始归档结果。
+    if (argc >= 2 && std::string(argv[1]) == "--multi")
+    {
+        if (argc != 4)
+        {
+            std::cerr << "Usage: project1 --multi <log-directory> <csv-directory>\n";
+            return 1;
+        }
+        const std::filesystem::path log_dir(argv[2]);
+        const std::filesystem::path csv_dir(argv[3]);
+        std::error_code directory_error;
+        if (!std::filesystem::is_directory(csv_dir, directory_error) || directory_error)
+        {
+            std::cerr << "CSV directory must already exist: " << csv_dir << '\n';
+            return 1;
+        }
+        std::array<std::string, 10> logs;
+        std::array<std::string, 10> outputs;
+        // 先检查全部输入和输出，再开始计算，避免已有 CSV 被覆盖。
+        for (std::size_t i = 0; i < logs.size(); ++i)
+        {
+            const std::string name = "pose" + std::string(i < 9 ? "0" : "")
+                + std::to_string(i + 1);
+            logs[i] = (log_dir / (name + ".log")).string();
+            outputs[i] = (csv_dir / (name + ".csv")).string();
+            std::ifstream input(logs[i]);
+            std::error_code output_error;
+            const bool exists = std::filesystem::exists(outputs[i], output_error);
+            if (!input || exists || output_error)
+            {
+                std::cerr << "Missing/unreadable log or unavailable/existing CSV: "
+                          << logs[i] << " -> " << outputs[i] << '\n';
+                return 1;
+            }
+        }
+        for (std::size_t i = 0; i < logs.size(); ++i)
+        {
+            std::cout << "\n=== Experiment 2: pose " << i + 1 << "/10 ===\n";
+            if (validate_log(logs[i], outputs[i]) != 0)
+            {
+                std::cerr << "Batch stopped; earlier CSV files may already be saved.\n";
+                return 1;
+            }
+        }
+        std::cout << "\nValidated all 10 static poses.\n";
+        return 0;
+    }
+
+    // 实验1：单日志模式；实验2也可以逐个位形调用此模式。
+    // 默认输出为原日志路径加 .csv，可用第二个参数指定其他输出路径。
+    if (argc > 3)
+    {
+        std::cerr << "Usage: project1 [candump-log-path] [output-csv-path]\n"
+                  << "       project1 --multi <log-directory> <csv-directory>\n";
+        return 1;
+    }
+    const std::string path = argc >= 2 ? argv[1]
+        : "/home/nbw/piper_can_static_2026-10-01.log";
+    const std::string csv_path = argc == 3 ? argv[2] : path + ".csv";
+    return validate_log(path, csv_path);
 }

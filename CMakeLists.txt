@@ -107,7 +107,7 @@ target_compile_features(piper_hal PUBLIC cxx_std_17)
 target_compile_options(piper_hal PRIVATE -Wall -Wextra -Wpedantic)
 
 add_executable(project1
-    apps/project1/main.cpp
+    apps/project1/fk_validation.cpp
 )
 
 target_link_libraries(
