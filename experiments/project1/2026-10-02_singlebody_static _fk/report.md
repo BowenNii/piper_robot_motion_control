@@ -2,23 +2,26 @@
 
 ## 1. 实验目的
 
-- 验证 CAN 日志解码流程，并比较：
+验证 CAN 日志解码流程，并比较：
+
 - 根据关节角和 URDF 推导的 POE 模型计算的末端位姿；
 - CAN 报文反馈的末端位姿。
 
-# 2. 实验条件
+## 2. 实验条件
 
 - 整理日期：2026-10-02
 - 数据来源：piper_can.log
 - 机械臂：PiPER 标准版
 - 实验状态：静止位姿
-- 夹爪及负载：无
+- 夹爪及负载：已安装 AgileX 夹爪，无额外负载。
+- 实验归档 Git 提交号：`419782a`。
+- 当时生成 CSV 所用的 C++ 代码提交号：尚未独立核实，不直接用归档提交号代替。
 
 ## 3. 文件说明
 
 - piper_can.log：原始 CAN 日志，仅复制、重命名，不修改内容。
-- data.csv：C++ 解码及 POE 对比结果，单位为秒、弧度、米。
-- matlab_plot.m：复制到matlab可以读取 CSV，绘制关节角、末端位置和误差曲线。
+- data.csv：C++ 解码及 POE 对比结果，逗号分隔，单位为秒、弧度、米；本次整理仅将原制表符分隔格式统一为逗号，数据数值未改变。
+- matlab_plot.m：在 MATLAB 中打开并运行，自动读取脚本同目录下的 data.csv，绘制关节角、末端位置和误差曲线，无需修改绝对路径。
 - report.md：本次实验记录。
 
 ## 4. 处理方法
@@ -52,10 +55,13 @@ CAN 反馈基本一致，日志解码和 CSV 导出流程能够正常运行。
 MATLAB 本次用于绘图分析，尚未进行独立算法交叉验证。
 
 ## 7. 照片、视频与结果图
+
 - 机械臂位姿照片：2 张。
 - MATLAB 分析图：3 张，分别为关节角度、模型一致性误差、末端位置对比。
 - 本次未记录视频。
   
 通过网盘分享的文件：experiments(piper_robot_motion_control)
-链接: https://pan.baidu.com/s/1YQn_boqRlxiEGFsJ75L62g?pwd=qsp4 提取码: qsp4
 
+[实验照片与 MATLAB 结果图](https://pan.baidu.com/s/1YQn_boqRlxiEGFsJ75L62g?pwd=qsp4)
+
+提取码：`qsp4`

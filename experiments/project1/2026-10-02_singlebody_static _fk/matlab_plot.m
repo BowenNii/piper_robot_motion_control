@@ -1,8 +1,13 @@
 clear; clc; close all;
 
 %% 1. 读取 C++ 导出的 CSV
-csv_path = '/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/data.csv';
-data = readtable(csv_path);
+% 请打开并运行这个 .m 文件；不要复制到命令窗口，否则无法确定脚本位置。
+script_dir = fileparts(mfilename('fullpath'));
+csv_path = fullfile(script_dir, 'data.csv');
+if ~isfile(csv_path)
+    error('找不到实验数据文件：%s', csv_path);
+end
+data = readtable(csv_path, 'Delimiter', ',');
 
 t = data.t_s;                        % 相对时间，单位 s
 q_rad = data{:, {'q1_rad', 'q2_rad', 'q3_rad', ...
