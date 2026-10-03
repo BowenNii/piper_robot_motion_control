@@ -98,7 +98,10 @@ target_compile_options(
 # ============================================================
 
 # CAN 协议解码独立于 Eigen、ROS 和 SocketCAN，方便离线测试。
-add_library(piper_hal hal/src/piper_can_decoder.cpp)
+add_library(piper_hal
+    hal/src/piper_can_decoder.cpp
+    hal/src/can_log_parser.cpp
+)
 target_include_directories(piper_hal PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/hal/include)
 target_compile_features(piper_hal PUBLIC cxx_std_17)
 target_compile_options(piper_hal PRIVATE -Wall -Wextra -Wpedantic)
@@ -151,6 +154,10 @@ target_link_libraries(
 include(CTest)
 
 if(BUILD_TESTING)
+    add_executable(test_can_log_parser tests/unit/test_can_log_parser.cpp)
+    target_link_libraries(test_can_log_parser PRIVATE piper_hal)
+    add_test(NAME CanLogParserTest COMMAND test_can_log_parser)
+
     add_executable(test_piper_can_decoder tests/unit/test_piper_can_decoder.cpp)
     target_link_libraries(test_piper_can_decoder PRIVATE piper_hal)
     add_test(NAME PiperCanDecoderTest COMMAND test_piper_can_decoder)

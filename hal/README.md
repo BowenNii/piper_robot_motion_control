@@ -30,8 +30,9 @@ const auto result = hal::decode_joint_angle_pair(frame);
 完整角度/位姿函数只检查帧集合，不检查时间同步；后续动态接收还要增加时间戳、
 完整性、新鲜度和超时检查。不能直接拼接不同时刻的帧作为同一状态。
 
-目前 Project 1 用代码中保存的真实静态字节样本演示解码和 POE 对比，
-尚不支持读日志文件或直接连接 CAN。厂家末端反馈不是独立的外部测量真值。
+Project 1 现在读取 `candump -L` 日志，组装六帧反馈后进行 POE 对比，
+输出首组矩阵、有效样本数及误差均值/RMS/最大值。它不直接连接 CAN。
+厂家末端反馈不是独立的外部测量真值。
 
 测试覆盖真实手算样本、补码边界、乱序组装、非法输入及固定种子随机整数。
 测试通过 `all_pass` 和非零退出码报告失败，在 Release 中也会执行。
@@ -41,4 +42,25 @@ cmake --preset debug
 cmake --build --preset debug-build
 ctest --preset debug-test --output-on-failure
 ./build/debug/project1
+# 或指定日志文件路径（默认使用下面这份真实日志）：
+./build/debug/project1 /home/nbw/piper_can_static_2026-10-01.log
 ```
+
+## 日志解析与反馈组装
+
+头文件：`hal/can_log_parser.hpp`；实现：`hal/src/can_log_parser.cpp`。
+
+| 编号 | 函数/类 | 输入 | 输出 |
+| --- | --- | --- | --- |
+| LOG-01 | `parse_can_log_line` | 一行 candump -L 文本 | 成功返回 true，填入时间戳、接口和 CanFrame；失败保持输出不变 |
+| LOG-02 | `PiperFeedbackAssembler::push` | 带时间戳的一帧 | 六种 ID 收齐时返回反馈样本，否则返回 std::nullopt |
+
+日志解析接受 0～8 字节标准 CAN 数据帧。扩展帧、CAN FD、远程帧等会被拒绝。
+关节角/位姿解码要求对应反馈帧恰好为 8 字节。
+演示只对 `can0` 的 0x2A2..0x2A7 做比较，其他正常报文计入 ignored。
+六帧配对窗口默认 2 ms；重复、超时、时间倒退或接口改变会重新开始收集。
+窗口是离线配对规则，不保证硬件严格同步，也不适合未经检查直接用于动态控制。
+不同设备/固件应根据实际时间跨度调整窗口，并检查数据来源及反馈生成延迟。
+
+原始日志保持不变。多个静止且重复的样本用于验证解码/回放，不代表多个不同姿态。
+暂无完整样本、文件无法打开或读取失败时演示程序以非零退出码结束。
