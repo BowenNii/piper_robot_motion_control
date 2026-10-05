@@ -1,0 +1,16 @@
+function value = clamp_checked(value, lower, upper)
+%CLAMP_CHECKED 将数值限制在给定上下界；错误的安全边界直接报错。
+%   value=CLAMP(value,lower,upper)
+%   lower/upper可为标量，或与value同尺寸的数组。
+%   用法：q_safe=clamp(q,q_min,q_max);
+assert(isnumeric(value) && isreal(value) && all(isfinite(value(:))), ...
+    'value必须为有限实数');
+assert(isnumeric(lower) && isnumeric(upper) && isreal(lower) && ...
+    isreal(upper) && all(~isnan(lower(:))) && all(~isnan(upper(:))), ...
+    '上下界必须为实数且不能包含NaN');
+assert((isscalar(lower) || isequal(size(lower),size(value))) && ...
+    (isscalar(upper) || isequal(size(upper),size(value))), ...
+    '上下界必须为标量或与value同尺寸');
+assert(all(lower<=upper,'all'), '下界不能大于上界');
+value=max(lower,min(value,upper));
+end

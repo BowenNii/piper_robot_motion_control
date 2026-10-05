@@ -17,14 +17,24 @@
 #include "piper_control/lie_group/so3.hpp"
 #include "piper_control/robot_model/piper_model.hpp"
 
-// 实验1（单位形）和实验2（多位形）共用同一套离线 FK 验证逻辑。
-// 终端输入参数运行实验1：
-// fk1_dir=$(mktemp -d /tmp/piper_fk1.XXXXXX)
-// home/nbw/piper_robot_motion_control/build/debug/project1 "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/piper_can.log" "$fk1_dir/data.csv"
-// 终端输入参数运行实验2：
-// fk2_dir=$(mktemp -d /tmp/piper_fk2.XXXXXX)
-// /home/nbw/piper_robot_motion_control/build/debug/project1 --multi "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fkk/piper_can_log" "$fk2_dir"
-// 本程序仅读取日志，不发送 CAN 指令，也不控制真机。
+/*
+实验1（单位形）和实验2（多位形）共用同一套离线 FK 验证逻辑。
+
+实验1：
+/home/nbw/piper_robot_motion_control/build/debug/project1 
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/piper_can.log" 
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/data.csv"
+
+实验2：
+/home/nbw/piper_robot_motion_control/build/debug/project1 --multi 
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fkk/piper_can_log"
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fkk/data_csv"
+
+注意：
+- 输出目录必须提前建立。
+- 已有同名 CSV 时拒绝覆盖，重新验证请使用新输出路径。
+- 本程序仅读取日志，不发送 CAN 指令，也不控制真机。
+*/
 int validate_log(const std::string& path, const std::string& csv_path)
 {
     using namespace piper_control;

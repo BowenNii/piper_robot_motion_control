@@ -1,0 +1,16 @@
+function value = clamp(value, lower, upper)
+%CLAMP 与 C++ 一致：上下界反置时逐元素交换；安全检查用clamp_checked。
+%   value=CLAMP(value,lower,upper)
+%   lower/upper可为标量，或与value同尺寸的数组。
+%   用法：q_safe=clamp(q,q_min,q_max);
+assert(isnumeric(value) && isreal(value) && all(isfinite(value(:))), ...
+    'value必须为有限实数');
+assert(isnumeric(lower) && isnumeric(upper) && isreal(lower) && ...
+    isreal(upper) && all(~isnan(lower(:))) && all(~isnan(upper(:))), ...
+    '上下界必须为实数且不能包含NaN');
+assert((isscalar(lower) || isequal(size(lower),size(value))) && ...
+    (isscalar(upper) || isequal(size(upper),size(value))), ...
+    '上下界必须为标量或与value同尺寸');
+lo=min(lower,upper); hi=max(lower,upper);
+value=max(lo,min(value,hi));
+end
