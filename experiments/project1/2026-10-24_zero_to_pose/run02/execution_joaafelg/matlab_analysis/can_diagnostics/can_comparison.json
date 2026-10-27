@@ -1,0 +1,466 @@
+{
+  "execution": "execution_joaafelg",
+  "success": true,
+  "sent_points": 3001,
+  "final_joint_error_rad": 0.001478884735403585,
+  "epoch_origin_est_s": 1792843301.3813257,
+  "clock_note": "CAN相对时间用ROS头时间与单调接收时间中位差估计，微小传输偏差未消除",
+  "unparsed_lines": 0,
+  "malformed_selected_frames": 0,
+  "can_id_counts": {
+    "0x255": 9000,
+    "0x256": 9000,
+    "0x1c1": 3600,
+    "0x2a1": 17999,
+    "0x2a2": 17999,
+    "0x2a3": 17999,
+    "0x2a4": 17999,
+    "0x2a5": 17999,
+    "0x2a6": 17999,
+    "0x2a7": 17999,
+    "0x2a8": 17999,
+    "0x251": 8999,
+    "0x261": 1800,
+    "0x252": 8999,
+    "0x253": 8999,
+    "0x254": 8999,
+    "0x266": 1800,
+    "0x1c0": 1800,
+    "0x265": 1800,
+    "0x1c2": 1800,
+    "0x264": 1800,
+    "0x1c3": 1800,
+    "0x263": 1800,
+    "0x262": 1799,
+    "0x212": 90
+  },
+  "wire_command_frames_available": false,
+  "comparison": [
+    {
+      "joint": 1,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 13,
+        "max_step_rad": 0.0018151424220741036,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.341390371322632,
+          0.0017976891295541594
+        ],
+        "median_interval_ms": 5.000114440917969
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 13,
+        "max_step_rad": 0.0018151424220741036,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.341421983990585,
+          0.0017976891295541596
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 366,
+        "max_step_rad": 0.0021118483949131434,
+        "reverse_steps_over_001rad": 19,
+        "reverse_examples": [
+          [
+            14.5714693069458,
+            -0.0012217304763960275
+          ],
+          [
+            15.011472225189209,
+            -0.0013264502315156884
+          ],
+          [
+            17.316471338272095,
+            -0.0010821041362364808
+          ],
+          [
+            17.7264723777771,
+            -0.0010995574287564341
+          ],
+          [
+            18.046473264694214,
+            -0.0010821041362364808
+          ],
+          [
+            19.02649736404419,
+            -0.001134464013796313
+          ],
+          [
+            19.711499214172363,
+            -0.0011170107212763805
+          ],
+          [
+            19.991498231887817,
+            -0.0011693705988362058
+          ]
+        ],
+        "first_change_over_001rad": [
+          5.341390371322632,
+          0.0017976891295541594
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    },
+    {
+      "joint": 2,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 17,
+        "max_step_rad": 0.0018151424220741032,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.601394176483154,
+          0.002111848394913139
+        ],
+        "median_interval_ms": 5.000114440917969
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 16,
+        "max_step_rad": 0.0018151424220741032,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.60162011499051,
+          0.0021118483949131386
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 487,
+        "max_step_rad": 0.0020245819323134184,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.601394176483154,
+          0.002111848394913139
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    },
+    {
+      "joint": 3,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 16,
+        "max_step_rad": 0.0017976891295541598,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.141542196273804,
+          -0.0015358897417550098
+        ],
+        "median_interval_ms": 5.000114440917969
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 14,
+        "max_step_rad": 0.0017976891295541592,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.141533175017685,
+          -0.00153588974175501
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 391,
+        "max_step_rad": 0.0019547687622336607,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          5.141542196273804,
+          -0.0015358897417550098
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    },
+    {
+      "joint": 4,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 4,
+        "max_step_rad": 0.005480333851262194,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          7.836516380310059,
+          0.005480333851262194
+        ],
+        "median_interval_ms": 5.000114440917969
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 4,
+        "max_step_rad": 0.005480333851262195,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          7.837245052010985,
+          0.005480333851262195
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 237,
+        "max_step_rad": 0.005480333851262194,
+        "reverse_steps_over_001rad": 5,
+        "reverse_examples": [
+          [
+            20.70162320137024,
+            -0.001134464013796313
+          ],
+          [
+            21.05162239074707,
+            -0.0011170107212763736
+          ],
+          [
+            25.891675233840942,
+            -0.0011170107212763736
+          ],
+          [
+            26.0866482257843,
+            -0.0010995574287564341
+          ],
+          [
+            26.331674337387085,
+            -0.0011519173063162524
+          ]
+        ],
+        "first_change_over_001rad": [
+          7.836516380310059,
+          0.005480333851262194
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    },
+    {
+      "joint": 5,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 4,
+        "max_step_rad": 0.00577703982410123,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          7.8316662311553955,
+          0.00577703982410123
+        ],
+        "median_interval_ms": 4.999876022338867
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 4,
+        "max_step_rad": 0.005777039824101231,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          7.831833931006258,
+          0.005777039824101231
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 219,
+        "max_step_rad": 0.00577703982410123,
+        "reverse_steps_over_001rad": 6,
+        "reverse_examples": [
+          [
+            20.521725177764893,
+            -0.0014660765716752316
+          ],
+          [
+            24.021775245666504,
+            -0.0010821041362364808
+          ],
+          [
+            24.381774187088013,
+            -0.0010821041362364947
+          ],
+          [
+            27.276775360107422,
+            -0.0011868238913561452
+          ],
+          [
+            29.661800384521484,
+            -0.0011519173063162802
+          ],
+          [
+            40.23687720298767,
+            -0.0011868238913561036
+          ]
+        ],
+        "first_change_over_001rad": [
+          7.8316662311553955,
+          0.00577703982410123
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    },
+    {
+      "joint": 6,
+      "raw_startup": {
+        "samples": 1000,
+        "distinct_values": 9,
+        "max_step_rad": 0.005358160803622592,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          6.466642379760742,
+          0.005358160803622592
+        ],
+        "median_interval_ms": 4.999876022338867
+      },
+      "ros_startup": {
+        "samples": 1000,
+        "distinct_values": 9,
+        "max_step_rad": 0.005358160803622592,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": [
+          6.466813709004782,
+          0.005358160803622592
+        ],
+        "median_interval_ms": 5.012827983591706
+      },
+      "command_startup": {
+        "samples": 0,
+        "distinct_values": 0,
+        "max_step_rad": 0,
+        "reverse_steps_over_001rad": 0,
+        "reverse_examples": [],
+        "first_change_over_001rad": null,
+        "median_interval_ms": null
+      },
+      "raw_motion": {
+        "samples": 12000,
+        "distinct_values": 453,
+        "max_step_rad": 0.005358160803622592,
+        "reverse_steps_over_001rad": 2,
+        "reverse_examples": [
+          [
+            44.096904277801514,
+            -0.0012566370614358613
+          ],
+          [
+            51.586955308914185,
+            -0.0012915436464758234
+          ]
+        ],
+        "first_change_over_001rad": [
+          6.466642379760742,
+          0.005358160803622592
+        ],
+        "median_interval_ms": 5.000114440917969
+      }
+    }
+  ],
+  "raw_to_ros_pair_checks": [
+    {
+      "joint": 1,
+      "samples": 12695,
+      "same_value_count": 12682,
+      "max_difference_rad": 0.0019373154697137074,
+      "p50_pair_age_ms": 0.24890899658203125
+    },
+    {
+      "joint": 2,
+      "samples": 12695,
+      "same_value_count": 12669,
+      "max_difference_rad": 0.0019024088846738563,
+      "p50_pair_age_ms": 0.24890899658203125
+    },
+    {
+      "joint": 3,
+      "samples": 12695,
+      "same_value_count": 12681,
+      "max_difference_rad": 0.001867502299633922,
+      "p50_pair_age_ms": 0.1251697540283203
+    },
+    {
+      "joint": 4,
+      "samples": 12695,
+      "same_value_count": 12692,
+      "max_difference_rad": 0.0011170107212763597,
+      "p50_pair_age_ms": 0.1251697540283203
+    },
+    {
+      "joint": 5,
+      "samples": 12695,
+      "same_value_count": 12694,
+      "max_difference_rad": 0.0019896753472735673,
+      "p50_pair_age_ms": 0.000476837158203125
+    },
+    {
+      "joint": 6,
+      "samples": 12695,
+      "same_value_count": 12695,
+      "max_difference_rad": 1.1102230246251565e-16,
+      "p50_pair_age_ms": 0.000476837158203125
+    }
+  ],
+  "max_host_send_interval_ms": 43.69909001979977,
+  "max_raw_interval_ms": {
+    "0x2a5": 5.365848541259766,
+    "0x2a6": 5.57708740234375,
+    "0x2a7": 5.712032318115234
+  }
+}

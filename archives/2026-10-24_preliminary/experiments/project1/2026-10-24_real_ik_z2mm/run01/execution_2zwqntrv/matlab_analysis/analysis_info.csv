@@ -1,0 +1,2 @@
+time_alignment,receive_origin_offset_s,alignment_note,bad_status_rows,endpoint_window_s,endpoint_joint_stable
+legacy_tail_estimate,1.7784035190125,旧记录按尾部减10秒发送和2秒观察估计；含未知清理延迟，不能测跟踪/通信延迟,0,0.5,1

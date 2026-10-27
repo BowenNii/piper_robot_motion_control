@@ -3,7 +3,8 @@ function results = run_all_tests(include_symbolic)
 if nargin<1, include_symbolic=true; end
 root=setup_piper_paths(include_symbolic);
 names={'math','kinematics','piper_model','controller','dynamics','estimation', ...
-    'optimization','trajectory','cpp_alignment'};
+    'optimization','trajectory','cpp_alignment','validation','plotting','experiment_analysis', ...
+    'ik_trajectory_analysis','csv_action_analysis','real_ik_analysis','endpoint_real_analysis'};
 if include_symbolic, names{end+1}='symbolic_derivations'; end
 results=struct('name',{},'status',{},'message',{});
 for i=1:numel(names)

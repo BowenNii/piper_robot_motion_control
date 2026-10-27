@@ -4,7 +4,8 @@ function root = setup_piper_paths(include_symbolic)
 if nargin<1, include_symbolic=false; end
 root=fileparts(mfilename('fullpath'));
 modules={'common','math','lie_group','kinematics','robot_model','dynamics', ...
-    'control','safety','estimation','optimization','trajectory'};
+    'control','safety','estimation','optimization','trajectory','validation','plotting', ...
+    'experiment_analysis'};
 for i=1:numel(modules)
     addpath(fullfile(root,'algorithm_library',modules{i}));
 end

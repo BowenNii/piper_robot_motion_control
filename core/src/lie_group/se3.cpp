@@ -245,11 +245,13 @@ Mat4 se3_exp(const Twist& xi)
 
     const double theta = phi.norm();
 
-    if (theta < kSmallAngle)
+    if (theta < 1e-4)
     {
-        return se3_from_rt(
-            Mat3::Identity(),
-            rho);
+        const Mat3 Phi=skew(phi);
+        const double t2=theta*theta;
+        const Mat3 V=Mat3::Identity()+(0.5-t2/24+t2*t2/720)*Phi
+            +(1.0/6-t2/120+t2*t2/5040)*Phi*Phi;
+        return se3_from_rt(so3_exp(phi),V*rho);
     }
 
     const Mat3 Phi = skew(phi);
@@ -323,10 +325,12 @@ Twist se3_log(const Mat4& T)
 
     Twist xi;
 
-    if (theta < kSmallAngle)
+    if (theta < 1e-4)
     {
-        xi.head<3>() = Vec3::Zero();
-        xi.tail<3>() = p;
+        const Mat3 Phi=skew(phi);
+        xi.head<3>() = phi;
+        xi.tail<3>() = (Mat3::Identity()-0.5*Phi
+            +(1.0/12+theta*theta/720)*Phi*Phi)*p;
 
         return xi;
     }

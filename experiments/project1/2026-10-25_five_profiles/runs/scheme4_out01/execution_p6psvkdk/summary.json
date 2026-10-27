@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "scheme": 4,
+  "direction": "outbound",
+  "csv_sha256": "842601172dbbaa7609783c7f9914b99ab714c51adf9cf0bfb81df4468d3744d1",
+  "clock_note": "CAN epoch clock; commands log monotonic + explicit wall-clock origin; no arbitrary alignment shift",
+  "driver_config": {
+    "arm_type": "piper",
+    "can_port": "can0",
+    "fast_mode": false,
+    "speed_percent": 5,
+    "auto_enable": false,
+    "effector_type": "agx_gripper",
+    "tcp_offset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pub_rate": 200
+  },
+  "trajectory_start_receive_elapsed_s": 3.957033708997187,
+  "trajectory_start_epoch_s": 1792928815.4878168,
+  "command_elapsed_s": 12.280227098002797,
+  "q_final_rad": [
+    0.29888763440402893,
+    0.2995857661048267,
+    -0.29855602184615004,
+    0.29927160683946774,
+    0.2990621673292284,
+    0.49883255351249933
+  ],
+  "final_joint_error_max_rad": 0.0014439781538499452,
+  "sent_points": 615,
+  "cleanup": {
+    "gate_close": "External control gate closed"
+  },
+  "candump_returncode": 0,
+  "candump_stderr": ""
+}

@@ -95,6 +95,18 @@ PiperFeedbackAssembler::PiperFeedbackAssembler(double max_span_seconds)
 
 void PiperFeedbackAssembler::reset()
 {
+    const auto count = pending_frame_count();
+    if (count != 0)
+    {
+        ++diagnostics_.manual_resets;
+        ++diagnostics_.discarded_groups;
+        diagnostics_.discarded_frames += count;
+    }
+    clear_pending();
+}
+
+void PiperFeedbackAssembler::clear_pending()
+{
     seen_.fill(false);
     interface_name_.clear();
     first_timestamp_ = 0.0;
@@ -108,13 +120,16 @@ std::size_t PiperFeedbackAssembler::pending_frame_count() const
 
 std::optional<PiperFeedbackSample> PiperFeedbackAssembler::push(const TimedCanFrame& timed)
 {
+    ++diagnostics_.received_frames;
     if (timed.frame.id < 0x2A2 || timed.frame.id > 0x2A7)
     {
+        ++diagnostics_.ignored_frames;
         return std::nullopt;
     }
     if (timed.frame.length != 8 || timed.interface_name.empty()
         || !std::isfinite(timed.timestamp_seconds) || timed.timestamp_seconds < 0.0)
     {
+        ++diagnostics_.invalid_frames;
         throw std::invalid_argument("PiPER assembler: invalid feedback frame");
     }
 
@@ -124,7 +139,13 @@ std::optional<PiperFeedbackSample> PiperFeedbackAssembler::push(const TimedCanFr
             || timed.timestamp_seconds < last_timestamp_
             || timed.timestamp_seconds - first_timestamp_ > max_span_seconds_))
     {
-        reset();
+        diagnostics_.duplicate_ids += seen_[slot] ? 1 : 0;
+        diagnostics_.interface_changes += timed.interface_name != interface_name_ ? 1 : 0;
+        diagnostics_.time_reversals += timed.timestamp_seconds < last_timestamp_ ? 1 : 0;
+        diagnostics_.over_window += timed.timestamp_seconds - first_timestamp_ > max_span_seconds_ ? 1 : 0;
+        ++diagnostics_.discarded_groups;
+        diagnostics_.discarded_frames += pending_frame_count();
+        clear_pending();
     }
     if (pending_frame_count() == 0)
     {
@@ -144,7 +165,8 @@ std::optional<PiperFeedbackSample> PiperFeedbackAssembler::push(const TimedCanFr
     sample.span_seconds = last_timestamp_ - first_timestamp_;
     sample.end_pose = decode_end_pose({frames_[0], frames_[1], frames_[2]});
     sample.q_rad = decode_joint_angles({frames_[3], frames_[4], frames_[5]});
-    reset();
+    ++diagnostics_.completed_samples;
+    clear_pending();
     return sample;
 }
 

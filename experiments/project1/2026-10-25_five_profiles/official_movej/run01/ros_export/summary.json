@@ -1,0 +1,8 @@
+{
+  "topics_read": {
+    "/feedback/joint_states": 37149,
+    "/feedback/arm_status": 73116,
+    "/feedback/tcp_pose": 37167
+  },
+  "note": "Offline MCAP extraction; no command reconstruction; timestamps are bag receive times."
+}

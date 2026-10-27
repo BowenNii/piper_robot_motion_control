@@ -1,0 +1,43 @@
+{
+  "success": false,
+  "scheme": 1,
+  "direction": "outbound",
+  "csv_sha256": "e24b280a377282976200060a440dffc132195f3a94df40f0b9042d4b150e1c1b",
+  "clock_note": "CAN epoch clock; commands log monotonic + explicit wall-clock origin; no arbitrary alignment shift",
+  "driver_config": {
+    "arm_type": "piper",
+    "can_port": "can0",
+    "fast_mode": false,
+    "speed_percent": 5,
+    "auto_enable": false,
+    "effector_type": "agx_gripper",
+    "tcp_offset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pub_rate": 200
+  },
+  "trajectory_start_receive_elapsed_s": 3.9620327230004477,
+  "trajectory_start_epoch_s": 1792929795.0661411,
+  "abort_timing": {
+    "index": 1776,
+    "target_time_s": 35.52,
+    "observed_elapsed_s": 35.55483814199397,
+    "lateness_s": 0.03483814199717017,
+    "after_wait_elapsed_s": 35.55475370199565,
+    "post_wait_checks_s": 8.443999831797555e-05,
+    "loop_elapsed_s": 0.054562034994887654
+  },
+  "exception": "迟到达到20ms，停止而非追赶补发",
+  "sent_points": 1776,
+  "cleanup": {
+    "stop_service_returned": true,
+    "gate_close": "External control gate closed"
+  },
+  "candump_returncode": 0,
+  "candump_stderr": ""
+}

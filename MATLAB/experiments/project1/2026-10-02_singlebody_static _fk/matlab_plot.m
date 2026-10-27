@@ -1,93 +1,29 @@
+%% 实验1：单个位形静态FK一致性（只统计与绘图，不独立重建POE）
 clear; clc; close all;
+script_dir=fileparts(mfilename('fullpath'));
+repo_dir=fileparts(fileparts(fileparts(fileparts(script_dir))));
+addpath(fullfile(repo_dir,'MATLAB')); setup_piper_paths;
+root_dir=fullfile(repo_dir,'experiments','project1','2026-10-02_singlebody_static _fk');
 
-%% 1. 读取 C++ 导出的 CSV
-script_dir = fileparts(mfilename('fullpath'));
-repo_dir = fileparts(fileparts(fileparts(fileparts(script_dir))));
-root_dir = fullfile(repo_dir,'experiments','project1','2026-10-02_singlebody_static _fk');
-csv_path = fullfile(root_dir, 'data.csv');
-if ~isfile(csv_path)
-    error('找不到实验数据文件：%s', csv_path);
-end
-data = readtable(csv_path, 'Delimiter', ',');
+%% 1. 读取与统计；原始CSV始终只读
+data=load_feedback_csv(fullfile(root_dir,'data.csv'));
+% 此归档部分坐标保留小数位较少，给算术复核留1e-10m余量，不改数据。
+summary=summarize_static_pose(data,'static01',struct('position_recheck_tolerance_m',1e-10));
+% 时间/跨度质量报告保留在data.timing；不隐式删除异常样本。
+if ~data.timing.ok, warning('时间或六帧跨度存在异常，请查看data.timing'); end
 
-t = data.t_s;                        % 相对时间，单位 s
-q_rad = data{:, {'q1_rad', 'q2_rad', 'q3_rad', ...
-                'q4_rad', 'q5_rad', 'q6_rad'}};
+%% 2. 绘图；本实验仍只显示，由使用者自行保存
+cfg_plot=struct('title','六关节角度反馈');
+plot_joint_angles(data.t,data.q_rad,cfg_plot);
+cfg_plot.title='末端位置：CAN反馈与C++ POE';
+plot_position_comparison(data.t,{data.p_feedback,data.p_cpp}, ...
+    {'CAN反馈','C++ POE'},cfg_plot);
+cfg_plot.title='C++ POE与CAN模型一致性偏差';
+plot_pose_errors(data.t,data.position_mm/1000,data.rotation_deg*pi/180,cfg_plot);
 
-p_feedback = data{:, {'feedback_x_m', ...
-                     'feedback_y_m', ...
-                     'feedback_z_m'}};
-
-p_poe = data{:, {'poe_x_m', 'poe_y_m', 'poe_z_m'}};
-
-% 仅在显示时换单位，不改变原始数据
-q_deg = q_rad * 180 / pi;
-p_feedback_mm = p_feedback * 1000;
-p_poe_mm = p_poe * 1000;
-position_error_mm = data.position_error_m * 1000;
-rotation_error_deg = data.rotation_error_rad * 180 / pi;
-
-%% 2. 六个关节角度随时间变化
-figure('Name', '关节角度', 'Color', 'w');
-tiledlayout(3, 2);
-
-for i = 1:6
-    nexttile;
-    plot(t, q_deg(:, i), 'LineWidth', 1.2);
-    grid on;
-    xlabel('时间 / s');
-    ylabel('角度 / °');
-    title(sprintf('J%d', i));
-end
-
-sgtitle('六关节角度反馈');
-
-%% 3. 末端 XYZ：厂家反馈与 POE 计算对比
-figure('Name', '末端位置对比', 'Color', 'w');
-tiledlayout(3, 1);
-
-axis_names = {'X', 'Y', 'Z'};
-
-for i = 1:3
-    nexttile;
-    plot(t, p_feedback_mm(:, i), 'b-', 'LineWidth', 1.2);
-    hold on;
-    plot(t, p_poe_mm(:, i), 'r--', 'LineWidth', 1.2);
-    grid on;
-    xlabel('时间 / s');
-    ylabel(sprintf('%s / mm', axis_names{i}));
-    legend('厂家反馈', 'POE计算', 'Location', 'best');
-end
-
-sgtitle('末端位置：反馈与模型对比');
-
-%% 4. 位置误差与姿态误差
-figure('Name', '模型一致性误差', 'Color', 'w');
-tiledlayout(2, 1);
-
-nexttile;
-plot(t, position_error_mm, 'LineWidth', 1.2);
-grid on;
-xlabel('时间 / s');
-ylabel('位置误差 / mm');
-title('位置误差：两位置向量之差的模');
-
-nexttile;
-plot(t, rotation_error_deg, 'LineWidth', 1.2);
-grid on;
-xlabel('时间 / s');
-ylabel('姿态误差 / °');
-title('姿态误差：相对旋转矩阵的转角');
-
-%% 5. 输出误差统计
-fprintf('有效数据组数：%d\n', height(data));
-
-fprintf('位置误差：均值 %.6f mm，RMS %.6f mm，最大 %.6f mm\n', ...
-    mean(position_error_mm), ...
-    sqrt(mean(position_error_mm.^2)), ...
-    max(position_error_mm));
-
-fprintf('姿态误差：均值 %.6f°，RMS %.6f°，最大 %.6f°\n', ...
-    mean(rotation_error_deg), ...
-    sqrt(mean(rotation_error_deg.^2)), ...
-    max(rotation_error_deg));
+%% 3. 输出统计；模型一致性不代表外部测量的实际定位精度
+fprintf('有效数据组数：%d\n',summary.sample_count);
+fprintf('位置偏差：均值 %.6f mm，RMS %.6f mm，最大 %.6f mm\n', ...
+    summary.position_mean_mm,summary.position_rms_mm,summary.position_max_mm);
+fprintf('姿态偏差：均值 %.6f deg，RMS %.6f deg，最大 %.6f deg\n', ...
+    summary.rotation_mean_deg,summary.rotation_rms_deg,summary.rotation_max_deg);

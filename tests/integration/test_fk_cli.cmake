@@ -1,0 +1,75 @@
+# 离线命令行回归，只在构建目录中新建临时目录，不碰实验归档。
+if(NOT DEFINED FK_VALIDATION OR NOT EXISTS "${FK_VALIDATION}")
+    message(FATAL_ERROR "FK_VALIDATION must point to the built fk_validation executable")
+endif()
+string(RANDOM LENGTH 12 ALPHABET 0123456789abcdef suffix)
+set(root "${TEST_ROOT}/fk-cli-test-${suffix}")
+file(MAKE_DIRECTORY "${root}/logs" "${root}/csv")
+set(log "${root}/input.log")
+file(WRITE "${log}"
+    "(10.0000) can0 2A2#0000000000000000\n"
+    "(10.0001) can0 2A3#0000000000000000\n"
+    "(10.0002) can0 2A4#0000000000000000\n"
+    "(10.0003) can0 2A5#0000000000000000\n"
+    "(10.0004) can0 2A6#0000000000000000\n"
+    "(10.0005) can0 2A7#0000000000000000\n")
+execute_process(COMMAND "${FK_VALIDATION}" "${log}" "${root}/single.csv"
+    RESULT_VARIABLE code OUTPUT_VARIABLE output ERROR_VARIABLE error)
+if(NOT code EQUAL 0 OR NOT output MATCHES "Valid feedback samples: 1")
+    message(FATAL_ERROR "single mode failed: ${output} ${error}")
+endif()
+file(STRINGS "${root}/single.csv" rows)
+list(LENGTH rows count)
+if(NOT count EQUAL 2)
+    message(FATAL_ERROR "expected header plus one row")
+endif()
+file(SHA256 "${root}/single.csv" before)
+execute_process(COMMAND "${FK_VALIDATION}" "${log}" "${root}/single.csv"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_QUIET)
+file(SHA256 "${root}/single.csv" after)
+if(code EQUAL 0 OR NOT before STREQUAL after)
+    message(FATAL_ERROR "same path must be rejected without overwrite")
+endif()
+foreach(i RANGE 1 10)
+    if(i LESS 10)
+        set(name "pose0${i}")
+    else()
+        set(name "pose${i}")
+    endif()
+    configure_file("${log}" "${root}/logs/${name}.log" COPYONLY)
+endforeach()
+execute_process(COMMAND "${FK_VALIDATION}" --multi "${root}/logs" "${root}/csv"
+    RESULT_VARIABLE code OUTPUT_VARIABLE output ERROR_VARIABLE error)
+if(NOT code EQUAL 0 OR NOT output MATCHES "Validated all 10 static poses")
+    message(FATAL_ERROR "batch failed: ${output} ${error}")
+endif()
+foreach(i RANGE 1 9)
+    if(NOT EXISTS "${root}/csv/pose0${i}.csv")
+        message(FATAL_ERROR "missing batch file ${i}")
+    endif()
+endforeach()
+if(NOT EXISTS "${root}/csv/pose10.csv")
+    message(FATAL_ERROR "missing pose10")
+endif()
+execute_process(COMMAND "${FK_VALIDATION}" --multi "${root}/logs"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_VARIABLE error)
+if(code EQUAL 0 OR NOT error MATCHES "Usage:")
+    message(FATAL_ERROR "missing CLI argument was not rejected")
+endif()
+execute_process(COMMAND "${FK_VALIDATION}" "${root}/absent.log" "${root}/absent.csv"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_QUIET)
+if(code EQUAL 0 OR EXISTS "${root}/absent.csv")
+    message(FATAL_ERROR "missing log should fail before creating output")
+endif()
+execute_process(COMMAND "${FK_VALIDATION}" "${log}" "${root}/absent/output.csv"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_QUIET)
+if(code EQUAL 0)
+    message(FATAL_ERROR "missing parent directory should fail")
+endif()
+file(WRITE "${root}/empty.log" "invalid text\n")
+execute_process(COMMAND "${FK_VALIDATION}" "${root}/empty.log" "${root}/empty.csv"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_VARIABLE error)
+if(code EQUAL 0 OR NOT error MATCHES "No complete feedback")
+    message(FATAL_ERROR "zero-sample log should fail")
+endif()
+message(STATUS "FK CLI integration PASS")

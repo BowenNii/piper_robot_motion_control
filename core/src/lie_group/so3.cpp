@@ -218,7 +218,7 @@ Mat3 rot_z(double theta)
  *
  *     exp([φ]^) → I
  *
- * 因此在小角度情况下返回单位矩阵。
+ * 小角度使用级数保留一阶旋转，不能直接丢弃为单位矩阵。
  *
  * 输入：
  *     rotation_vector：旋转向量 φ，单位 rad
@@ -230,9 +230,12 @@ Mat3 so3_exp(const Vec3& rotation_vector)
 {
     const double theta = rotation_vector.norm();
 
-    if (theta < kSmallAngle)
+    if (theta < 1e-4)
     {
-        return Mat3::Identity();
+        const Mat3 Phi=skew(rotation_vector);
+        const double t2=theta*theta;
+        return Mat3::Identity()+(1-t2/6+t2*t2/120)*Phi
+            +(0.5-t2/24+t2*t2/720)*Phi*Phi;
     }
 
     const Vec3 axis = rotation_vector / theta;
@@ -296,11 +299,13 @@ Vec3 so3_log(const Mat3& R)
     const double cos_theta =
         clamp((R.trace() - 1.0) * 0.5, -1.0, 1.0);
 
-    const double theta = std::acos(cos_theta);
+    const Vec3 sine_axis=0.5*vee(R-R.transpose());
+    // acos在接近单位阵时会丢失小角度；atan2保留反对称部分的信息。
+    const double theta = std::atan2(sine_axis.norm(),cos_theta);
 
-    if (theta < kSmallAngle)
+    if (theta < 1e-6)
     {
-        return Vec3::Zero();
+        return (1+theta*theta/6)*sine_axis;
     }
 
     if (kPi - theta < kSmallAngle)

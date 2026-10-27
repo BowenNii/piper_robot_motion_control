@@ -1,0 +1,23 @@
+{
+  "simulation_only": true,
+  "domain_id": 93,
+  "mode": "preallocated",
+  "duration_s": 53.62,
+  "plan": "experiments/project1/2026-10-25_five_profiles/runs/scheme1_return01/trajectory.csv",
+  "feedback_source": "experiments/project1/2026-10-25_five_profiles/runs/scheme1_return01/execution__lmrsp_m/feedback.csv",
+  "gc_enabled": true,
+  "memory_note": "Linux ru_maxrss: peak RSS KiB, not current RSS; includes initialization",
+  "scope": "ROS and Python scheduling only; no CAN/real driver/firmware, no hardware safety certification",
+  "completed": true,
+  "max_lateness_ms": 18.376145999354776,
+  "late_at_least_20ms": 0,
+  "feedback_samples": 10785,
+  "max_feedback_receive_gap_ms": 41.4637119974941,
+  "max_callback_ms": 0.6078110018279403,
+  "command_received": 2682,
+  "max_pre_lateness_ms": 18.367299999226816,
+  "max_message_build_ms": 0.12186700041638687,
+  "start_peak_rss_kib": 75616,
+  "end_peak_rss_kib": 89728,
+  "max_gc_pause_ms": 37.357156004873104
+}

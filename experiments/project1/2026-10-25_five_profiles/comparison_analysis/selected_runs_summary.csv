@@ -1,0 +1,11 @@
+scheme,direction,duration_s,peak_joint_tracking_rad,endpoint_mean_joint_error_rad,max_frame_span_ms,max_pc_lateness_ms,bad_status_rows,execution_dir
+1,outbound,53.72,0.00540780394227141,0.00156615120148945,1.10197067260742,2.93470200325885,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme1_out02/execution_e9ciw07w
+1,return,53.58,0.00544794870771326,0,1.07693672180176,1.41421700245736,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme1_return02/execution_nct6klzu
+2,outbound,10.76,0.00560234431254809,0.00149633803140969,0.892877578735352,1.21008399961287,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme2_out03/execution_x39j4vgp
+2,return,10.76,0.00525672787562864,0,1.13201141357422,1.10785300261362,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme2_return04/execution_ih9ohuf6
+3,outbound,6.72,0.00700171212644679,0.00154869790896961,0.817060470581055,0.376318005728571,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme3_out02/execution_upj6z36c
+3,return,6.72,0.00761095785205212,0,1.12509727478027,0.299800995562705,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme3_return03/execution_r5f94lp4
+4,outbound,12.28,0.00572445310883845,0.00156615120148945,1.10387802124023,1.21772499522194,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme4_out02/execution_h91zbohu
+4,return,12.26,0.00500809425664628,0,0.752925872802734,0.684384997875931,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme4_return02/execution_yt0krvy5
+5,outbound,9.24,0.00579257190242905,0.00147888473888991,1.10101699829102,1.45082700182719,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme5_out02/execution_777zkwpd
+5,return,9.24,0.00550165521884585,0,1.00302696228027,1.14084399654502,0,/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-25_five_profiles/runs/scheme5_return02/execution_pgf7c1lm

@@ -37,6 +37,16 @@ struct PiperFeedbackSample
 // 重复 ID、超出时间窗口、时间倒退或接口变化时丢弃未完成的组，
 // 再以当前帧开始新组。其他 ID 被忽略。
 // max_span_seconds 是配对窗口，不是硬件同步精度保证；默认 2 ms。
+// 计数累计到 clear_diagnostics()；原因可能同时出现，不能相加当作丢弃组数。
+// discarded_frames 不含触发重启后被用作新组首帧的当前帧。
+struct FeedbackAssemblerDiagnostics
+{
+    std::size_t received_frames = 0, ignored_frames = 0, invalid_frames = 0;
+    std::size_t completed_samples = 0, discarded_groups = 0, discarded_frames = 0;
+    std::size_t duplicate_ids = 0, interface_changes = 0;
+    std::size_t time_reversals = 0, over_window = 0, manual_resets = 0;
+};
+
 class PiperFeedbackAssembler
 {
 public:
@@ -46,8 +56,13 @@ public:
     void reset();
 
     [[nodiscard]] std::size_t pending_frame_count() const;
+    [[nodiscard]] const FeedbackAssemblerDiagnostics& diagnostics() const { return diagnostics_; }
+    // 只清计数，不清正在组装的帧。reset 则清帧并记录非空组的人工丢弃。
+    void clear_diagnostics() { diagnostics_ = {}; }
 
 private:
+    void clear_pending();
+    FeedbackAssemblerDiagnostics diagnostics_;
     double max_span_seconds_;
     double first_timestamp_ = 0.0;
     double last_timestamp_ = 0.0;

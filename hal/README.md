@@ -27,8 +27,8 @@ const auto result = hal::decode_joint_angle_pair(frame);
 非法 ID、长度、重复 ID 或越界偏移抛出 `std::invalid_argument`。
 未知报文应由接收层分流，不能直接把所有报文传给关节角解码函数。
 
-完整角度/位姿函数只检查帧集合，不检查时间同步；后续动态接收还要增加时间戳、
-完整性、新鲜度和超时检查。不能直接拼接不同时刻的帧作为同一状态。
+完整角度/位姿解码函数只检查帧集合，不检查时间同步；离线组装器另做组内接收时间窗口检查。
+实时控制仍需要反馈新鲜度、看门狗和设备采样同步机制。不能把接收窗口当作采样同步保证。
 
 Project 1 现在读取 `candump -L` 日志，组装六帧反馈后进行 POE 对比，
 输出首组矩阵、有效样本数及误差均值/RMS/最大值。它不直接连接 CAN。
@@ -41,9 +41,9 @@ Project 1 现在读取 `candump -L` 日志，组装六帧反馈后进行 POE 对
 cmake --preset debug
 cmake --build --preset debug-build
 ctest --preset debug-test --output-on-failure
-./build/debug/project1
+./build/debug/fk_validation
 # 或指定日志文件路径（默认使用下面这份真实日志）：
-./build/debug/project1 /home/nbw/piper_can_static_2026-10-01.log
+./build/debug/fk_validation /home/nbw/piper_can_static_2026-10-01.log
 ```
 
 ## 日志解析与反馈组装
@@ -64,3 +64,30 @@ ctest --preset debug-test --output-on-failure
 
 原始日志保持不变。多个静止且重复的样本用于验证解码/回放，不代表多个不同姿态。
 暂无完整样本、文件无法打开或读取失败时演示程序以非零退出码结束。
+
+## 组装诊断（已实现）
+
+diagnostics() 返回累计 FeedbackAssemblerDiagnostics；不改变正在组装的帧。
+
+| 字段 | 含义 |
+| --- | --- |
+| received_frames / ignored_frames / invalid_frames | push调用数 / 非目标ID数 / 非法目标帧数 |
+| completed_samples | 完整输出的组数 |
+| discarded_groups / discarded_frames | 被重启或人工reset丢弃的未完成组数 / 旧帧数 |
+| duplicate_ids | 组内同ID再次到达 |
+| over_window | 当前帧距组首帧超过配置窗口 |
+| time_reversals | 组内当前时间早于上一帧 |
+| interface_changes | 组内接口名改变 |
+| manual_resets | reset调用时有待组装帧的次数 |
+
+多个原因可能同时触发，所以原因计数不能相加当作丢弃组数。
+触发自动重启的当前帧会开始新组，不计入旧帧丢弃数量。
+完整组输出后正常清空不算丢弃；EOF待处理帧另外用 pending_frame_count() 查看。
+clear_diagnostics() 只清计数，reset() 只清待组装帧并记录非空组人工丢弃。
+非法目标帧计数后抛 invalid_argument，保留旧待组装帧，由调用者决定是否reset。
+
+时间倒退诊断只覆盖正在组装的组，不是整个日志的全局时间顺序检查。
+日志解析失败发生在 push 之前，所以仍由主程序的 invalid/unsupported 计数报告。
+project1 在 push 前过滤其他接口/ID，主程序 ignored 与组装器 ignored_frames 含义不同。
+这些规则用于离线数据检查，不提供物理急停或设备采样同步。
+测试见 tests/unit/test_assembler_diagnostics.cpp。

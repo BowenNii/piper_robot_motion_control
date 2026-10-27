@@ -22,6 +22,10 @@ compile_commands.json
 *.asv
 *.m~
 
+# Python / ROS preview tools
+__pycache__/
+*.py[cod]
+
 # Temporary
 *.tmp
 *.swp

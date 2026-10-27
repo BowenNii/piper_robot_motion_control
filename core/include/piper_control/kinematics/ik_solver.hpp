@@ -25,7 +25,7 @@ struct IKOptions {
   VecXd q_min;
   VecXd q_max;
 };
-
+//已收敛，最大迭代次数，停滞，数值计算失败
 enum class IKStatus { kConverged, kMaxIterations, kStalled, kNumericalFailure };
 
 struct IKResult {

@@ -1,107 +1,45 @@
+%% 实验2：多位形静态FK一致性；各位形独立统计，不是连续轨迹
 clear; clc; close all;
+script_dir=fileparts(mfilename('fullpath'));
+repo_dir=fileparts(fileparts(fileparts(fileparts(script_dir))));
+addpath(fullfile(repo_dir,'MATLAB')); setup_piper_paths;
+root_dir=fullfile(repo_dir,'experiments','project1','2026-10-03_Multibody_static _fk');
+data_dir=fullfile(root_dir,'data_csv');
+num_poses=10; pairing_window_ms=2;
+plot_each_pose=true; show_figures=usejava('desktop');
+pose_labels=string(compose('pose%02d',(1:num_poses)'));
+q_names=compose('q%d_rad',1:6);
+feedback_names={'feedback_x_m','feedback_y_m','feedback_z_m'};
+poe_names={'poe_x_m','poe_y_m','poe_z_m'};
 
-%% 1. 配置与输入检查
-script_dir = fileparts(mfilename('fullpath'));
-repo_dir = fileparts(fileparts(fileparts(fileparts(script_dir))));
-root_dir = fullfile(repo_dir,'experiments','project1','2026-10-03_Multibody_static _fk');
-data_dir = fullfile(root_dir, 'data_csv');
-num_poses = 10;
-pairing_window_ms = 2;              % 与 C++ 六帧配对窗口一致
-plot_each_pose = true;             % 每个位形生成一张详细图
-show_figures = usejava('desktop'); % 图形界面运行时显示，批处理时不显示
-pose_labels = string(compose('pose%02d', (1:num_poses)'));
-q_names = compose('q%d_rad', 1:6);
-feedback_names = {'feedback_x_m','feedback_y_m','feedback_z_m'};
-poe_names = {'poe_x_m','poe_y_m','poe_z_m'};
-required = [{'t_s','timestamp_s','frame_span_s'}, cellstr(q_names), ...
-    feedback_names, poe_names, {'position_error_m','rotation_error_rad'}];
-data_all = cell(num_poses, 1);
-sample_count = zeros(num_poses, 1);
-duration_s = zeros(num_poses, 1);
-q_mean_deg = zeros(num_poses, 6);
-q_range_deg = zeros(num_poses, 6);
-feedback_mean_mm = zeros(num_poses, 3);
-poe_mean_mm = zeros(num_poses, 3);
-position_stats_mm = zeros(num_poses, 3); % 每行：[均值 RMS 最大值]
-rotation_stats_deg = zeros(num_poses, 3);
-span_max_ms = zeros(num_poses, 1);
-span_over_window_count = zeros(num_poses, 1);
-position_recheck_max_mm = zeros(num_poses, 1);
-
-for k = 1:num_poses
-    csv_path = fullfile(data_dir, sprintf('pose%02d.csv', k));
-    if ~isfile(csv_path)
-        error('缺少数据文件：%s', csv_path);
-    end
-    D = readtable(csv_path, 'Delimiter', ',');
-    missing = setdiff(required, D.Properties.VariableNames);
-    if ~isempty(missing)
-        error('%s 缺少列：%s', csv_path, strjoin(missing, ', '));
-    end
-    if height(D) == 0 || any(~isfinite(D{:, required}), 'all')
-        error('%s 为空或包含非有限数值；请检查源数据。', csv_path);
-    end
-    if any(diff(D.t_s) < 0) || any(diff(D.timestamp_s) < 0) || ...
-            any(D.frame_span_s < 0) || any(D.position_error_m < 0) || ...
-            any(D.rotation_error_rad < 0)
-        error('%s 时间戳倒退，或跨度/误差出现负数。', csv_path);
-    end
-    data_all{k} = D;
-    q = D{:, cellstr(q_names)} * 180/pi;
-    p_feedback = D{:, feedback_names} * 1000;
-    p_poe = D{:, poe_names} * 1000;
-    position_mm = D.position_error_m * 1000;
-    rotation_deg = D.rotation_error_rad * 180/pi;
-
-    % 重新计算位置偏差，核对 CSV 中误差列；不是独立 FK 验证。
-    position_recomputed = vecnorm(p_poe - p_feedback, 2, 2);
-    position_recheck_max_mm(k) = max(abs(position_recomputed-position_mm));
-    if position_recheck_max_mm(k) > 1e-8
-        error('%s 位置误差列与两位置向量不一致。', csv_path);
-    end
-    sample_count(k) = height(D);
-    duration_s(k) = D.t_s(end)-D.t_s(1);
-    q_mean_deg(k,:) = mean(q, 1);
-    q_range_deg(k,:) = max(q,[],1)-min(q,[],1);
-    feedback_mean_mm(k,:) = mean(p_feedback, 1);
-    poe_mean_mm(k,:) = mean(p_poe, 1);
-    position_stats_mm(k,:) = [mean(position_mm), ...
-        sqrt(mean(position_mm.^2)), max(position_mm)];
-    rotation_stats_deg(k,:) = [mean(rotation_deg), ...
-        sqrt(mean(rotation_deg.^2)), max(rotation_deg)];
-    span_max_ms(k) = max(D.frame_span_s)*1000;
-    span_over_window_count(k) = sum(D.frame_span_s*1000 > pairing_window_ms+1e-6);
-    if span_over_window_count(k) > 0
-        warning('%s 存在超过 2 ms 配对窗口的反馈组。', pose_labels(k));
-    end
+%% 1. 读取与独立统计；只核对位置误差列，不新增独立POE验算
+data_all=cell(num_poses,1); rows=struct([]);
+cfg_static=struct('frame_window_s',pairing_window_ms/1000, ...
+    'position_recheck_tolerance_m',1e-11);
+for k=1:num_poses
+    d=load_feedback_csv(fullfile(data_dir,sprintf('pose%02d.csv',k)));
+    row=summarize_static_pose(d,pose_labels(k),cfg_static);
+    if k==1, rows=row; else, rows(k)=row; end
+    data_all{k}=d.table; % 保留原MAT归档中的原始表
+    if ~d.timing.ok, warning('%s：时间或跨度异常，请查看质量报告',pose_labels(k)); end
 end
+summary=struct2table(rows);
+% 下面的数组仅供本实验专项总览绘图使用，不重复计算统计量。
+sample_count=summary.sample_count;
+q_mean_deg=summary{:,cellstr(compose('q%d_mean_deg',1:6))};
+q_range_deg=summary{:,cellstr(compose('q%d_range_deg',1:6))};
+feedback_mean_mm=summary{:,{'feedback_x_mean_mm','feedback_y_mean_mm','feedback_z_mean_mm'}};
+poe_mean_mm=summary{:,{'poe_x_mean_mm','poe_y_mean_mm','poe_z_mean_mm'}};
+position_stats_mm=summary{:,{'position_mean_mm','position_rms_mm','position_max_mm'}};
+rotation_stats_deg=summary{:,{'rotation_mean_deg','rotation_rms_deg','rotation_max_deg'}};
+span_max_ms=summary.frame_span_max_ms;
+span_over_window_count=summary.span_over_window_count;
+axis_names={'x','y','z'};
 
-%% 2. 汇总表（每行代表一个位形，不代表连续轨迹）
-summary = table(pose_labels, sample_count, duration_s, ...
-    'VariableNames', {'pose','sample_count','duration_s'});
-for j = 1:6
-    summary.(sprintf('q%d_mean_deg',j)) = q_mean_deg(:,j);
-    summary.(sprintf('q%d_range_deg',j)) = q_range_deg(:,j);
-end
-axis_names = {'x','y','z'};
-for j = 1:3
-    summary.(['feedback_' axis_names{j} '_mean_mm']) = feedback_mean_mm(:,j);
-    summary.(['poe_' axis_names{j} '_mean_mm']) = poe_mean_mm(:,j);
-    summary.(['delta_' axis_names{j} '_mean_mm']) = ...
-        poe_mean_mm(:,j)-feedback_mean_mm(:,j); % 带符号：POE - 反馈
-end
-summary.position_mean_mm = position_stats_mm(:,1);
-summary.position_rms_mm = position_stats_mm(:,2);
-summary.position_max_mm = position_stats_mm(:,3);
-summary.rotation_mean_deg = rotation_stats_deg(:,1);
-summary.rotation_rms_deg = rotation_stats_deg(:,2);
-summary.rotation_max_deg = rotation_stats_deg(:,3);
-summary.frame_span_max_ms = span_max_ms;
-summary.span_over_window_count = span_over_window_count;
-summary.position_recheck_max_mm = position_recheck_max_mm;
-writetable(summary, fullfile(root_dir, 'summary.csv'));
-save(fullfile(root_dir, 'analysis_results.mat'), 'summary', 'data_all', ...
-    'pairing_window_ms');
+%% 2. 保存统计；明确允许重新运行覆盖本脚本生成的CSV/MAT，不保存图片
+save_analysis_results(root_dir,struct('summary',summary), ...
+    struct('summary',summary,'data_all',{data_all},'pairing_window_ms',pairing_window_ms), ...
+    struct('overwrite',true));
 
 %% 3. 图形设置（不修改 MATLAB 的全局默认字体）
 font_name = 'Noto Sans CJK SC';
@@ -136,7 +74,7 @@ nexttile; bar(x, rotation_stats_deg); grid on;
 ylim([0,max(1e-6,1.15*max(rotation_stats_deg,[],'all'))]);
 xticks(x); xticklabels(pose_labels); ylabel('姿态偏差 / deg');
 title('姿态偏差：均值、RMS、最大值'); legend('均值','RMS','最大值','Location','eastoutside');
-sgtitle('POE 与厂家反馈的模型一致性（不是独立定位精度）');
+sgtitle('POE 与CAN反馈的模型一致性（不是独立定位精度）');
 format_plot(f, '02_model_errors_overview', font_name);
 
 %% 6. 总览：末端 XYZ 与带符号位置偏差
@@ -148,7 +86,7 @@ for j = 1:3
     plot(x, feedback_mean_mm(:,j),'bo',x,poe_mean_mm(:,j),'rx','LineWidth',1.2);
     grid on; xticks(x); xticklabels(pose_labels); xtickangle(35);
     ylabel(sprintf('%s / mm',upper(axis_names{j})));
-    title(sprintf('%s 坐标均值',upper(axis_names{j}))); legend('厂家反馈','POE计算','Location','best');
+    title(sprintf('%s 坐标均值',upper(axis_names{j}))); legend('CAN反馈','POE计算','Location','best');
     nexttile;
     bar(x,poe_mean_mm(:,j)-feedback_mean_mm(:,j)); grid on;
     xticks(x); xticklabels(pose_labels); xtickangle(35);
@@ -186,7 +124,7 @@ if plot_each_pose
             plot(D.t_s,D{:,feedback_names{j}}*1000,'b-', ...
                 D.t_s,D{:,poe_names{j}}*1000,'r--','LineWidth',1.2);
             grid on; xlabel('相对时间 / s'); ylabel('位置 / mm');
-            title(sprintf('%s 坐标',upper(axis_names{j}))); legend('厂家反馈','POE计算','Location','best');
+            title(sprintf('%s 坐标',upper(axis_names{j}))); legend('CAN反馈','POE计算','Location','best');
         end
         nexttile;
         plot(D.t_s,D.position_error_m*1000,'LineWidth',1.2);
@@ -216,12 +154,11 @@ fprintf('图形仅显示，不自动保存 PNG 或 FIG。\n');
 fprintf(['说明：十个位形覆盖的是本次局部测试范围，不代表整个工作空间。\n' ...
     '厂家位姿反馈不是外部测量，本次不是实际定位精度或动态跟踪验证。\n']);
 
-%% 局部函数：统一图形格式；仅显示，由使用者自行保存
-function format_plot(f, basename, font_name)
-    set(findall(f,'-property','FontName'),'FontName',font_name);
-    set(findall(f,'Type','axes'),'FontSize',10);
-    if endsWith(basename,'overview')
-        set(findall(f,'Type','axes'),'XLim',[0.5,10.5]);
-    end
-    drawnow;
+%% 本实验专项格式：位形编号不是时间，不调用时间曲线函数
+function format_plot(f,basename,font_name)
+apply_plot_style(f,struct('font_name',font_name,'font_size',10));
+if endsWith(basename,'overview')
+    set(findall(f,'Type','axes'),'XLim',[0.5,10.5]);
+end
+drawnow;
 end

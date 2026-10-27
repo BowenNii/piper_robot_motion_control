@@ -1,0 +1,15 @@
+{
+  "action": "/arm_controller/follow_joint_trajectory",
+  "state_topic": "/offline_preview/joint_states",
+  "success": true,
+  "endpoint_derivatives_zeroed": true,
+  "simulation_only": true,
+  "source_csv": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-18_ik_trajectory/data_csv/trajectory.csv",
+  "sample_count": 501,
+  "duration_s": 10.0,
+  "status": 4,
+  "error_code": 0,
+  "error_string": "Goal successfully reached!",
+  "action_elapsed_s": 10.052183983003488,
+  "final_error_rad": 0.0
+}

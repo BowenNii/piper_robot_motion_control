@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "simulation_only": false,
+  "planned_command_duration_s": 10.0,
+  "csv_sha256": "bb495b45931793ff05c72332d166b81e36e99ff355cec221e7c3e84736b4f1c5",
+  "metrics": {
+    "velocity_peak_rad_s": 0.003851745245148086,
+    "acceleration_peak_rad_s2": 0.001435390939302783,
+    "max_excursion_rad": 0.020248881166684912
+  },
+  "command_topic": "/control/move_j",
+  "feedback_topic": "/feedback/joint_states",
+  "command_elapsed_s": 10.00022829399677,
+  "q_final_rad": [
+    0.0999724595542352,
+    0.10124654990819106,
+    -0.10786134777324956,
+    0.06332054526235428,
+    0.015376350710070043,
+    -0.065868725970266
+  ],
+  "final_joint_error_max_rad": 0.0015710336980917783,
+  "sent_points": 501,
+  "cleanup": {
+    "gate_close": "External control gate closed"
+  }
+}

@@ -1,0 +1,2 @@
+command_index,send_return_time_s,max_send_interval_ms,pre_send_lateness_ms,precheck_to_send_return_ms,max_receive_interval_ms,receive_peak_time_s,position_peak_before_mm,position_peak_after_mm,rotation_peak_before_deg,rotation_peak_after_deg
+1808,36.174796678999,34.3240249785595,0.843990012072027,13.9526889869046,14.452914998401,36.17456567302,0.604276096796363,0.492385875288903,0.254795629446644,0.254714060093338

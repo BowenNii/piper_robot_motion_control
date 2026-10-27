@@ -203,8 +203,64 @@
 
 ## safety / joint_limits
 
-* 【SAFE-02】 joint_limits：机器人关节状态 → 关节限制检查结果
+* 【SAFE-02】 check_joint_limits：N×n 关节角序列(rad) + n维上下限(rad) + 容差 → 全部通过标志、逐行通过标志、超限幅度矩阵及超限行/关节索引。只检查位置，不裁剪输入，不检查碰撞。
 
 ## safety / watchdog
 
 * 【SAFE-03】 watchdog：控制周期 / 通信状态 → Watchdog 状态
+
+---
+
+## 本次补充：common / error_statistics（已实现）
+
+* 【STAT-01】 ErrorAccumulator::add：单个非负有限误差 → 累计样本数、和、缩放平方和、最大值；不保留全部样本。单位由调用者保持一致。
+* ErrorAccumulator::statistics：已累计数据 → count、mean、rms、max；无样本时 count=0，其余 NaN。
+* ErrorAccumulator::reset：无输入 → 清空统计。负数/NaN/Inf 不会进入累计。
+
+## validation / pose_error（已实现）
+
+* 【VAL-01】 check_se3：矩阵 + 数值容差（默认 1e-8） → 是否为有限4×4齐次位姿、旋转正交误差、det(R)、末行误差。不修正输入矩阵。
+* 【VAL-02】 pose_error：actual、reference 两个 SE(3) → position_m、rotation_rad、delta_p_m。位置差为 actual-reference；转角范围 [0,pi]，不直接相减 RPY。
+
+## validation / kinematics_validation（已实现）
+
+* 【VAL-03】 check_ik_solution：6×n 空间旋量 S、零位 M、候选关节角 q、目标位姿、上下限、IkValidationConfig → FK回代位姿、位姿残差、关节限位报告、综合通过标志。不是逆解求解器；还需调用者检查求解器成功状态。
+* 【VAL-04】 check_joint_continuity：N×n 角度序列 + 每关节变化阈值（或一个共用阈值，rad） → 相邻有符号差 (N-1)×n、跳变索引和幅度。不做2pi绕回，不替代速度/加速度检查。
+
+所有报告中的行号与关节号均从0开始。N×n表示“一行一个样本，一列一个关节”。
+输入维度/有限值/配置不合法时抛 std::invalid_argument；合法输入但验证未通过时返回 ok=false。
+check_se3 是例外：非法矩阵返回报告，非法容差才抛异常。
+
+### 阅读与使用顺序
+
+1. 先看各头文件中的输入输出说明；再看同名 cpp 的计算步骤。
+2. 阅读 tests/unit/test_validation_modules.cpp，查看正常输入与拒绝输入示例。
+3. 最后看 apps/project1/fk_validation.cpp：它保留实验业务流程，调用位姿误差和统计模块。
+
+示例（变量 q、model、target 已准备好）：
+
+```cpp
+#include "piper_control/validation/kinematics_validation.hpp"
+#include "piper_control/common/error_statistics.hpp"
+const auto report = piper_control::check_ik_solution(
+    model.S_list, model.M, q, target, model.q_min, model.q_max);
+// report.ok 同时要求 FK 回代误差满足阈值、角度不超限。
+piper_control::ErrorAccumulator stats;
+stats.add(report.error.position_m);
+const auto summary = stats.statistics(); // mean/rms/max 都是 m。
+```
+
+### 文件输出与反馈诊断的位置
+
+文件输出不放入数学 core：见 tools/experiment_io/README.md。
+CAN 帧组装与丢弃原因不放入数学 core：见 hal/README.md。
+这些验证函数是工程检查，不是硬件急停或认证安全控制器。
+上面既有列表仍含 dynamics、estimation、watchdog 等占位模块，不能将列表中的全部条目视为已实现功能。
+
+## trajectory / time_parameterization（2026-10-19补充）
+
+* quintic_time_scaling(t, duration)：当前时间与总时长（s）→ PathTimeState，含路径进度s、ds_dt（1/s）、d2s_dt2（1/s²）。五次时间缩放，起终点路径速度及加速度为0；拒绝越界时间、非正时长和非有限输入。
+* differentiate_joint_samples(q, dt)：N×n等时间采样角度与采样间隔（s）→ JointTimeDerivatives，velocity（rad/s）和acceleration（rad/s²），均为N×n。至少4行，内点中心差分，首尾单边差分，不强制置零。差分会放大误差，不代表真机测量或点间约束保证。
+
+示例入口：apps/project1/ik_trajectory_validation.cpp；测试：tests/unit/test_time_parameterization.cpp。
+小角度SO(3)/SE(3)映射使用级数保留微小旋转，避免平滑启停时的旋转截断与IK停滞。

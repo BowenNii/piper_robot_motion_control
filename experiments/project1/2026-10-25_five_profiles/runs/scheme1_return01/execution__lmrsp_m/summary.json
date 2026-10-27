@@ -1,0 +1,34 @@
+{
+  "success": false,
+  "scheme": 1,
+  "direction": "return",
+  "csv_sha256": "d5a138299f79a2f26e6d6d782004655da74506aa4be95c306eb7f73b551dc5eb",
+  "clock_note": "CAN epoch clock; commands log monotonic + explicit wall-clock origin; no arbitrary alignment shift",
+  "driver_config": {
+    "arm_type": "piper",
+    "can_port": "can0",
+    "fast_mode": false,
+    "speed_percent": 5,
+    "auto_enable": false,
+    "effector_type": "agx_gripper",
+    "tcp_offset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pub_rate": 200
+  },
+  "trajectory_start_receive_elapsed_s": 3.9549136349960463,
+  "trajectory_start_epoch_s": 1792929177.43486,
+  "exception": "迟到达到20ms，停止而非追赶补发",
+  "sent_points": 1777,
+  "cleanup": {
+    "stop_service_returned": true,
+    "gate_close": "External control gate closed"
+  },
+  "candump_returncode": 0,
+  "candump_stderr": ""
+}
