@@ -1,0 +1,45 @@
+{
+  "kind": "movej_multi_joint_probe_v1",
+  "joint": "all",
+  "mode": "once",
+  "direction": "return",
+  "q_start_rad": [
+    0.300091911587905,
+    0.29972539244498625,
+    -0.30054569719342356,
+    0.2992017936693879,
+    0.30065041694854316,
+    0.500769868982213
+  ],
+  "q_goal_rad": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "duration_s": 10.76,
+  "samples": 539,
+  "driver_config": {
+    "arm_type": "piper",
+    "can_port": "can0",
+    "fast_mode": false,
+    "speed_percent": 5,
+    "auto_enable": false,
+    "effector_type": "agx_gripper",
+    "tcp_offset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pub_rate": 200
+  },
+  "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+  "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+  "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+  "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+}

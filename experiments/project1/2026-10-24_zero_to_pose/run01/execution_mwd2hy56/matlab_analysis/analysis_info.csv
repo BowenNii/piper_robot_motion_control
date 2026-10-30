@@ -1,2 +1,0 @@
-execution_name,time_alignment,receive_origin_offset_s,alignment_note,bad_status_rows,endpoint_joint_stable,endpoint_window_s
-execution_mwd2hy56,recorded_monotonic_origin,1.76971584899002,已记录同机单调时钟原点；接收时刻比较仍包含传输/排队影响,0,1,0.5

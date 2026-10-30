@@ -27,6 +27,25 @@ import time
 from csv_trajectory_preview import REPO, DEFAULT_URDF, JOINTS, load_csv
 from csv_action_sender import ordered_positions
 
+
+def driver_configuration(io):
+    """只读驱动参数；ABC模型对比要求零TCP，不自动修改参数。"""
+    from rcl_interfaces.srv import GetParameters
+    names=['arm_type','can_port','fast_mode','speed_percent','auto_enable','effector_type','tcp_offset','pub_rate']
+    response=io.service(DRIVER+'/get_parameters',GetParameters,GetParameters.Request(names=names))
+    values={}
+    for name,v in zip(names,response.values):
+        if v.type==1:values[name]=v.bool_value
+        elif v.type==2:values[name]=v.integer_value
+        elif v.type==3:values[name]=v.double_value
+        elif v.type==4:values[name]=v.string_value
+        elif v.type==8:values[name]=list(v.double_array_value)
+        else:values[name]=None
+    offset=values.get('tcp_offset')
+    if not isinstance(offset,list) or len(offset)!=6 or any(not math.isfinite(x) or abs(x)>1e-12 for x in offset):
+        raise RuntimeError('本次模型对比要求已确认的零TCP偏移；不自动修改驱动参数')
+    return values
+
 FEEDBACK = "/feedback/joint_states"
 STATUS = "/feedback/arm_status"
 COMMAND = "/control/move_j"
@@ -49,6 +68,10 @@ class RowBuffer:
     def writerow(self,row):
         if len(self.rows)>=20000: raise RuntimeError("实验日志缓存超限")
         self.rows.append(list(row))
+
+
+class GraphNotReady(RuntimeError):
+    """DDS图尚未完整发现；只允许在门控关闭的初始化阶段等待。"""
 
 
 @contextmanager
@@ -309,8 +332,25 @@ class RobotIO:
                 v[2].type!=1 or v[2].bool_value or v[3].type!=2 or v[3].integer_value!=5 or \
                 v[4].type!=1 or v[4].bool_value:
             raise RuntimeError("驱动必须为piper/can0、fast_mode=false、speed_percent=5、auto_enable=false")
-        self.check_graph()
+        self.wait_for_graph()
         self.wait_stationary()
+
+    def wait_for_graph(self):
+        # 服务已可调用，不等于新节点已完成全部图发现。门控已由ready关闭。
+        # 只等待缺失/未知身份，重复驱动和已知非预期发布者直接报错。
+        deadline=time.monotonic()+3.
+        stable_since=None;last='尚未发现节点'
+        while time.monotonic()<deadline:
+            if self.interrupted:raise RuntimeError('用户取消图发现等待')
+            try:self.check_graph()
+            except GraphNotReady as exc:
+                stable_since=None;last=str(exc)
+            else:
+                now=time.monotonic()
+                if stable_since is None:stable_since=now
+                if now-stable_since>=.3:return
+            self.spin(.02)
+        raise RuntimeError('3秒内ROS图未稳定，未开放门控：'+last)
 
     def wait_stationary(self):
         # 图发现/服务查询只在开门前进行；查询后重新积累一段新鲜位置，
@@ -326,13 +366,19 @@ class RobotIO:
 
     def check_graph(self):
         drivers=[(n,ns) for n,ns in self.node.get_node_names_and_namespaces() if n=="agx_arm_ctrl_single_node"]
+        if not drivers:
+            raise GraphNotReady('尚未发现根命名空间真机驱动')
         if drivers!=[("agx_arm_ctrl_single_node","/")]:
-            raise RuntimeError("只能存在一个根命名空间真机驱动")
+            raise RuntimeError(f"只能存在一个根命名空间真机驱动；实际发现：{drivers!r}")
         pubs=self.node.get_publishers_info_by_topic(FEEDBACK)
+        if not pubs or (len(pubs)==1 and (pubs[0].node_name=='_NODE_NAME_UNKNOWN_' or pubs[0].node_namespace=='_NODE_NAMESPACE_UNKNOWN_')):
+            raise GraphNotReady('反馈发布者尚未发现或身份未知')
         if len(pubs)!=1 or pubs[0].node_name!="agx_arm_ctrl_single_node" or pubs[0].node_namespace!="/":
             raise RuntimeError("反馈话题发布者不唯一或不是预期真机驱动")
         for topic in MOTION_TOPICS:
             for pub in self.node.get_publishers_info_by_topic(topic):
+                if pub.node_name=='_NODE_NAME_UNKNOWN_' or pub.node_namespace=='_NODE_NAMESPACE_UNKNOWN_':
+                    raise GraphNotReady(f'运动发布者身份尚未发现：{topic}')
                 if pub.node_name!=self.node.get_name() or pub.node_namespace!="/":
                     raise RuntimeError(f"存在其他运动发布者：{topic} {pub.node_name}；先关闭MoveIt/其他发送器")
 

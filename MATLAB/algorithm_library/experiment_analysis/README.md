@@ -6,6 +6,9 @@
 
 ## 函数清单
 
+Project1当前收尾入口为`analyze_project1_closeout`，辅助函数为`project1_trace_metrics`、`project1_path_distance`。对应主脚本位于`MATLAB/experiments/project1/2026-10-27_movej_repeat`。
+旧五方案比较、60秒真机与离线Action专项分析代码已随历史实验归档，不再放在数值库搜索路径中；静态/动态FK、离线IK及通用数据验证函数保留。
+
 | 函数 | 输入 | 输出与用途 |
 |---|---|---|
 | `load_feedback_csv` | CSV路径、可选cfg | 统一数据结构；调用格式/时间检查 |

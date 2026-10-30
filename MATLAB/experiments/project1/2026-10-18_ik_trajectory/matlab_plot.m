@@ -20,9 +20,9 @@ cfg.font='Noto Sans CJK SC';
 [r,summary,points]=analyze_ik_trajectory(csv_path,urdf_path,cfg);
 assert(r.timed,'请先用新版C++导出含t_s的时间轨迹CSV');
 % 只覆盖本脚本生成的统计和PNG，不覆盖输入CSV或照片。
-save_analysis_results(analysis_dir,struct('summary',summary,'point_checks',points), ...
-    struct('result',r,'summary',summary,'cfg',cfg,'csv_path',csv_path, ...
-    'urdf_path',urdf_path,'matlab_version',version),struct('overwrite',true));
+if ~isfolder(analysis_dir),mkdir(analysis_dir);end
+writetable(summary,fullfile(analysis_dir,'summary.csv'));
+writetable(points,fullfile(analysis_dir,'point_checks.csv')); % 不重复保存完整MAT变量。
 
 %% 2. 六轴关节角：检查整体变化与连续性，不要求中间角度线性插值
 f=new_figure('连续路径IK六轴关节角',cfg);
@@ -43,19 +43,7 @@ end
 sgtitle('六轴关节角随时间变化（五次时间缩放，离线IK）');
 finish_figure(f,figure_dir,'matlab_01_六轴关节角.png',cfg);
 
-%% 3. 相邻增量：每轴有符号变化及每步六轴最大绝对变化
-f=new_figure('相邻关节解增量',cfg); tiledlayout(2,1);
-nexttile;
-% 第0点没有路径前驱；CSV第一行0只用于起始检查，图中不把它当运动增量。
-plot(r.t(2:end),r.delta_q_rad(2:end,:),'LineWidth',1.1);
-xlabel('时间 / s'); ylabel('相邻角度增量 / rad');
-legend(compose('J%d',1:6),'Location','eastoutside'); title('六轴有符号增量，不是关节速度');
-nexttile;
-plot(r.t(2:end),r.max_abs_delta_q_rad(2:end),'LineWidth',1.3); hold on;
-yline(r.config.max_sample_step_rad,'r--','相邻解上限');
-ylim([0,r.config.max_sample_step_rad*1.15]);
-xlabel('时间 / s'); ylabel('最大绝对增量 / rad'); title('每一步取六轴最大值');
-finish_figure(f,figure_dir,'matlab_02_相邻关节增量.png',cfg);
+% 相邻解增量仍在analyze_ik_trajectory中检查，不单独绘制诊断图。
 
 %% 4. 回代残差：与目标位姿比较，不涉及CAN和真实测量
 f=new_figure('FK回代位姿残差',cfg); tiledlayout(2,1);

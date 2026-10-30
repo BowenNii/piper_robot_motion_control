@@ -4,7 +4,7 @@ if nargin<1, include_symbolic=true; end
 root=setup_piper_paths(include_symbolic);
 names={'math','kinematics','piper_model','controller','dynamics','estimation', ...
     'optimization','trajectory','cpp_alignment','validation','plotting','experiment_analysis', ...
-    'ik_trajectory_analysis','csv_action_analysis','real_ik_analysis','endpoint_real_analysis'};
+    'ik_trajectory_analysis','project1_closeout_metrics','project1_closeout_data','project1_analysis_config'};
 if include_symbolic, names{end+1}='symbolic_derivations'; end
 results=struct('name',{},'status',{},'message',{});
 for i=1:numel(names)
@@ -27,5 +27,10 @@ assert(~any(strcmp({results.status},'FAIL')),'MATLAB回归测试失败，详见�
 end
 
 function run_isolated(test_path)
-run(test_path);
+% 新增收尾测试是零参数函数；早期通用测试仍是脚本，分别调用。
+if ~isempty(regexp(fileread(test_path),'^\s*function\b','once'))
+    addpath(fileparts(test_path));[~,name]=fileparts(test_path);feval(name);
+else
+    run(test_path);
+end
 end

@@ -1,0 +1,2 @@
+index,target_time_s,send_elapsed_s,lateness_s,publish_start_elapsed_s,publish_return_epoch_s,q1_rad,q2_rad,q3_rad,q4_rad,q5_rad,q6_rad
+0.0,0.0,0.0007564330007880926,0.0006121479964349419,0.0006121479964349419,1793111426.529777,0.3,0.3,-0.3,0.3,0.3,0.5

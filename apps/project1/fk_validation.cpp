@@ -21,15 +21,15 @@
 /*
 实验1（单位形）和实验2（多位形）共用同一套离线 FK 验证逻辑。
 
-实验1：
+单个位形离线复核（只写新输出）：
 /home/nbw/piper_robot_motion_control/build/debug/fk_validation
-"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/piper_can.log" 
-"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-02_singlebody_static _fk/data.csv"
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fk/piper_can_log/pose01.log"
+"/tmp/piper_pose01_recheck.csv"
 
 实验2：
 /home/nbw/piper_robot_motion_control/build/debug/fk_validation --multi
-"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fkk/piper_can_log"
-"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fkk/data_csv"
+"/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-03_Multibody_static _fk/piper_can_log"
+"/tmp/piper_multibody_recheck"
 
 注意：
 - 输出目录必须提前建立。

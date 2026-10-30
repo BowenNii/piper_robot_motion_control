@@ -45,12 +45,16 @@ struct FeedbackAssemblerDiagnostics
     std::size_t completed_samples = 0, discarded_groups = 0, discarded_frames = 0;
     std::size_t duplicate_ids = 0, interface_changes = 0;
     std::size_t time_reversals = 0, over_window = 0, manual_resets = 0;
+    std::size_t cycle_resets = 0, unaligned_frames = 0;
 };
 
 class PiperFeedbackAssembler
 {
 public:
-    explicit PiperFeedbackAssembler(double max_span_seconds = 0.002);
+    // ordered_cycles仅用于已确认按2A2..2A7顺序上报的日志。
+    // 等待2A2起帧，不把日志开头的半轮反馈与下一轮拼在一起。
+    explicit PiperFeedbackAssembler(double max_span_seconds = 0.002,
+                                    bool ordered_cycles = false);
 
     [[nodiscard]] std::optional<PiperFeedbackSample> push(const TimedCanFrame& timed);
     void reset();
@@ -64,6 +68,7 @@ private:
     void clear_pending();
     FeedbackAssemblerDiagnostics diagnostics_;
     double max_span_seconds_;
+    bool ordered_cycles_;
     double first_timestamp_ = 0.0;
     double last_timestamp_ = 0.0;
     std::string interface_name_;

@@ -41,19 +41,27 @@ int main(int argc,char** argv) {
             (reference.array()<model.q_min.array()).any() || (reference.array()>model.q_max.array()).any())
             throw std::invalid_argument("Start/goal outside model limits; no clipping");
         const auto target=forward_poe_space(model.S_list,reference,model.M);
-        IKOptions options;options.q_min=model.q_min;options.q_max=model.q_max;
-        options.max_iterations=2000;options.position_tolerance=1e-9;options.orientation_tolerance=1e-9;
+        IKOptions options;
+        options.q_min=model.q_min;
+        options.q_max=model.q_max;
+        options.max_iterations=2000;
+        options.position_tolerance=1e-9;
+        options.orientation_tolerance=1e-9;
         // 参考角只用于指定共同解支；不是声称从零位的局部IK一定能收敛。
         const auto ik=solve_ik_dls(model.S_list,model.M,target,reference,options);
-        IkValidationConfig cfg;cfg.position_tolerance_m=1e-9;cfg.rotation_tolerance_rad=1e-9;
+        IkValidationConfig cfg;
+        cfg.position_tolerance_m=1e-9;
+        cfg.rotation_tolerance_rad=1e-9;
         if(!ik.success || !check_ik_solution(model.S_list,model.M,ik.q,target,
             model.q_min,model.q_max,cfg).ok) throw std::runtime_error("Endpoint IK failed");
         const VecXd delta=ik.q-q0;
         const double distance=delta.cwiseAbs().maxCoeff(),rad=std::acos(-1.)/180,dt=.02;
         // 方案1..3以速度确定时长；此离线上限不是厂家安全参数。
         const auto baseline=make_comparison_profile(2,distance,5*rad,.2,dt);
-        if(!std::filesystem::create_directory(out)) throw std::runtime_error("Cannot create output directory");
-        std::ofstream summary(out/"summary.csv");summary.exceptions(std::ios::badbit|std::ios::failbit);
+        if(!std::filesystem::create_directory(out)) 
+        throw std::runtime_error("Cannot create output directory");
+        std::ofstream summary(out/"summary.csv");
+        summary.exceptions(std::ios::badbit|std::ios::failbit);
         summary<<std::setprecision(17)<<"scheme,motion_duration_s,grid_duration_s,accel_time_s,cruise_time_s,peak_velocity_deg_s,peak_acceleration_deg_s2,min_weighted_sigma\n";
         for(int scheme=1;scheme<=5;++scheme) {
             const double speed=(scheme==1?1:scheme==3?8:5)*rad;
@@ -63,7 +71,8 @@ int main(int argc,char** argv) {
             for(int back=0;back<2;++back) {
                 const VecXd start=back?ik.q:q0,displacement=back?-delta:delta;
                 std::ofstream f(out/("scheme"+std::to_string(scheme)+(back?"_return.csv":"_outbound.csv")));
-                f.exceptions(std::ios::badbit|std::ios::failbit);f<<std::setprecision(17);
+                f.exceptions(std::ios::badbit|std::ios::failbit);
+                f<<std::setprecision(17);
                 f<<"t_s,s,ds_dt,d2s_dt2,phase,weighted_sigma_min";
                 for(const auto prefix:{"q","dq","ddq","jerk"}) for(int j=1;j<=6;++j)
                     f<<','<<prefix<<j<<(std::string(prefix)=="q"?"_rad":std::string(prefix)=="dq"?"_rad_s":std::string(prefix)=="ddq"?"_rad_s2":"_rad_s3");

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.21)
 
 project(piper_robot_motion_control LANGUAGES CXX)
 
@@ -9,6 +9,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 find_package(Eigen3 REQUIRED)
+
+# 仅控制构建/离线验证范围，不是机械臂运行参数。
+option(PIPER_BUILD_PLACEHOLDER_APPS "Build unfinished Project2/3/4 examples" OFF)
+option(PIPER_ENABLE_OFFLINE_PYTHON_TESTS "Register pure Python tests (no ROS/CAN)" ON)
+option(PIPER_ENABLE_EXPERIMENT_DATA_TESTS "Verify retained Project1 dataset" OFF)
 
 # ============================================================
 # Core library: piper_control
@@ -158,6 +163,7 @@ target_compile_options(project1_feedback_export PRIVATE -Wall -Wextra -Wpedantic
 # Project 2：动力学与模型控制
 # ============================================================
 
+if(PIPER_BUILD_PLACEHOLDER_APPS)
 add_executable(project2
     apps/project2/main.cpp
 )
@@ -195,6 +201,7 @@ target_link_libraries(
     PRIVATE
         piper_control
 )
+endif()
 
 # ============================================================
 # Tests
@@ -405,4 +412,34 @@ if(BUILD_TESTING)
         COMMAND test_piper_model
     )
 
+    # 所有自动注册项均为离线测试；不注册tests/hardware或ROS真机操作。
+    get_property(piper_cpp_tests DIRECTORY PROPERTY TESTS)
+    set_tests_properties(${piper_cpp_tests} PROPERTIES LABELS "cpp;offline" TIMEOUT 120)
+    if(PIPER_ENABLE_OFFLINE_PYTHON_TESTS OR PIPER_ENABLE_EXPERIMENT_DATA_TESTS)
+        find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter)
+    endif()
+    if(PIPER_ENABLE_OFFLINE_PYTHON_TESTS)
+        foreach(piper_test IN ITEMS
+                tests/integration/test_movej_single_joint_probe.py
+                tests/integration/test_robot_graph_discovery.py
+                tests/unit/test_real_ik_trajectory.py
+                tests/unit/test_repository_configuration.py)
+            get_filename_component(piper_test_name ${piper_test} NAME_WE)
+            add_test(NAME ${piper_test_name} COMMAND ${Python3_EXECUTABLE}
+                ${CMAKE_CURRENT_SOURCE_DIR}/${piper_test} -q)
+            set_tests_properties(${piper_test_name} PROPERTIES
+                LABELS "python;offline" TIMEOUT 60
+                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+        endforeach()
+    endif()
+    if(PIPER_ENABLE_EXPERIMENT_DATA_TESTS)
+        if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/experiments/project1/2026-10-27_movej_repeat/project1_closeout/inventory.json")
+            message(FATAL_ERROR "Project1 dataset is required by PIPER_ENABLE_EXPERIMENT_DATA_TESTS")
+        endif()
+        add_test(NAME Project1CloseoutDataTest COMMAND ${Python3_EXECUTABLE}
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/integration/test_project1_closeout_data.py -q)
+        set_tests_properties(Project1CloseoutDataTest PROPERTIES
+            LABELS "python;offline;data" TIMEOUT 60
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    endif()
 endif()

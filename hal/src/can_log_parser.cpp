@@ -84,8 +84,8 @@ bool parse_can_log_line(const std::string& line, TimedCanFrame& result)
     return true;
 }
 
-PiperFeedbackAssembler::PiperFeedbackAssembler(double max_span_seconds)
-    : max_span_seconds_(max_span_seconds)
+PiperFeedbackAssembler::PiperFeedbackAssembler(double max_span_seconds, bool ordered_cycles)
+    : max_span_seconds_(max_span_seconds), ordered_cycles_(ordered_cycles)
 {
     if (!std::isfinite(max_span_seconds_) || max_span_seconds_ <= 0.0)
     {
@@ -134,6 +134,21 @@ std::optional<PiperFeedbackSample> PiperFeedbackAssembler::push(const TimedCanFr
     }
 
     const std::size_t slot = timed.frame.id - 0x2A2;
+    if (ordered_cycles_ && slot != pending_frame_count())
+    {
+        if (pending_frame_count() != 0)
+        {
+            ++diagnostics_.cycle_resets;
+            ++diagnostics_.discarded_groups;
+            diagnostics_.discarded_frames += pending_frame_count();
+            clear_pending();
+        }
+        if (slot != 0)
+        {
+            ++diagnostics_.unaligned_frames;
+            return std::nullopt;
+        }
+    }
     if (pending_frame_count() != 0
         && (seen_[slot] || timed.interface_name != interface_name_
             || timed.timestamp_seconds < last_timestamp_
@@ -146,6 +161,11 @@ std::optional<PiperFeedbackSample> PiperFeedbackAssembler::push(const TimedCanFr
         ++diagnostics_.discarded_groups;
         diagnostics_.discarded_frames += pending_frame_count();
         clear_pending();
+    }
+    if (ordered_cycles_ && slot != 0 && pending_frame_count() == 0)
+    {
+        ++diagnostics_.unaligned_frames;
+        return std::nullopt;
     }
     if (pending_frame_count() == 0)
     {

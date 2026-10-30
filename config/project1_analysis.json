@@ -1,0 +1,8 @@
+{
+    "schema_version": 1,
+    "scope": "offline_analysis_only",
+    "joint_tolerance_deg": null,
+    "position_tolerance_mm": null,
+    "orientation_tolerance_deg": null,
+    "description": "Unset limits report measured performance only. Never used as hardware limits, gains or motion commands."
+}

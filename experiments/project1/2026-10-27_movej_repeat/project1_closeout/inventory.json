@@ -1,0 +1,3596 @@
+{
+  "records": [
+    {
+      "record": 1,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/A_out01/execution_1om1stqb",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/01_j1_0p5_A_out01",
+      "run_name": "A_out01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "da31c80794c219428dbb204cbc02eb21f3d5877b383be6b8c06c4817ac7006ca",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "da31c80794c219428dbb204cbc02eb21f3d5877b383be6b8c06c4817ac7006ca",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.167866371994023,
+        "trajectory_start_epoch_s": 1793109405.6501627,
+        "command_window_elapsed_s": 10.760155397001654,
+        "q_final_rad": [
+          0.500455709716854,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.00045570971685404693,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40635,
+        "invalid_lines": 0,
+        "fk_samples": 3356,
+        "motor_frames": 10068,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009329319000244141,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 5,
+        "pending_frames": 5
+      },
+      "raw_hashes": {
+        "j1_0p5/A_out01/execution_1om1stqb/raw_can.log": "ddf88d0f354fa3338f594f94ad8d842eb4334ac7aad2802c2e68800a363c6a06",
+        "j1_0p5/A_out01/execution_1om1stqb/commands.csv": "83f582726c3aafc8faccc3c8cd8f01bfbc40b6264fb5a3e4561e4d6812ff055a",
+        "j1_0p5/A_out01/execution_1om1stqb/feedback.csv": "f34f97645baf5da5cca694dac270867cad74f03f472f92236cddf1198c02f87f",
+        "j1_0p5/A_out01/execution_1om1stqb/status.csv": "c6c7941cd5ff4f1ce41e49ad4632dc1af0f93aaadb6283012ebdfb8f1fcbf4cb",
+        "j1_0p5/A_out01/execution_1om1stqb/summary.json": "6b9f9daf3566a030fa57b8cedbf0238b93f3ed05be685a12b0035cae633b1de3"
+      }
+    },
+    {
+      "record": 2,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/A_return01/execution_xgqhspqj",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/02_j1_0p5_A_return01",
+      "run_name": "A_return01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.500455709716854,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9244706009922083,
+        "trajectory_start_epoch_s": 1793109446.9254487,
+        "command_window_elapsed_s": 10.760156126008951,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40658,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0008831024169921875,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j1_0p5/A_return01/execution_xgqhspqj/raw_can.log": "34702347ff9b401e3d879aa3a4cc47c6bf41110ecd0c302dae75386bdf4bd71e",
+        "j1_0p5/A_return01/execution_xgqhspqj/commands.csv": "582c05ea0524caf7a5d7de4d3162f6f2cf758e757c6e3441263dfec30211c1d3",
+        "j1_0p5/A_return01/execution_xgqhspqj/feedback.csv": "f9d426a5bfe814c901e44194b12f2700258304f48860d70c2e53e4ea8d695574",
+        "j1_0p5/A_return01/execution_xgqhspqj/status.csv": "d2c2e70a2f7c75a562288c7309a018871f1c70118669f2619e0670f6ffa9618f",
+        "j1_0p5/A_return01/execution_xgqhspqj/summary.json": "6882f9578aacb3f04a8327dc959b93ff9f08b88ff65bda7498185bded634b4fb"
+      }
+    },
+    {
+      "record": 3,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/B_out01/execution_e_x5f9lp",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/03_j1_0p5_B_out01",
+      "run_name": "B_out01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "repeat",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "354a997cb4d06753e099c94e4a18f93d96266b42883c1c961c9222fe9debb7a5",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "repeat",
+        "direction": "outbound",
+        "targets_sha256": "354a997cb4d06753e099c94e4a18f93d96266b42883c1c961c9222fe9debb7a5",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9161160819930956,
+        "trajectory_start_epoch_s": 1793109483.485318,
+        "command_window_elapsed_s": 10.760233181004878,
+        "q_final_rad": [
+          0.5000368306963755,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 3.6830696375500516e-05,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40660,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10078,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0010979175567626953,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j1_0p5/B_out01/execution_e_x5f9lp/raw_can.log": "f9a7badda0a6249f6b3859b8251f507f3f1c7ba49ad96de6f2091be9fc4e00ab",
+        "j1_0p5/B_out01/execution_e_x5f9lp/commands.csv": "00a2842a449c5e0f161c42b99d33411a3cd5893587c65f3390d17fa364afa1f7",
+        "j1_0p5/B_out01/execution_e_x5f9lp/feedback.csv": "b6458d6c27db882d0d17906a69a5492ca3fa67008e0301edd6e3abe1abbb8ce8",
+        "j1_0p5/B_out01/execution_e_x5f9lp/status.csv": "59109e1535c15b1f2dde88ce34aafe36f74eceacd69c9d92ecf801f4a1aaf09e",
+        "j1_0p5/B_out01/execution_e_x5f9lp/summary.json": "5e562536e63433e435b630fcece41d5e1c9c782c930a2845c1349e37b9816dc6"
+      }
+    },
+    {
+      "record": 4,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/B_return01/execution_d9t6t4a4",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/04_j1_0p5_B_return01",
+      "run_name": "B_return01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "repeat",
+        "direction": "return",
+        "q_start_rad": [
+          0.5000368306963755,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "repeat",
+        "direction": "return",
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9162741119944258,
+        "trajectory_start_epoch_s": 1793109522.5978317,
+        "command_window_elapsed_s": 10.76095491599699,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40654,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0012679100036621094,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 5,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j1_0p5/B_return01/execution_d9t6t4a4/raw_can.log": "0588084f6fee94b538dea044eebd29315945da2ace8e639ef4603c2965f53d1a",
+        "j1_0p5/B_return01/execution_d9t6t4a4/commands.csv": "5cdbb34ddaa2c0d0f57e26f8414b169c892b487166f82239814bdebb27237f47",
+        "j1_0p5/B_return01/execution_d9t6t4a4/feedback.csv": "75a43c961a19fb9f4f43b4abe2acb78b734d08e1bb24c12e1fe183828f5df8bd",
+        "j1_0p5/B_return01/execution_d9t6t4a4/status.csv": "a3744fbf8771e25f2b94f0fe06d9353a9c8ad31bbf4f5275242472a9d18aced8",
+        "j1_0p5/B_return01/execution_d9t6t4a4/summary.json": "47ea6ef53515df830f4eb0cd57d45f46c073965e230eaba050ba45e854a36640"
+      }
+    },
+    {
+      "record": 5,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/C_out01/execution_zde50qjs",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/05_j1_0p5_C_out01",
+      "run_name": "C_out01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "stream",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.5,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "8ae13259aa68a3e7e1ca4a690ba4587bf213947a5783fee36fd809c14838acc3",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "stream",
+        "direction": "outbound",
+        "targets_sha256": "8ae13259aa68a3e7e1ca4a690ba4587bf213947a5783fee36fd809c14838acc3",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.164586743005202,
+        "trajectory_start_epoch_s": 1793109550.4619288,
+        "command_window_elapsed_s": 10.760321982001187,
+        "q_final_rad": [
+          0.4997750313085763,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.00022496869142368814,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40656,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0007450580596923828,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j1_0p5/C_out01/execution_zde50qjs/raw_can.log": "6eca29a163adbeb10f5f186b2b97ea7e36db1c238445340087d26ae461408f30",
+        "j1_0p5/C_out01/execution_zde50qjs/commands.csv": "f8cea66bbfc143fc0d5e48c523f04d0f99ab833d2bbede88abae3ae5f01f7433",
+        "j1_0p5/C_out01/execution_zde50qjs/feedback.csv": "a457fe523eb9841626cae77bd074ce5588d4f53dd8c5970103dd95d4b2d5271c",
+        "j1_0p5/C_out01/execution_zde50qjs/status.csv": "286fae644426f4b308212e9230d90b724ca44f0c3a4ce9ff4355c71636dc4fb4",
+        "j1_0p5/C_out01/execution_zde50qjs/summary.json": "8fe097571023bbdd07f841b1e783cc2ce1fec8c9c8ec130f5db9c9e14003f86b"
+      }
+    },
+    {
+      "record": 6,
+      "group": "j1_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j1_0p5/C_return01/execution_qf0k7svt",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/06_j1_0p5_C_return01",
+      "run_name": "C_return01",
+      "manifest": {
+        "kind": "movej_j1_probe_v1",
+        "mode": "stream",
+        "direction": "return",
+        "q_start_rad": [
+          0.4997750313085763,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "844a12a50554a6ccdd1a96e67f4f4fa6d75ac6b8fb5d940c2659bcb1c6767e7c",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "bda7dc059b02e7868a1ed430197eba9e1772283ce0961853f3236471ca5b734c",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "mode": "stream",
+        "direction": "return",
+        "targets_sha256": "844a12a50554a6ccdd1a96e67f4f4fa6d75ac6b8fb5d940c2659bcb1c6767e7c",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.1177281709969975,
+        "trajectory_start_epoch_s": 1793109597.6142118,
+        "command_window_elapsed_s": 10.760279686001013,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40641,
+        "invalid_lines": 0,
+        "fk_samples": 3357,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0010960102081298828,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j1_0p5/C_return01/execution_qf0k7svt/raw_can.log": "f9d7997ab28ef52e127b1928b6110775e418e501b3cca6e219ce67be892740b2",
+        "j1_0p5/C_return01/execution_qf0k7svt/commands.csv": "ef301e630b97acfd72a193d71788457b4fb16c928e3f95db826d77826e1733f5",
+        "j1_0p5/C_return01/execution_qf0k7svt/feedback.csv": "7b4812350efbcb89ae301dedf3429fb09a342f893a464b2db2bdcfc8c8cde4bd",
+        "j1_0p5/C_return01/execution_qf0k7svt/status.csv": "d1056a7bf369c6b99c01ce3e69e95d9e4b1416eb50e90b090728caec5b849848",
+        "j1_0p5/C_return01/execution_qf0k7svt/summary.json": "e593f7987dfb87a66a321b598297dcf08f12308fcbc6bfad9951f466cac9762c"
+      }
+    },
+    {
+      "record": 7,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/A_out01/execution_sh8ojvmo",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/07_j4_0p5_A_out01",
+      "run_name": "A_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "156694b420c20dba6019858c546d205960d437ecedc6f61bfc2918c714d82309",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "156694b420c20dba6019858c546d205960d437ecedc6f61bfc2918c714d82309",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.170930093998322,
+        "trajectory_start_epoch_s": 1793110864.475328,
+        "command_window_elapsed_s": 10.760158696997678,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.499879751063696,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.00012024893630402378,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40660,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10077,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009131431579589844,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/A_out01/execution_sh8ojvmo/raw_can.log": "6572696ff04394c06a8e4665b8e206ce06674bbf9d00743d11f7e01b88182da1",
+        "j4_0p5/A_out01/execution_sh8ojvmo/commands.csv": "3946a3603bb80b789e7a69bbf2f86e58b75e9f2f29fe8a7ae60cdd390de595d2",
+        "j4_0p5/A_out01/execution_sh8ojvmo/feedback.csv": "5c3a77cd9cf231943e2f5ffb1eb074ee7d8b83099f9692fb91ad3390e54504d9",
+        "j4_0p5/A_out01/execution_sh8ojvmo/status.csv": "e9e9e5d8b8fe614a2f358472411a9632d6dc16259db9d929fc5815ef3208cda1",
+        "j4_0p5/A_out01/execution_sh8ojvmo/summary.json": "6847a67615fa8a3086125c94680234426c3f49e8258088928b5d6c2b40a969a7"
+      }
+    },
+    {
+      "record": 8,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/A_return01/execution_34cj9_2g",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/08_j4_0p5_A_return01",
+      "run_name": "A_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.499879751063696,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9231679950025864,
+        "trajectory_start_epoch_s": 1793110888.8655252,
+        "command_window_elapsed_s": 10.760253590997308,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40658,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0007801055908203125,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/A_return01/execution_34cj9_2g/raw_can.log": "5286716ffc37ebfc2d96c2e0b26640adec45a4365d6d67bf5f8065bff797ca9f",
+        "j4_0p5/A_return01/execution_34cj9_2g/commands.csv": "470fe0fddf8f275a17a00cd9b2a0631915b8030e137b0a6c80208135d4ce4843",
+        "j4_0p5/A_return01/execution_34cj9_2g/feedback.csv": "d09fe00c7eccd257fa61f64087ef3aa9f4c9fcd89af06397281107d1f2c9e4e7",
+        "j4_0p5/A_return01/execution_34cj9_2g/status.csv": "c952ae9d6aecf4e4a0b97f713f2fea9e29f20ade6db22c6ffc58ab84c5e97c92",
+        "j4_0p5/A_return01/execution_34cj9_2g/summary.json": "40b3bcb4af30bfee41fc3a5ae9a18857b7add3ece83eca5ef8914223e2d5050b"
+      }
+    },
+    {
+      "record": 9,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/B_out01/execution_lj43ss7h",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/09_j4_0p5_B_out01",
+      "run_name": "B_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "repeat",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "6db89fac3bcebc284cfabc13427f6a8f870aa09953f4464295c10c09637d91fe",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "repeat",
+        "direction": "outbound",
+        "targets_sha256": "6db89fac3bcebc284cfabc13427f6a8f870aa09953f4464295c10c09637d91fe",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9238928810082143,
+        "trajectory_start_epoch_s": 1793110913.8288515,
+        "command_window_elapsed_s": 10.76025706899236,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.5000717372814153,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 7.173728141529612e-05,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40656,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.001127004623413086,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/B_out01/execution_lj43ss7h/raw_can.log": "1e155299c69cdb24785c7ec7f93449c88d12cc43c870e486a8e9bfa3d8309e3b",
+        "j4_0p5/B_out01/execution_lj43ss7h/commands.csv": "89b671a473b63d0bdaf5a5f6b6d11ab180732a2518e3c53bfcd37fec76f9c861",
+        "j4_0p5/B_out01/execution_lj43ss7h/feedback.csv": "4890a2da27b958b1ca58201857cb914f006256a6c19d6dff0890b7797a4b5743",
+        "j4_0p5/B_out01/execution_lj43ss7h/status.csv": "1efbc6f68f74884990ad21c45f8daaa92be3579441adc9f598a411c754bf3c7d",
+        "j4_0p5/B_out01/execution_lj43ss7h/summary.json": "68bf3e89218d447a06ab30e48b0d059c1508ea6e684ffaeca801ce459940238f"
+      }
+    },
+    {
+      "record": 10,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/B_return01/execution_cqea7w7r",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/10_j4_0p5_B_return01",
+      "run_name": "B_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "repeat",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.5000717372814153,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "repeat",
+        "direction": "return",
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9215570190135622,
+        "trajectory_start_epoch_s": 1793110969.8250582,
+        "command_window_elapsed_s": 10.760239974988508,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40655,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10079,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.000926971435546875,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/B_return01/execution_cqea7w7r/raw_can.log": "7dfded59e5d0ef8267e2e21db1baf8d8ea97b0b4d8fc0eaf7482b82c86f36c3b",
+        "j4_0p5/B_return01/execution_cqea7w7r/commands.csv": "389fce7ec02ef1e16c0b02c25bb2aedee62d18f28286bb9d3b31ad9c04940f1e",
+        "j4_0p5/B_return01/execution_cqea7w7r/feedback.csv": "28e35eb15fad5437fbc8905d93c399e6b2f536358b44a6e5159f2aa1f1d9d0ca",
+        "j4_0p5/B_return01/execution_cqea7w7r/status.csv": "e278d96cbed952ef0493edb5a62214dc0621c38a12bd007bed5ed39504f85dbf",
+        "j4_0p5/B_return01/execution_cqea7w7r/summary.json": "19d45ef73badaa5afa53c4dfa212123c3b21dc3aeec3304b0d6634e66cf88339"
+      }
+    },
+    {
+      "record": 11,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/C_out01/execution_34vehnf8",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/11_j4_0p5_C_out01",
+      "run_name": "C_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "stream",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "4a4acd951db0e4713b1b807203268a35ab1f990dd88c883f595dee10fdf2261b",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "stream",
+        "direction": "outbound",
+        "targets_sha256": "4a4acd951db0e4713b1b807203268a35ab1f990dd88c883f595dee10fdf2261b",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.926434362991131,
+        "trajectory_start_epoch_s": 1793110999.2710648,
+        "command_window_elapsed_s": 10.760232972999802,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.4993386989955777,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0006613010044222989,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40658,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.001001119613647461,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/C_out01/execution_34vehnf8/raw_can.log": "af48952d7d19c505a907a0195d4af0e1cc358ed3e25aea2f2a154ca3fe58549d",
+        "j4_0p5/C_out01/execution_34vehnf8/commands.csv": "2c27aeadcad525a9a54d794edc74551707e7bdfef563bdbdff8fbdba1a93921b",
+        "j4_0p5/C_out01/execution_34vehnf8/feedback.csv": "4b182b9c748e1c40e189b154ed44510638d7b10b53f7e976b4e02cf81ef6cc40",
+        "j4_0p5/C_out01/execution_34vehnf8/status.csv": "0747bb5ed1734c54508d8b4f01841c368dd263c5cfe936f70836d47ae2fbc349",
+        "j4_0p5/C_out01/execution_34vehnf8/summary.json": "290183b669b3dabe7e928f6cbe2983c955bf1c15c3da766f574c18b56b02d535"
+      }
+    },
+    {
+      "record": 12,
+      "group": "j4_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j4_0p5/C_return01/execution_2g95bttg",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/12_j4_0p5_C_return01",
+      "run_name": "C_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 4,
+        "mode": "stream",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.4993386989955777,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "be3ba2bc0a07cd4233aabbaf6d762310db5d7a7906b4753cfeef9ee9c8c231c0",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "5db65a3d82c414de66904a0bb07d3e666a12f6e8621165839a76cbb70587b8b1",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 4,
+        "mode": "stream",
+        "direction": "return",
+        "targets_sha256": "be3ba2bc0a07cd4233aabbaf6d762310db5d7a7906b4753cfeef9ee9c8c231c0",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9191219589993125,
+        "trajectory_start_epoch_s": 1793111024.1109934,
+        "command_window_elapsed_s": 10.760199172000284,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40649,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0013349056243896484,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j4_0p5/C_return01/execution_2g95bttg/raw_can.log": "0f0e4506e2d995beeca1bfcc89a403e2016aac1b205f3038cacb9e66a50b2fb2",
+        "j4_0p5/C_return01/execution_2g95bttg/commands.csv": "0f785a35d4c30ad96c17924ddde1cd1d8d2188b1844bfe57c79eac8e4c9d236f",
+        "j4_0p5/C_return01/execution_2g95bttg/feedback.csv": "9c864109ff814f2f5233cde53b2b6ce6953967959a194fd52aacf205abc6b75a",
+        "j4_0p5/C_return01/execution_2g95bttg/status.csv": "84b912dd77ae7f56b2e155ec186394365f02e5dda6bfbf6bfe956a303ed334da",
+        "j4_0p5/C_return01/execution_2g95bttg/summary.json": "671d1fb4f18a951169dfd93d545afd7d0e2a0fc3c95dfe1b9a6ea3b508c78f98"
+      }
+    },
+    {
+      "record": 13,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/A_out01/execution_om6d4n12",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/13_j5_0p5_A_out01",
+      "run_name": "A_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "d1fd19215fdda36379ef52ba3df70d0e30dd96cbf529dddac2a8589082f68c59",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "d1fd19215fdda36379ef52ba3df70d0e30dd96cbf529dddac2a8589082f68c59",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.121789069002261,
+        "trajectory_start_epoch_s": 1793110324.7665849,
+        "command_window_elapsed_s": 10.760276268003508,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49881510021997943,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0011848997800205652,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40637,
+        "invalid_lines": 0,
+        "fk_samples": 3357,
+        "motor_frames": 10068,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.001035928726196289,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 4
+      },
+      "raw_hashes": {
+        "j5_0p5/A_out01/execution_om6d4n12/raw_can.log": "1e7de25d4cf32d6f04834e63c7081018cd9ca48044380092a1c742461cdfac28",
+        "j5_0p5/A_out01/execution_om6d4n12/commands.csv": "2d134f877ca985b1aa266983a24620f4db3d82d3c122bf8e4cd4c8aab72e3419",
+        "j5_0p5/A_out01/execution_om6d4n12/feedback.csv": "ff3413641d8f0cf5677b342a309f912428dc1042ec2a578c27f44877439f2719",
+        "j5_0p5/A_out01/execution_om6d4n12/status.csv": "421db636480fe63a2d76ac009a0d3217d609923f6a3f7f98cc8f8cdf7fc8a153",
+        "j5_0p5/A_out01/execution_om6d4n12/summary.json": "ca9980311d7a98fdc845765ebb72472d8e15d53f7792aecf2b901dbf3dd943da"
+      }
+    },
+    {
+      "record": 14,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/A_out02/execution_be3teflo",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/14_j5_0p5_A_out02",
+      "run_name": "A_out02",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "d1fd19215fdda36379ef52ba3df70d0e30dd96cbf529dddac2a8589082f68c59",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "d1fd19215fdda36379ef52ba3df70d0e30dd96cbf529dddac2a8589082f68c59",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9234268150030402,
+        "trajectory_start_epoch_s": 1793110620.5087016,
+        "command_window_elapsed_s": 10.760164163992158,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.4987627403424196,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0012372596575804251,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40657,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0013048648834228516,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/A_out02/execution_be3teflo/raw_can.log": "cb7d2a9d0969d2597c2660092b2bec3b381b60fa4c481e6f1cf795dc92feddc4",
+        "j5_0p5/A_out02/execution_be3teflo/commands.csv": "d6c0304468153e620ca3ce0d4a5bee8bf8222965b9f7a30b5cccd9fddc50d2c8",
+        "j5_0p5/A_out02/execution_be3teflo/feedback.csv": "48208600d921d013db228669d292e780e158de51a28a120c1d44ae76049b38b6",
+        "j5_0p5/A_out02/execution_be3teflo/status.csv": "965e15d0acad55ba3be4c3ead94aeac7d0692d0dcac3757fb47acb581a4bd2dd",
+        "j5_0p5/A_out02/execution_be3teflo/summary.json": "eb6dd9aed07c1de8e7cd60d2c70c137b694269d2be13527c58054a5d1b843650"
+      }
+    },
+    {
+      "record": 15,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/A_return01/execution_o7n8qlao",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/15_j5_0p5_A_return01",
+      "run_name": "A_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49881510021997943,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.924490657998831,
+        "trajectory_start_epoch_s": 1793110352.7698374,
+        "command_window_elapsed_s": 10.760175620001974,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40668,
+        "invalid_lines": 0,
+        "fk_samples": 3360,
+        "motor_frames": 10076,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0007879734039306641,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/A_return01/execution_o7n8qlao/raw_can.log": "dcc7d41e149c23e9d3e71abfce0ebc772ddba531d707bc01ba6933b67ac7690a",
+        "j5_0p5/A_return01/execution_o7n8qlao/commands.csv": "6ebe2de796121d7e0508f033f1652621a11b77910e2d28c0f6d7d2586927ff0e",
+        "j5_0p5/A_return01/execution_o7n8qlao/feedback.csv": "424bacf9dc6d2af60fd296c6efce1fca54870cec55163e9f03c4198147c2a420",
+        "j5_0p5/A_return01/execution_o7n8qlao/status.csv": "a3b3d06fd125b9fd675205f58b0b9487d72f04d7e955a4bf901fcac5feeac757",
+        "j5_0p5/A_return01/execution_o7n8qlao/summary.json": "dc54cf9a076029056b7ae0d3bfd918b17c6416bc855a77efdf87afdfcdb7283d"
+      }
+    },
+    {
+      "record": 16,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/A_return02/execution_uu85uxob",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/16_j5_0p5_A_return02",
+      "run_name": "A_return02",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.4987627403424196,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9240768700110493,
+        "trajectory_start_epoch_s": 1793110650.086006,
+        "command_window_elapsed_s": 10.760187674997724,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40673,
+        "invalid_lines": 0,
+        "fk_samples": 3360,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.001194000244140625,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/A_return02/execution_uu85uxob/raw_can.log": "521e77a7d535c496dcfcd229ff945acf6aa43b099f8d42650b377ddb311a751f",
+        "j5_0p5/A_return02/execution_uu85uxob/commands.csv": "6b7bd86cde1e9653deb76ca861bc8e4471f856e4c3ca7c7d7ca20d9a895b3438",
+        "j5_0p5/A_return02/execution_uu85uxob/feedback.csv": "c2648e90b50ae20dc4ba45ae21e95bcd93438e80fef96f54c96bb9440c4eea9a",
+        "j5_0p5/A_return02/execution_uu85uxob/status.csv": "3b37ecdd4fe6592ba467710aa00c335ef0e9f80de612b8d6f58ee1b7bbc48ef0",
+        "j5_0p5/A_return02/execution_uu85uxob/summary.json": "d64f4d6146b24343e76d7b8bfc360e1649b2fea6a3c59a72fee3cd53eff65121"
+      }
+    },
+    {
+      "record": 17,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/B_out01/execution_mzstdqt_",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/17_j5_0p5_B_out01",
+      "run_name": "B_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "repeat",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "5ba8ff66be17555ec498b7267bba6510e15c730b905ade111e79a0351429819d",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "repeat",
+        "direction": "outbound",
+        "targets_sha256": "5ba8ff66be17555ec498b7267bba6510e15c730b905ade111e79a0351429819d",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.173746972010122,
+        "trajectory_start_epoch_s": 1793110404.6254847,
+        "command_window_elapsed_s": 10.760305841991794,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.4987801936349395,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0012198063650605273,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40648,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0010349750518798828,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/B_out01/execution_mzstdqt_/raw_can.log": "f2f51fc63ec33b8d278e648ac77e0199406c98905c90678a42977d50e1d180eb",
+        "j5_0p5/B_out01/execution_mzstdqt_/commands.csv": "b0d88030fdfdbec1a1bdd8c15b3f3a9edebc1c7068198655854573ef8000f7c2",
+        "j5_0p5/B_out01/execution_mzstdqt_/feedback.csv": "f3814dfd03ced3f91209f34f809d6b9555a0f6abfbce09e620cdb28caaba3247",
+        "j5_0p5/B_out01/execution_mzstdqt_/status.csv": "02fe4a13b84dbc6ee46e72a7230f63c08a1d920e82ba95eb2aa88b209eb64414",
+        "j5_0p5/B_out01/execution_mzstdqt_/summary.json": "abff6ec564b3c568fac4bc3320792955c666cd1db7b87550238803d1107c4138"
+      }
+    },
+    {
+      "record": 18,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/B_return01/execution_tkdb8drt",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/18_j5_0p5_B_return01",
+      "run_name": "B_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "repeat",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.4987801936349395,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "repeat",
+        "direction": "return",
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9213932779966854,
+        "trajectory_start_epoch_s": 1793110432.9139068,
+        "command_window_elapsed_s": 10.760229366002022,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40648,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0011258125305175781,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/B_return01/execution_tkdb8drt/raw_can.log": "9361adf16d6b925b88dc48cb3aa6f917bb836b684d5d3e5441fc82694d38261b",
+        "j5_0p5/B_return01/execution_tkdb8drt/commands.csv": "da438b974069fabad79def1555a64370ff566c5fabc8b21f06331ed82ec33a60",
+        "j5_0p5/B_return01/execution_tkdb8drt/feedback.csv": "76a56b3ec732e868cb042525224ee6424212b3bf1208372243e0c93ed497cc95",
+        "j5_0p5/B_return01/execution_tkdb8drt/status.csv": "d95e61a5ccd9402dbf5d7c6256ddfc8b7e978d582cb65d270b502e6c7df34d09",
+        "j5_0p5/B_return01/execution_tkdb8drt/summary.json": "2b3c9b1224d23c0392983b6269f70374bcb3a0832192c5581ab78e1602a50197"
+      }
+    },
+    {
+      "record": 19,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/C_out01/execution_bbxv36ns",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/19_j5_0p5_C_out01",
+      "run_name": "C_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "stream",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "d1f278350e58a33b85ac5fe6d3ad82cfc3a4fb1b2386ea832a3810575b5acb4f",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "stream",
+        "direction": "outbound",
+        "targets_sha256": "d1f278350e58a33b85ac5fe6d3ad82cfc3a4fb1b2386ea832a3810575b5acb4f",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9251528680033516,
+        "trajectory_start_epoch_s": 1793110463.0564647,
+        "command_window_elapsed_s": 10.760366239002906,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49909435290029847,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0009056470997015342,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40676,
+        "invalid_lines": 0,
+        "fk_samples": 3360,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0008618831634521484,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 2
+      },
+      "raw_hashes": {
+        "j5_0p5/C_out01/execution_bbxv36ns/raw_can.log": "b64f556d3109958ec8747c6237c466472fb3e854ad71ca0f872dd829dbe5871c",
+        "j5_0p5/C_out01/execution_bbxv36ns/commands.csv": "cc4e4538efe19eb4a647bd74da17b74fa9d4d29a803d6ac3cdf742119a7ba763",
+        "j5_0p5/C_out01/execution_bbxv36ns/feedback.csv": "0332f80fb61670affe8f59aa4f1d11a1aa9746e7bdcfc95231457c300a020f2d",
+        "j5_0p5/C_out01/execution_bbxv36ns/status.csv": "fd854a5305d7800cc40aca74f71546af7d0ed43aecd56ed1aad592721dca16ac",
+        "j5_0p5/C_out01/execution_bbxv36ns/summary.json": "647065a2326b0bab13ffde7eb901e7313374aa5519f24ca7ae3345f1251a4814"
+      }
+    },
+    {
+      "record": 20,
+      "group": "j5_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j5_0p5/C_return01/execution_7f92xt4g",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/20_j5_0p5_C_return01",
+      "run_name": "C_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 5,
+        "mode": "stream",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49909435290029847,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "e2ef85cf16b68a0c81a1dc26682c8fc3c96ba18d079b0af296397b20abc0e541",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "91fd476a40fd90c55e7a2f88ade14448ca9a768a4f30c0d846946cc7564f26b5",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 5,
+        "mode": "stream",
+        "direction": "return",
+        "targets_sha256": "e2ef85cf16b68a0c81a1dc26682c8fc3c96ba18d079b0af296397b20abc0e541",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.172369082996738,
+        "trajectory_start_epoch_s": 1793110490.4850512,
+        "command_window_elapsed_s": 10.760208231993602,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40670,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009200572967529297,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 5,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j5_0p5/C_return01/execution_7f92xt4g/raw_can.log": "074ad71bbfed2eadcb46a03e937b9151eb47a638e6b0c83bf7a5abb8d517cb4c",
+        "j5_0p5/C_return01/execution_7f92xt4g/commands.csv": "5ab472188fd9599cf992b20e1d07566dbb2555042a18ba3a093bfffaacefe954",
+        "j5_0p5/C_return01/execution_7f92xt4g/feedback.csv": "ddd4cc2eb543848a3303ce9d3a6c3ede3f6e8e7fa6ac550669965c7b40bc0317",
+        "j5_0p5/C_return01/execution_7f92xt4g/status.csv": "631b05924c4f181a63f57d1767bb454993988a29091875c91ab16dde37679b47",
+        "j5_0p5/C_return01/execution_7f92xt4g/summary.json": "62db887e5cd8baef7f819b4a708c1f358697393ca15d1f48f52c10fab4825248"
+      }
+    },
+    {
+      "record": 21,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/A_out01/execution_od1k29ca",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/21_j6_0p5_A_out01",
+      "run_name": "A_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "2753951b9005de9a367bbe1aa65e91317ac91547f32d6d694cd571815b4bd2db",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "2753951b9005de9a367bbe1aa65e91317ac91547f32d6d694cd571815b4bd2db",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.917674143987824,
+        "trajectory_start_epoch_s": 1793110027.656491,
+        "command_window_elapsed_s": 10.760174580005696,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5009444019074125
+        ],
+        "final_joint_error_max_rad": 0.0009444019074125176,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40656,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0011239051818847656,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j6_0p5/A_out01/execution_od1k29ca/raw_can.log": "752a6f48e2d90fd070ead75d40738e277abc9e6e812d25c5bc06ee852ca10dd0",
+        "j6_0p5/A_out01/execution_od1k29ca/commands.csv": "7f6ec325a757be9695adf5cf069ac84ee645e4651e4af260f3c6084774c44592",
+        "j6_0p5/A_out01/execution_od1k29ca/feedback.csv": "98545f0a0c567d3abdd10af6e208a46c4327df6558728dad0a2230511c0f4f17",
+        "j6_0p5/A_out01/execution_od1k29ca/status.csv": "b1b35f17e45fcd1039a4524470b552897680f903491d346a736d9ebd90ca6f49",
+        "j6_0p5/A_out01/execution_od1k29ca/summary.json": "b2e4903ab71282ad57e8e0a3ef37d9e0d2518df998f853470953229985fcf087"
+      }
+    },
+    {
+      "record": 22,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/A_return01/execution__j8bq91i",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/22_j6_0p5_A_return01",
+      "run_name": "A_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5009444019074125
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9241279780108016,
+        "trajectory_start_epoch_s": 1793110058.3120437,
+        "command_window_elapsed_s": 10.760103366003023,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40654,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009322166442871094,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 4
+      },
+      "raw_hashes": {
+        "j6_0p5/A_return01/execution__j8bq91i/raw_can.log": "fe8517f5294b58448089bcdf334e67be8aff2583f19c63d7d0d0e874ad9363e1",
+        "j6_0p5/A_return01/execution__j8bq91i/commands.csv": "a31d4f4f9df8aac6a05fbf879876751823c2f5f977dac98ddc1221a97d43a938",
+        "j6_0p5/A_return01/execution__j8bq91i/feedback.csv": "5135729cfd084217cbadb4358502c61df2164edb8f97d564ba980b79899700a8",
+        "j6_0p5/A_return01/execution__j8bq91i/status.csv": "19481d35a9dc30fc72df8e9c98c6bf84e651b4479ba556a395a23b2867d87fe1",
+        "j6_0p5/A_return01/execution__j8bq91i/summary.json": "34ada551e2c01d18146f089aa7f84569dfbf0555b12c60b41e311ea69a262e63"
+      }
+    },
+    {
+      "record": 23,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/B_out01/execution_yur7_oam",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/23_j6_0p5_B_out01",
+      "run_name": "B_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "repeat",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "efe851d159341d319592263ceebaedb74e295a7b530929bae7491083bd509323",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "repeat",
+        "direction": "outbound",
+        "targets_sha256": "efe851d159341d319592263ceebaedb74e295a7b530929bae7491083bd509323",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9169121339946287,
+        "trajectory_start_epoch_s": 1793110085.6565905,
+        "command_window_elapsed_s": 10.760213992005447,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5001066438664552
+        ],
+        "final_joint_error_max_rad": 0.00010664386645520274,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40648,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0008831024169921875,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j6_0p5/B_out01/execution_yur7_oam/raw_can.log": "81a5459ea17573ca7f82880c8352a88584a29d89f9fe77b936a7798804487ae5",
+        "j6_0p5/B_out01/execution_yur7_oam/commands.csv": "fa9787f1aa244012b2c4d02e50263a8f45094b90790d731d117837e2670f9b96",
+        "j6_0p5/B_out01/execution_yur7_oam/feedback.csv": "e8fa3dd0bbcfe72da26463a79a6b969f95d0cf0b096a2a2be0789b95b5d802aa",
+        "j6_0p5/B_out01/execution_yur7_oam/status.csv": "35ba2f27d76067323118afb4f81971873bab62c4921027d39d17200cfb568f1c",
+        "j6_0p5/B_out01/execution_yur7_oam/summary.json": "f12a93894c35746920aeeea9ea401459b00bcab56827038fd5a246141a1bb7f5"
+      }
+    },
+    {
+      "record": 24,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/B_return01/execution_oon711um",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/24_j6_0p5_B_return01",
+      "run_name": "B_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "repeat",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5001066438664552
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "repeat",
+        "direction": "return",
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.922451859994908,
+        "trajectory_start_epoch_s": 1793110113.8509045,
+        "command_window_elapsed_s": 10.760272095008986,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40648,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0011401176452636719,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j6_0p5/B_return01/execution_oon711um/raw_can.log": "057fbb36af506d44e24ca0a82549a3dc0fb7ce274845a4ddf82ca4d1e007a8c1",
+        "j6_0p5/B_return01/execution_oon711um/commands.csv": "2fd1b9ae7c75f24b867d6f4ae967bd19f0fb8561624c47a43ce1e3c2eea12e24",
+        "j6_0p5/B_return01/execution_oon711um/feedback.csv": "f7dc965b016e56cda2a958e59f17c99cb4aa4b78450e75c6771d49ed86e693b1",
+        "j6_0p5/B_return01/execution_oon711um/status.csv": "86c3de25ea09c14697ad8a05873547dc0b2a3ec305f9648fa258504e72a929c8",
+        "j6_0p5/B_return01/execution_oon711um/summary.json": "a48fed2480d07206356b2a4f160dfc8874d1df4cb817a4e313497e9880605732"
+      }
+    },
+    {
+      "record": 25,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/C_out01/execution_a3rbxvgg",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/25_j6_0p5_C_out01",
+      "run_name": "C_out01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "stream",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "2075ac7b6a252273dcef72907d56b48ca8716f49187713ac651529a455422986",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "stream",
+        "direction": "outbound",
+        "targets_sha256": "2075ac7b6a252273dcef72907d56b48ca8716f49187713ac651529a455422986",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.125187757992535,
+        "trajectory_start_epoch_s": 1793110146.3450136,
+        "command_window_elapsed_s": 10.760212379012955,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49926888582549794
+        ],
+        "final_joint_error_max_rad": 0.0007311141745020566,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40651,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009770393371582031,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j6_0p5/C_out01/execution_a3rbxvgg/raw_can.log": "ba2ab7759b9025b99a79e10c345f816d186070ab1cc981e16bc8f50f2334f521",
+        "j6_0p5/C_out01/execution_a3rbxvgg/commands.csv": "a03ffcab588082b4d9b3c69c03671dcf95c543376845b9550e604ace80eb7f12",
+        "j6_0p5/C_out01/execution_a3rbxvgg/feedback.csv": "f409bf5c64d8ca0297cf3628d3a59644abc630c14783dda6c88ca1a4fcab2820",
+        "j6_0p5/C_out01/execution_a3rbxvgg/status.csv": "7f5a6527859c43745722d2ebed12bf9a1e8a71b4be3aa651cd4b8e1bae021245",
+        "j6_0p5/C_out01/execution_a3rbxvgg/summary.json": "a661d947f8c5bafd57796fccb9fc70fa2a59226f15b3356be4fd3670aad60374"
+      }
+    },
+    {
+      "record": 26,
+      "group": "j6_0p5",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/j6_0p5/C_return01/execution_osyllrlg",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/26_j6_0p5_C_return01",
+      "run_name": "C_return01",
+      "manifest": {
+        "kind": "movej_single_joint_probe_v2",
+        "joint": 6,
+        "mode": "stream",
+        "direction": "return",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.49926888582549794
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "8cddcbcac6ed7ba76e070bbb335890e98e346750b4b2361a72b8c7c13a564084",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "dfc2c32939c4d7c814fb0e712aab9e5af3c17bd460e9cc19789a92231bb31113",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": 6,
+        "mode": "stream",
+        "direction": "return",
+        "targets_sha256": "8cddcbcac6ed7ba76e070bbb335890e98e346750b4b2361a72b8c7c13a564084",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.922949992993381,
+        "trajectory_start_epoch_s": 1793110181.8172994,
+        "command_window_elapsed_s": 10.760258517009788,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40678,
+        "invalid_lines": 0,
+        "fk_samples": 3360,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0011239051818847656,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 4,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "j6_0p5/C_return01/execution_osyllrlg/raw_can.log": "847cff0eb593465c6e4db6f2ff684d28a3f5fcfb293f418437a16e7502a83d28",
+        "j6_0p5/C_return01/execution_osyllrlg/commands.csv": "64306c4d95e3bf18798bc397de3310cc13520da5d92329c0894e0ca206b48edb",
+        "j6_0p5/C_return01/execution_osyllrlg/feedback.csv": "8f977f3569a7cb5d6904af4410f16d005eb5ab3dc017c031afdb81e58d42303b",
+        "j6_0p5/C_return01/execution_osyllrlg/status.csv": "afc977219b2f6c96f095f8ec9d05984ed9eb110c31e0c4b28e0d8976697e89f4",
+        "j6_0p5/C_return01/execution_osyllrlg/summary.json": "020ea2e46d881effba83fffdcb1e8dfcf699fee53322f9a16174215671af70ba"
+      }
+    },
+    {
+      "record": 27,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/A_out01/execution_kb8bmc7c",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/27_multi_abc_A_out01",
+      "run_name": "A_out01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.3,
+          0.3,
+          -0.3,
+          0.3,
+          0.3,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "e8c015af325bd29d00033e78966c245703ae4b21bde9728545010f591fdb7fd0",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "e8c015af325bd29d00033e78966c245703ae4b21bde9728545010f591fdb7fd0",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.922324015002232,
+        "trajectory_start_epoch_s": 1793111426.5290167,
+        "command_window_elapsed_s": 10.760159426994505,
+        "q_final_rad": [
+          0.2993588733020674,
+          0.2993588733020674,
+          -0.3000744582953851,
+          0.2995334062272668,
+          0.2999173786627056,
+          0.5011712947101717
+        ],
+        "final_joint_error_max_rad": 0.0011712947101717441,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40649,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0010309219360351562,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/A_out01/execution_kb8bmc7c/raw_can.log": "afe8c48bc45571d8dafa2f6a4198ee60f8a03b945f6f69dd465c8692cb79772a",
+        "multi_abc/A_out01/execution_kb8bmc7c/commands.csv": "84e1fc514889a93a0666ecaecb16fc01d30b6e4cf6c2a1565b8e5e92b28b7252",
+        "multi_abc/A_out01/execution_kb8bmc7c/feedback.csv": "1dd6a5dcade10a79584e92366d56beaf319a8bd22a1522f5feeebf4967aa56f5",
+        "multi_abc/A_out01/execution_kb8bmc7c/status.csv": "9503750a75af6acbfbff0d294532b855dcb214336ba065826a7d1db5e81f0736",
+        "multi_abc/A_out01/execution_kb8bmc7c/summary.json": "0de2b73c53298b8e23aa28d032155d1db92d16fd035d945e3ae3c8da8dcf3e36"
+      }
+    },
+    {
+      "record": 28,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/A_out02/execution_az_jwkuk",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/28_multi_abc_A_out02",
+      "run_name": "A_out02",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "once",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.3,
+          0.3,
+          -0.3,
+          0.3,
+          0.3,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "e8c015af325bd29d00033e78966c245703ae4b21bde9728545010f591fdb7fd0",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "once",
+        "direction": "outbound",
+        "targets_sha256": "e8c015af325bd29d00033e78966c245703ae4b21bde9728545010f591fdb7fd0",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9224334710015683,
+        "trajectory_start_epoch_s": 1793111711.7963982,
+        "command_window_elapsed_s": 10.760208731997409,
+        "q_final_rad": [
+          0.300091911587905,
+          0.29972539244498625,
+          -0.30054569719342356,
+          0.2992017936693879,
+          0.30065041694854316,
+          0.500769868982213
+        ],
+        "final_joint_error_max_rad": 0.0007982063306120613,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40666,
+        "invalid_lines": 0,
+        "fk_samples": 3359,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009031295776367188,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/A_out02/execution_az_jwkuk/raw_can.log": "c9e3762b6fe25494be1add67574216910c992f4548b9ea8c0009e32ede0fee1a",
+        "multi_abc/A_out02/execution_az_jwkuk/commands.csv": "8594b2230f8a4ba29971f9e0af23b285e569733c05b54f6ab487b8624074847e",
+        "multi_abc/A_out02/execution_az_jwkuk/feedback.csv": "aca3b0503b903b70b0d37902ea67d6af295c228c4deb89f93adefff686de1301",
+        "multi_abc/A_out02/execution_az_jwkuk/status.csv": "e054ab333806f6587a099ee4705e9fce4caf3ef367c5b8875b0929c5a586e386",
+        "multi_abc/A_out02/execution_az_jwkuk/summary.json": "22f9ba298d67eb9f4119b263a0af7e9d195feea4f210e6a0df55a9e74f2e584b"
+      }
+    },
+    {
+      "record": 29,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/A_return01/execution_jarjm2b8",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/29_multi_abc_A_return01",
+      "run_name": "A_return01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.2993588733020674,
+          0.2993588733020674,
+          -0.3000744582953851,
+          0.2995334062272668,
+          0.2999173786627056,
+          0.5011712947101717
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.170382036012597,
+        "trajectory_start_epoch_s": 1793111453.759661,
+        "command_window_elapsed_s": 10.76020746199356,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40653,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0008540153503417969,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 4
+      },
+      "raw_hashes": {
+        "multi_abc/A_return01/execution_jarjm2b8/raw_can.log": "bead2b13f183d6bad3608886b2a25718c4ca9a6cc518617ef315e97fab25c08d",
+        "multi_abc/A_return01/execution_jarjm2b8/commands.csv": "ad12ae575ccde99c4397d40b7b4ca236186ab2f782b005317054a58ca15224d8",
+        "multi_abc/A_return01/execution_jarjm2b8/feedback.csv": "4405675f7212da9dca67160f6188d901ae4c78615e89c252a196964ed6e85cc4",
+        "multi_abc/A_return01/execution_jarjm2b8/status.csv": "d35949533953cc33958ea0d0cb03e42c35bff8d66a1638d2436990d9c91e3eb4",
+        "multi_abc/A_return01/execution_jarjm2b8/summary.json": "bdc51bbbe23c2cd820b3f3390a0c72a6ba575bbc25959e622acac0c0e8de6a13"
+      }
+    },
+    {
+      "record": 30,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/A_return02/execution_ucn1tm_l",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/30_multi_abc_A_return02",
+      "run_name": "A_return02",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "once",
+        "direction": "return",
+        "q_start_rad": [
+          0.300091911587905,
+          0.29972539244498625,
+          -0.30054569719342356,
+          0.2992017936693879,
+          0.30065041694854316,
+          0.500769868982213
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "once",
+        "direction": "return",
+        "targets_sha256": "44f973d43507caefe4a2835e54ff2b81c29a867057691f0cbe37fd15112bb181",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.221395169995958,
+        "trajectory_start_epoch_s": 1793111891.2563772,
+        "command_window_elapsed_s": 10.760292762992322,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 1,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40663,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10080,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0009620189666748047,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 5,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/A_return02/execution_ucn1tm_l/raw_can.log": "aff291e9cdd66bb2426e0074b1d6db55727c9fd9e1081a7b59a5f9f18bad4fa5",
+        "multi_abc/A_return02/execution_ucn1tm_l/commands.csv": "6ef78fa138db06317b463486dbf8073d9e9ce71d6765bc84493b6bfe5905ad5c",
+        "multi_abc/A_return02/execution_ucn1tm_l/feedback.csv": "126714e581c2af88d4fed10176e6b4de2ab6f9a14432b1c1c37158f2384c46b8",
+        "multi_abc/A_return02/execution_ucn1tm_l/status.csv": "87b33bd13983c290ebbed1331c58fc510ffd5f6f16affe304380167d4c496b1f",
+        "multi_abc/A_return02/execution_ucn1tm_l/summary.json": "8d4f7681e1898e18e8db769d34c2494057cb82152edf3869754490cea7d69139"
+      }
+    },
+    {
+      "record": 31,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/B_out01/execution_fqsg2eyw",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/31_multi_abc_B_out01",
+      "run_name": "B_out01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "repeat",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.3,
+          0.3,
+          -0.3,
+          0.3,
+          0.3,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "4b3f5a3435e3a24e6a7c1003948cff3f309bd0e503784f6d04fb9d0e659ffaa8",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "repeat",
+        "direction": "outbound",
+        "targets_sha256": "4b3f5a3435e3a24e6a7c1003948cff3f309bd0e503784f6d04fb9d0e659ffaa8",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9231440510047833,
+        "trajectory_start_epoch_s": 1793111477.7444854,
+        "command_window_elapsed_s": 10.760252794003463,
+        "q_final_rad": [
+          0.2998999253701856,
+          0.29888763440402893,
+          -0.299184340376868,
+          0.29932396671702755,
+          0.30037116426822413,
+          0.4993910588731375
+        ],
+        "final_joint_error_max_rad": 0.0011123655959710543,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40671,
+        "invalid_lines": 0,
+        "fk_samples": 3360,
+        "motor_frames": 10079,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0007648468017578125,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/B_out01/execution_fqsg2eyw/raw_can.log": "902f29c39e796c6b46440150b268a4a3cdf44922d8b66a122130f7aba5857187",
+        "multi_abc/B_out01/execution_fqsg2eyw/commands.csv": "8b255ff53821107638947fe115e453131ef5af605bcddb304bf3ee11de824057",
+        "multi_abc/B_out01/execution_fqsg2eyw/feedback.csv": "accabab55fc159e069f48230bc7d80a7a2b95ffa7c235fb4977a7d6f7665d3dc",
+        "multi_abc/B_out01/execution_fqsg2eyw/status.csv": "e9a8f41f726985db0000cbff9b3642d2d5be476c93b37a4ba6b7974f4482dafe",
+        "multi_abc/B_out01/execution_fqsg2eyw/summary.json": "33ae129d4f29054dc9cc3235a3a0e116e716abb50622bb7cb751c7ba75fe8470"
+      }
+    },
+    {
+      "record": 32,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/B_return01/execution_dhz3icb0",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/32_multi_abc_B_return01",
+      "run_name": "B_return01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "repeat",
+        "direction": "return",
+        "q_start_rad": [
+          0.2998999253701856,
+          0.29888763440402893,
+          -0.299184340376868,
+          0.29932396671702755,
+          0.30037116426822413,
+          0.4993910588731375
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "repeat",
+        "direction": "return",
+        "targets_sha256": "0c28c30a3edeb5b33ff124847300a007dc449823924c28a9b7ee3c9284392770",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.167352282995125,
+        "trajectory_start_epoch_s": 1793111563.7817218,
+        "command_window_elapsed_s": 10.760217086004559,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40643,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10070,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.000965118408203125,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/B_return01/execution_dhz3icb0/raw_can.log": "7716ea4426dbe25b54b83de924479a5e8a9b3f73afa43b988bf128ce5a1fc8bc",
+        "multi_abc/B_return01/execution_dhz3icb0/commands.csv": "dfb044a5bf2fe7389ded650455cdb7d9d3298d03e1a4b510f969bd73ac606a5c",
+        "multi_abc/B_return01/execution_dhz3icb0/feedback.csv": "427015cd4b28a925229239af81b6c0dbd42da29a8015ad1bcd5d5e9e2ca6cde4",
+        "multi_abc/B_return01/execution_dhz3icb0/status.csv": "f30d944d6b293b8930da2b43a3d6331cac9eb4337bc3e9ee2ebcaa01f3b3a298",
+        "multi_abc/B_return01/execution_dhz3icb0/summary.json": "14db52f58ce851ecd40544c2288532be4f7b654f6fac8fc1a14603307808b62a"
+      }
+    },
+    {
+      "record": 33,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/C_out01/execution_zt7jeb4f",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/33_multi_abc_C_out01",
+      "run_name": "C_out01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "stream",
+        "direction": "outbound",
+        "q_start_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "q_goal_rad": [
+          0.3,
+          0.3,
+          -0.3,
+          0.3,
+          0.3,
+          0.5
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "ae792499ccdb433d508ed643fdff7979796701e5c41f8a6bda129130d2cc5e06",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "stream",
+        "direction": "outbound",
+        "targets_sha256": "ae792499ccdb433d508ed643fdff7979796701e5c41f8a6bda129130d2cc5e06",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 4.170621944998857,
+        "trajectory_start_epoch_s": 1793111599.5347862,
+        "command_window_elapsed_s": 10.760256148001645,
+        "q_final_rad": [
+          0.29960321939734663,
+          0.29900980745166855,
+          -0.2997079391524663,
+          0.29977775232254605,
+          0.29878291464890927,
+          0.4987976469274594
+        ],
+        "final_joint_error_max_rad": 0.0012170853510907187,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40648,
+        "invalid_lines": 0,
+        "fk_samples": 3358,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0006759166717529297,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/C_out01/execution_zt7jeb4f/raw_can.log": "ebb1d9482fdf8b3c7c5bc803e0e07fdd1955febc489742a264931e58e565f537",
+        "multi_abc/C_out01/execution_zt7jeb4f/commands.csv": "4d89450b6931474f4bf27da3a8a1b3ac21f721d4bda6ea4fb08dc9093427d83f",
+        "multi_abc/C_out01/execution_zt7jeb4f/feedback.csv": "d85d5c15d1e8063c78fd71dbe54b7f138a58b030a0d2ea708824241d37a153b3",
+        "multi_abc/C_out01/execution_zt7jeb4f/status.csv": "aff2a694b54915684bfde006bd11950f013639c38f615a944cb30a90c33c566f",
+        "multi_abc/C_out01/execution_zt7jeb4f/summary.json": "c5ebe6b8d7d85d360969196d61a61c3a9e088c54a7c7520dae9875f700b22bcc"
+      }
+    },
+    {
+      "record": 34,
+      "group": "multi_abc",
+      "execution_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/multi_abc/C_return01/execution_1h_adxqc",
+      "decoded_dir": "/home/nbw/piper_robot_motion_control/experiments/project1/2026-10-27_movej_repeat/project1_closeout/decoded/34_multi_abc_C_return01",
+      "run_name": "C_return01",
+      "manifest": {
+        "kind": "movej_multi_joint_probe_v1",
+        "joint": "all",
+        "mode": "stream",
+        "direction": "return",
+        "q_start_rad": [
+          0.29960321939734663,
+          0.29900980745166855,
+          -0.2997079391524663,
+          0.29977775232254605,
+          0.29878291464890927,
+          0.4987976469274594
+        ],
+        "q_goal_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "duration_s": 10.76,
+        "samples": 539,
+        "driver_config": {
+          "arm_type": "piper",
+          "can_port": "can0",
+          "fast_mode": false,
+          "speed_percent": 5,
+          "auto_enable": false,
+          "effector_type": "agx_gripper",
+          "tcp_offset": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "pub_rate": 200
+        },
+        "targets_sha256": "518df69d504a3449a81c09167589e3a50dfd4b1db8fab22aa0036efb683c57fa",
+        "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+        "sender_sha256": "31c83315fe1e95871f758bbc9b05af309e5f359d8f429f9db37eaeceb5280d63",
+        "note": "MOVE J only. once/repeat have unknown internal time law. No collision certification."
+      },
+      "execution_summary": {
+        "success": true,
+        "joint": "all",
+        "mode": "stream",
+        "direction": "return",
+        "targets_sha256": "518df69d504a3449a81c09167589e3a50dfd4b1db8fab22aa0036efb683c57fa",
+        "gc_enabled": true,
+        "interface": "/control/move_j",
+        "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+        "trajectory_start_receive_elapsed_s": 3.9175219850003486,
+        "trajectory_start_epoch_s": 1793111629.8938882,
+        "command_window_elapsed_s": 10.760232988002826,
+        "q_final_rad": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "final_joint_error_max_rad": 0.0,
+        "sent_points": 539,
+        "cleanup": {
+          "gate_close": "External control gate closed"
+        },
+        "candump_returncode": 0,
+        "candump_stderr": ""
+      },
+      "decoder": {
+        "complete": true,
+        "lines": 40640,
+        "invalid_lines": 0,
+        "fk_samples": 3357,
+        "motor_frames": 10074,
+        "command_frames": 0,
+        "span_over_2ms": 0,
+        "max_span_s": 0.0006799697875976562,
+        "discarded_groups": 0,
+        "discarded_frames": 0,
+        "window_resets_50ms": 0,
+        "duplicate_resets": 0,
+        "ordered_cycles": true,
+        "cycle_resets": 0,
+        "unaligned_frames": 0,
+        "pending_frames": 0
+      },
+      "raw_hashes": {
+        "multi_abc/C_return01/execution_1h_adxqc/raw_can.log": "fddc21d316e471789633f1563d8f67cf7e6b8e8b46ed563fb75df910ccac6d0e",
+        "multi_abc/C_return01/execution_1h_adxqc/commands.csv": "ba2800d15155b0742d1f5ecf55a03c3772925a4c4d27a14059b1ce74c7249974",
+        "multi_abc/C_return01/execution_1h_adxqc/feedback.csv": "22ea4a752cc0efc86b576f49cd781902400a8e4b2cbd4b7756d08e9d2c6067f1",
+        "multi_abc/C_return01/execution_1h_adxqc/status.csv": "7de5593f4ea580dbe2f674a55d66a4cdbd31e3ebe44eacd0088e1685d37ea032",
+        "multi_abc/C_return01/execution_1h_adxqc/summary.json": "20e6fce5b440613461be492cddafadc0337d656e584202eb955d00e49e44066d"
+      }
+    }
+  ],
+  "selected_record_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    28,
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "assembler_policy": "Ordered observed bursts 0x2A2..0x2A7; discard incomplete prefix/sequence, report every discard; 50ms ceiling, 2ms quality flag.",
+  "scope": "Feedback-derived link6 poses, not external measurement. No motor current/velocity diagnosis."
+}

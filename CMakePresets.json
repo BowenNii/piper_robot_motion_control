@@ -1,5 +1,6 @@
 {
     "version": 3,
+    "cmakeMinimumRequired": {"major": 3, "minor": 21, "patch": 0},
     "configurePresets": [
         {
             "name": "debug",
@@ -9,7 +10,11 @@
             "installDir": "${sourceDir}/install/debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "BUILD_TESTING": "ON",
+                "PIPER_BUILD_PLACEHOLDER_APPS": "OFF",
+                "PIPER_ENABLE_OFFLINE_PYTHON_TESTS": "ON",
+                "PIPER_ENABLE_EXPERIMENT_DATA_TESTS": "OFF"
             }
         },
         {
@@ -20,20 +25,38 @@
             "installDir": "${sourceDir}/install/release",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "BUILD_TESTING": "ON",
+                "PIPER_BUILD_PLACEHOLDER_APPS": "OFF",
+                "PIPER_ENABLE_OFFLINE_PYTHON_TESTS": "ON",
+                "PIPER_ENABLE_EXPERIMENT_DATA_TESTS": "OFF"
             }
+        },
+        {
+            "name": "project1",
+            "displayName": "Project1 offline verification with retained data",
+            "inherits": "debug",
+            "binaryDir": "${sourceDir}/build/project1",
+            "cacheVariables": {"PIPER_ENABLE_EXPERIMENT_DATA_TESTS": "ON"}
         }
     ],
     "buildPresets": [
         {
             "name": "debug-build",
             "displayName": "Build Debug",
-            "configurePreset": "debug"
+            "configurePreset": "debug",
+            "jobs": 2
         },
         {
             "name": "release-build",
             "displayName": "Build Release",
-            "configurePreset": "release"
+            "configurePreset": "release",
+            "jobs": 2
+        },
+        {
+            "name": "project1-build",
+            "configurePreset": "project1",
+            "jobs": 2
         }
     ],
     "testPresets": [
@@ -41,9 +64,20 @@
             "name": "debug-test",
             "displayName": "Test Debug",
             "configurePreset": "debug",
-            "output": {
-                "outputOnFailure": true
-            }
+            "output": {"outputOnFailure": true},
+            "execution": {"noTestsAction": "error", "jobs": 2}
+        },
+        {
+            "name": "release-test",
+            "configurePreset": "release",
+            "output": {"outputOnFailure": true},
+            "execution": {"noTestsAction": "error", "jobs": 2}
+        },
+        {
+            "name": "project1-test",
+            "configurePreset": "project1",
+            "output": {"outputOnFailure": true},
+            "execution": {"noTestsAction": "error", "jobs": 2}
         }
     ]
 }

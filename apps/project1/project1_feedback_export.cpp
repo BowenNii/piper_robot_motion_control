@@ -30,7 +30,7 @@ int main(int argc,char** argv) {
         status<<"timestamp_s,ctrl_mode,arm_status,mode_feedback,teach_status,motion_status,trajectory_num,err_status\n";
         commands<<"timestamp_s,joint,q_rad\n";
         // 2ms是报告阈值，不先删除超2ms样本。50ms只是离线组装上限。
-        hal::PiperFeedbackAssembler assembler(.05);
+        hal::PiperFeedbackAssembler assembler(.05, true);
         const auto model=make_piper_model();
         std::size_t lines=0,bad=0,count=0,motor_count=0,over2=0,cmd_count=0;
         double first=0,last=-1,spanmax=0;std::string line;
@@ -78,6 +78,8 @@ int main(int argc,char** argv) {
             <<",\"span_over_2ms\":"<<over2<<",\"max_span_s\":"<<spanmax
             <<",\"discarded_groups\":"<<d.discarded_groups<<",\"discarded_frames\":"<<d.discarded_frames
             <<",\"window_resets_50ms\":"<<d.over_window<<",\"duplicate_resets\":"<<d.duplicate_ids
+            <<",\"ordered_cycles\":true,\"cycle_resets\":"<<d.cycle_resets
+            <<",\"unaligned_frames\":"<<d.unaligned_frames
             <<",\"pending_frames\":"<<assembler.pending_frame_count()<<"}\n";report.close();
         std::cout<<"Decoded "<<count<<" FK samples, "<<motor_count<<" motor frames; >2ms groups "<<over2<<'\n';
     }catch(const std::exception& e){std::cerr<<e.what()<<"; partial outputs must not be used\n";return 1;}

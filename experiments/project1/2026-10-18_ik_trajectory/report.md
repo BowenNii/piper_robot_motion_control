@@ -49,7 +49,7 @@ cmake --build build/debug --target ik_trajectory_validation
 1. 核对CSV列、有限值、时间、五次进度、配置与关节限位。
 2. 根据q独立复算MATLAB POE、目标残差、增量和加权雅可比最小奇异值。
 3. 根据q与dt复算速度、加速度，核对CSV导数与自设上限。
-4. 输出`analysis`统计与7张PNG，原CSV不由MATLAB修改。
+4. 精简版输出两份统计CSV与6张核心PNG，原CSV不由MATLAB修改。相邻增量仍检查，不再单独绘图；大幅预览和重复MAT结果已归档。
 
 ## 4. 实验结果
 
@@ -83,7 +83,6 @@ Debug、Release各20项CTest通过；MATLAB分析与损坏CSV拒绝测试通过�
 
 ![六轴加速度数值估计](figures/matlab_07_六轴关节加速度.png)
 
-![相邻关节增量](figures/matlab_02_相邻关节增量.png)
 
 ![回代位姿残差](figures/matlab_03_回代位姿残差.png)
 

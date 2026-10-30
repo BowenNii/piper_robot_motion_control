@@ -83,6 +83,13 @@ diagnostics() 返回累计 FeedbackAssemblerDiagnostics；不改变正在组装�
 多个原因可能同时触发，所以原因计数不能相加当作丢弃组数。
 触发自动重启的当前帧会开始新组，不计入旧帧丢弃数量。
 完整组输出后正常清空不算丢弃；EOF待处理帧另外用 pending_frame_count() 查看。
+
+离线`project1_feedback_export`对本轮已观察到的有序反馈采用
+`PiperFeedbackAssembler(0.05, true)`：等待2A2，按2A2～2A7收齐一轮。
+开头半轮不与下一轮拼合；缺帧/乱序后重新等待起帧。
+`unaligned_frames`记录未对齐时忽略的帧，`cycle_resets`记录中断的未完成组。
+50ms仍是组装上限，2ms是质量报告线，均不证明硬件采样同步。
+其他调用者默认仍使用原来的无序收齐模式，未改变真机控制逻辑。
 clear_diagnostics() 只清计数，reset() 只清待组装帧并记录非空组人工丢弃。
 非法目标帧计数后抛 invalid_argument，保留旧待组装帧，由调用者决定是否reset。
 

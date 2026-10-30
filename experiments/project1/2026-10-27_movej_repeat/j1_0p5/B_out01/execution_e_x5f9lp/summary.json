@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "mode": "repeat",
+  "direction": "outbound",
+  "targets_sha256": "354a997cb4d06753e099c94e4a18f93d96266b42883c1c961c9222fe9debb7a5",
+  "gc_enabled": true,
+  "interface": "/control/move_j",
+  "reference_note": "once/repeat: no known internal q(t), dq(t), ddq(t)",
+  "trajectory_start_receive_elapsed_s": 3.9161160819930956,
+  "trajectory_start_epoch_s": 1793109483.485318,
+  "command_window_elapsed_s": 10.760233181004878,
+  "q_final_rad": [
+    0.5000368306963755,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "final_joint_error_max_rad": 3.6830696375500516e-05,
+  "sent_points": 539,
+  "cleanup": {
+    "gate_close": "External control gate closed"
+  },
+  "candump_returncode": 0,
+  "candump_stderr": ""
+}

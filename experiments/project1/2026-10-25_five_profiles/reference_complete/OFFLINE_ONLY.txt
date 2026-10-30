@@ -1,8 +1,0 @@
-COMPLETE OFFLINE DATASET. NOT APPROVED FOR HARDWARE.
-No collision, torque, latency, watchdog or controller-mode validation.
-Return assumes exact planned endpoint; regenerate from measured state before hardware.
-Scheme 5 has acceleration discontinuities: finite listed jerk excludes impulses.
-Scheme 1..3 phase=0 means whole quintic, not a constant-acceleration phase.
-Scheme 4/5 phase 0/1/2/3=accel/cruise/decel/endpoint hold.
-20ms grid; scheme4/5 end hold <20ms avoids stretching matched peaks.
-IK uses reference seed to fix branch; not online Cartesian IK or a zero-seed convergence test.
