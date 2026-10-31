@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piper-analysis"
+version = "0.1.0"
+description = "Offline PiPER experiment analysis and nominal dynamics; no hardware I/O"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24,<3", "scipy>=1.10,<2", "matplotlib>=3.6,<4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

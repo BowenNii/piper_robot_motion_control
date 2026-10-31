@@ -1,5 +1,8 @@
 # Project1真机执行验证与收尾分析
 
+新增正式Python入口：[迁移说明与命令](../../../analysis/README.md)。
+Python结果在`project1_closeout/python/`；原MATLAB结果继续保留作数值基准。
+
 当前正式入口：[project1_closeout/REPORT.md](project1_closeout/REPORT.md)。图按01～10阅读。
 
 ## 目录

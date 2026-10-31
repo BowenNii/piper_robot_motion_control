@@ -37,7 +37,10 @@
             "displayName": "Project1 offline verification with retained data",
             "inherits": "debug",
             "binaryDir": "${sourceDir}/build/project1",
-            "cacheVariables": {"PIPER_ENABLE_EXPERIMENT_DATA_TESTS": "ON"}
+            "cacheVariables": {
+                "PIPER_ENABLE_EXPERIMENT_DATA_TESTS": "ON",
+                "PIPER_ENABLE_ANALYSIS_TESTS": "ON"
+            }
         }
     ],
     "buildPresets": [

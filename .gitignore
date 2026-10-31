@@ -26,6 +26,8 @@ CMakeUserPresets.json
 # Python / ROS preview tools
 __pycache__/
 *.py[cod]
+.venv-analysis/
+*.egg-info/
 
 # Temporary
 *.tmp

@@ -1,0 +1,13 @@
+field,max_abs_difference,passed
+position_mean_mm,1.1957101975212936e-13,True
+position_rms_mm,1.1897427487639334e-13,True
+position_max_mm,1.1877998584708394e-13,True
+rotation_mean_deg,1.5465927150071224e-14,True
+rotation_rms_deg,1.5468095554416195e-14,True
+rotation_max_deg,1.8318679906315083e-14,True
+frame_span_max_ms,4.440892098500626e-15,True
+samples,0.0,True
+start_s,4.618527782440651e-14,True
+end_s,4.973799150320701e-14,True
+duration_s,4.973799150320701e-14,True
+sufficient_static_baseline,0.0,True

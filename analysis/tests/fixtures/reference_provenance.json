@@ -1,0 +1,13 @@
+{
+  "generated_on": "2026-10-30",
+  "engine": "MATLAB R2024b",
+  "samples": 12,
+  "hardware_data": false,
+  "generator": "analysis/tests/fixtures/export_matlab_dynamics_reference.m",
+  "hashes": {
+    "models/urdf/piper_description.urdf": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+    "MATLAB/algorithm_library/dynamics/rnea.m": "810831c57a91a433c76c549a3c6cd3599698976c2b6cd869ff4b29dbb7bb23c8",
+    "MATLAB/algorithm_library/dynamics/crba.m": "16ea5a3b328de8b5b2ac60fbbb64621845daf7af2dce72fec2655945b6f9cedb",
+    "analysis/tests/fixtures/matlab_dynamics_reference.csv": "883c2f6b75844d0a1ad153432010c0b719d53385414664e2db1ae036936c5050"
+  }
+}

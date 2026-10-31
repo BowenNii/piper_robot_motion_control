@@ -1,0 +1,8 @@
+{
+  "simulation_only": true,
+  "hardware_validated": false,
+  "samples": 201,
+  "min_mass_matrix_eigenvalue": 0.00012303986628095444,
+  "urdf_sha256": "89983deafec0d83e0ea0781f3157101607b8375041198e623298344bb3cb49b3",
+  "note": "No payload/friction/rotor inertia. No real data identification. No commands sent."
+}

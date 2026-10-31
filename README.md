@@ -1,13 +1,14 @@
 # PiPER Robot Motion Control
 
-C++17算法实现、MATLAB独立验算与PiPER真机实验。当前完成Project1基础运动学与执行验证；Project2～4是后续方向，目录存在不代表功能完成。
+C++17算法实现、Python数据分析与PiPER真机实验。MATLAB保留作历史复现和交叉验证基准。
+当前完成Project1基础运动学与执行验证；Project2已有Python离线动力学基础，真机辨识与模型控制尚未完成。
 
 ## 项目状态
 
 | 项目 | 内容 | 当前状态 |
 | --- | --- | --- |
 | Project1 | FK、Jacobian、数值IK、时间参数化、真机位置执行与反馈分析 | 已有四阶段实验和收尾报告；外部绝对精度、抓取、硬实时未验证 |
-| Project2 | 动力学建模、参数辨识与模型控制 | C++主体尚未实现，下一阶段开展 |
+| Project2 | 动力学建模、参数辨识与模型控制 | Python标称模型/离线函数已测试；C++主体及真机验证待开展 |
 | Project3 | 约束轨迹优化 | 预留接口/示例，尚未完成 |
 | Project4 | 力感知与笛卡尔阻抗 | 预留接口/示例，尚未完成 |
 
@@ -21,6 +22,7 @@ hal/           CAN字节解码与离线帧组装，不直接控制机械臂
 apps/          程序入口，组合算法、HAL和实验I/O
 tools/         ROS适配、日志缓冲、离线导出
 MATLAB/        独立验算、数值/符号算法、实验绘图与测试
+analysis/      Python正式分析、Project2离线原型、绘图与测试
 models/        URDF和网格资源
 experiments/   正式实验数据、结果、报告
 tests/         C++与Python测试，硬件测试不自动执行
@@ -36,6 +38,7 @@ build/         本地生成目录，已忽略，不提交
 
 - CMake ≥3.21、Ninja、C++17编译器、Eigen3。
 - Python ≥3.10：默认离线Python测试，不需要ROS。
+- Python科学计算依赖/环境配置见[分析入口](analysis/README.md)；Project1数据预设需要NumPy/SciPy/Matplotlib。
 - MATLAB：本机验证R2024b；优化/符号测试缺少工具箱时明确SKIP。
 - ROS2 Jazzy：只在使用ROS适配工具时需要，基础构建与CTest不连接机器人。
 
@@ -69,6 +72,7 @@ ctest --preset project1-test
 | `BUILD_TESTING` | ON | 构建/注册离线测试 |
 | `PIPER_ENABLE_OFFLINE_PYTHON_TESTS` | ON | 纯Python假节点、保护与配置测试，不启动ROS |
 | `PIPER_ENABLE_EXPERIMENT_DATA_TESTS` | OFF | 数据回归，project1预设显式ON |
+| `PIPER_ENABLE_ANALYSIS_TESTS` | OFF | NumPy/SciPy分析及动力学测试，project1预设ON |
 | `PIPER_BUILD_PLACEHOLDER_APPS` | OFF | 可选编译未完成历史示例，不代表对应任务已实现 |
 
 机器专属覆盖放`CMakeUserPresets.json`，不提交。VS Code的本地任务与离线IK调试已配置在`.vscode`，该目录仍按现有规则忽略；共享构建以CMake预设为准。调试需要C/C++扩展及GDB。
@@ -90,7 +94,21 @@ ctest --preset project1-test
 
 ROS适配限制见[工具索引](tools/ros2/README.md)。历史`--wide-preview`、`--relative-target`、`--endpoint-joint-target`不是当前C++ CLI支持的功能。
 
-## MATLAB与配置
+## Python分析与MATLAB基准
+
+Project1四阶段分析已迁移至[Python入口与阅读顺序](analysis/README.md)。Project2新增分析和数值原型使用Python；保留C++核心实现方向。
+Python代码按数学、模型、运动学、动力学、辨识、控制、信号、验证、读写、绘图和实验组织分层，见[工程结构](analysis/ARCHITECTURE.md)。
+已有结果位于`experiments/project1/2026-10-27_movej_repeat/project1_closeout/python/`，不覆盖原MATLAB结果。
+
+```bash
+.venv-analysis/bin/python analysis/scripts/view_project1.py 9
+.venv-analysis/bin/python -m unittest discover -s analysis/tests -v
+```
+
+生成新分析使用`analysis/scripts/analyze_project1.py --output <不存在的新目录>`。
+Project2演示入口`analysis/scripts/project2_demo.py`只输出合成离线数据，不控制机器人。
+
+以下MATLAB入口用于历史复现/可选验算，不再是后续实验分析的前置条件：
 
 ```matlab
 addpath('/home/nbw/piper_robot_motion_control/MATLAB'); % 换成实际仓库路径

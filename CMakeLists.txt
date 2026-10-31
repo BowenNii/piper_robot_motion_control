@@ -14,6 +14,7 @@ find_package(Eigen3 REQUIRED)
 option(PIPER_BUILD_PLACEHOLDER_APPS "Build unfinished Project2/3/4 examples" OFF)
 option(PIPER_ENABLE_OFFLINE_PYTHON_TESTS "Register pure Python tests (no ROS/CAN)" ON)
 option(PIPER_ENABLE_EXPERIMENT_DATA_TESTS "Verify retained Project1 dataset" OFF)
+option(PIPER_ENABLE_ANALYSIS_TESTS "Test NumPy/SciPy offline analysis and dynamics" OFF)
 
 # ============================================================
 # Core library: piper_control
@@ -415,7 +416,7 @@ if(BUILD_TESTING)
     # 所有自动注册项均为离线测试；不注册tests/hardware或ROS真机操作。
     get_property(piper_cpp_tests DIRECTORY PROPERTY TESTS)
     set_tests_properties(${piper_cpp_tests} PROPERTIES LABELS "cpp;offline" TIMEOUT 120)
-    if(PIPER_ENABLE_OFFLINE_PYTHON_TESTS OR PIPER_ENABLE_EXPERIMENT_DATA_TESTS)
+    if(PIPER_ENABLE_OFFLINE_PYTHON_TESTS OR PIPER_ENABLE_EXPERIMENT_DATA_TESTS OR PIPER_ENABLE_ANALYSIS_TESTS)
         find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter)
     endif()
     if(PIPER_ENABLE_OFFLINE_PYTHON_TESTS)
@@ -441,5 +442,27 @@ if(BUILD_TESTING)
         set_tests_properties(Project1CloseoutDataTest PROPERTIES
             LABELS "python;offline;data" TIMEOUT 60
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    endif()
+    if(PIPER_ENABLE_ANALYSIS_TESTS)
+        execute_process(COMMAND ${Python3_EXECUTABLE} -c "import numpy, scipy, matplotlib"
+            RESULT_VARIABLE piper_analysis_dependencies)
+        if(NOT piper_analysis_dependencies EQUAL 0)
+            message(FATAL_ERROR "Analysis needs NumPy/SciPy/Matplotlib. See analysis/README.md; select the analysis Python interpreter explicitly.")
+        endif()
+        add_test(NAME PythonAnalysisTest COMMAND ${Python3_EXECUTABLE} -m unittest discover
+            -s analysis/tests -v)
+        set_tests_properties(PythonAnalysisTest PROPERTIES LABELS "python;offline;analysis"
+            TIMEOUT 120 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+        if(PIPER_ENABLE_EXPERIMENT_DATA_TESTS)
+            add_test(NAME PythonRefactorRegressionTest COMMAND ${Python3_EXECUTABLE}
+                ${CMAKE_CURRENT_SOURCE_DIR}/tests/integration/test_python_refactor.py -q)
+            set_tests_properties(PythonRefactorRegressionTest PROPERTIES
+                LABELS "python;offline;analysis;data;regression"
+                TIMEOUT 180 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+            add_test(NAME PythonMigrationDataTest COMMAND ${Python3_EXECUTABLE}
+                ${CMAKE_CURRENT_SOURCE_DIR}/tests/integration/test_python_migration.py -q)
+            set_tests_properties(PythonMigrationDataTest PROPERTIES LABELS "python;offline;analysis;data"
+                TIMEOUT 120 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+        endif()
     endif()
 endif()
