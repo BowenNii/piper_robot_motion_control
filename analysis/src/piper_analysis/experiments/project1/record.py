@@ -17,14 +17,14 @@ def analyze_record(data: FeedbackRecord, model: RobotModel) -> tuple[dict, list[
     qs, qg = data.q_start_rad, data.q_goal_rad
     active, duration = data.active_joints, data.duration_s
     # MATLAB round(linspace(1,N,101))使用正数四舍五入；Python内建round为银行舍入。
-    ix = np.unique(np.floor(np.linspace(1, len(t), 101)+.5).astype(int)-1)
+    ix = np.unique(np.floor(np.linspace(1, len(t), 101)+.5).astype(int)-1)#从全部反馈样本中，均匀选出最多 101 个样本的下标
     ep, er = pose_error(fk_sequence(model, q[ix]), T[ix])
     if ep.max() > 1e-9 or er.max() > 1e-7:
         raise ValueError("Python/C++ FK crosscheck failed")
-    tail = (t >= duration+2) & (t <= duration+3)
-    if tail.sum() <= 20:
+    tail = (t >= duration+2) & (t <= duration+3)#提取终点保持阶段的数据
+    if tail.sum() <= 20:#终点保持阶段的有效采样点不超过20个，就认为数据不足
         raise ValueError("Insufficient endpoint hold samples")
-    qend = q[tail].mean(axis=0)
+    qend = q[tail].mean(axis=0)#计算最终关节角度
     endp, endr = pose_error(forward(model, qend), forward(model, qg))
 
     response = []

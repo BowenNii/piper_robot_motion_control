@@ -72,4 +72,69 @@ execute_process(COMMAND "${FK_VALIDATION}" "${root}/empty.log" "${root}/empty.cs
 if(code EQUAL 0 OR NOT error MATCHES "No complete feedback")
     message(FATAL_ERROR "zero-sample log should fail")
 endif()
+# 半轮旧关节帧 + 半轮新位姿帧不能拼成完整样本，即使跨度小于 2 ms。
+file(WRITE "${root}/cross-cycle.log"
+    "(10.0045) can0 2A5#000003E8000003E8\n"
+    "(10.0046) can0 2A6#000003E8000003E8\n"
+    "(10.0047) can0 2A7#000003E8000003E8\n"
+    "(10.0050) can0 2A2#0000000000000000\n"
+    "(10.0051) can0 2A3#0000000000000000\n"
+    "(10.0052) can0 2A4#0000000000000000\n")
+execute_process(COMMAND "${FK_VALIDATION}" "${root}/cross-cycle.log" "${root}/cross-cycle.csv"
+    RESULT_VARIABLE code OUTPUT_QUIET ERROR_VARIABLE error)
+if(code EQUAL 0 OR NOT error MATCHES "No complete feedback")
+    message(FATAL_ERROR "cross-cycle mixed sample must be rejected")
+endif()
+file(STRINGS "${root}/cross-cycle.csv" rows)
+list(LENGTH rows count)
+if(NOT count EQUAL 1)
+    message(FATAL_ERROR "mixed sample must not be written")
+endif()
+
+file(READ "${log}" group10)
+string(REPLACE "(10." "(11." group11 "${group10}")
+string(REPLACE "(10." "(12." group12 "${group10}")
+# 不完整轮之后，遇到新的 2A2 应恢复，并且只写入新完整轮。
+file(READ "${root}/cross-cycle.log" incomplete)
+file(WRITE "${root}/recovered.log" "${incomplete}${group11}")
+execute_process(COMMAND "${FK_VALIDATION}" "${root}/recovered.log" "${root}/recovered.csv"
+    RESULT_VARIABLE code OUTPUT_VARIABLE output ERROR_VARIABLE error)
+if(NOT code EQUAL 0 OR NOT output MATCHES "Valid feedback samples: 1")
+    message(FATAL_ERROR "ordered cycle recovery failed: ${output} ${error}")
+endif()
+file(READ "${root}/single.csv" expected)
+file(READ "${root}/recovered.csv" recovered)
+# 两个样本仅绝对时间不同；其余列（包括关节角）应完全一致。
+string(REPLACE "11.0005" "10.0005" recovered "${recovered}")
+if(NOT recovered STREQUAL expected)
+    message(FATAL_ERROR "recovery must use only the new complete cycle")
+endif()
+
+file(WRITE "${root}/increasing.log" "${group10}${group11}")
+execute_process(COMMAND "${FK_VALIDATION}" "${root}/increasing.log" "${root}/increasing.csv"
+    RESULT_VARIABLE code OUTPUT_VARIABLE output ERROR_VARIABLE error)
+if(NOT code EQUAL 0 OR NOT output MATCHES "Valid feedback samples: 2")
+    message(FATAL_ERROR "increasing groups should succeed: ${output} ${error}")
+endif()
+foreach(kind IN ITEMS reversed duplicate)
+    if(kind STREQUAL "reversed")
+        set(groups "${group10}${group12}${group11}")
+        set(expected_rows 3)
+    else()
+        set(groups "${group10}${group10}")
+        set(expected_rows 2)
+    endif()
+    file(WRITE "${root}/${kind}.log" "${groups}")
+    execute_process(COMMAND "${FK_VALIDATION}" "${root}/${kind}.log" "${root}/${kind}.csv"
+        RESULT_VARIABLE code OUTPUT_VARIABLE output ERROR_VARIABLE error)
+    if(code EQUAL 0 OR NOT error MATCHES "timestamps must be strictly increasing"
+            OR output MATCHES "CSV saved:")
+        message(FATAL_ERROR "${kind} group timestamps must fail: ${output} ${error}")
+    endif()
+    file(STRINGS "${root}/${kind}.csv" rows)
+    list(LENGTH rows count)
+    if(NOT count EQUAL expected_rows)
+        message(FATAL_ERROR "${kind} sample must be rejected before writing")
+    endif()
+endforeach()
 message(STATUS "FK CLI integration PASS")

@@ -8,6 +8,7 @@ from ...data_io.csv import write_rows
 from ...data_io.provenance import sha256
 
 def export_trace(z: dict, output: Path) -> None:
+    #将当前记录的轨迹分析数据导出到输出目录
     record = z['record']
     je, pe, re = z['jerror'], z['pe'], z['re']
     values = np.column_stack([z['tr'], je, pe, re, z['path_forward']])
@@ -20,11 +21,13 @@ def export_trace(z: dict, output: Path) -> None:
 
 
 def export_tables(cache: list[dict], response: list[dict], output: Path) -> None:
+    #将所有记录的分析结果和响应数据导出为 CSV 文件
     write_rows(output / 'run_metrics.csv', [z['row'] for z in cache])
     write_rows(output / 'response_metrics.csv', response)
 
 
 def export_provenance(output: Path, sources: dict, cfg: dict, model) -> None:
+    #导出分析的来源和配置的哈希值，以便追踪和验证
     code = {str(path.relative_to(REPO)): sha256(path)
             for path in sorted((REPO / 'analysis').rglob('*.py'))}
     provenance = dict(

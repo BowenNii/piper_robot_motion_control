@@ -6,6 +6,7 @@ import numpy as np
 from ..common.validation import finite
 
 def read_numeric(path, required=()):
+#读取 CSV 文件，按列组织成字典，尽可能把数据转换成数字，返回该列数据数组的字典
     with Path(path).open(newline='', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames or len(set(reader.fieldnames)) != len(reader.fieldnames):

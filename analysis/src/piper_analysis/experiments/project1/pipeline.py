@@ -35,7 +35,7 @@ def analyze(root=DEFAULT_ROOT, output=None, config=None, make_plots: bool = True
         cache.append(result)
         responses.extend(response)
         sources.update(data.source_hashes)
-    for result in cache:
+    for result in cache:#逐条处理 stream 实验，为它找到同组唯一的去程 stream 记录作为延迟来源，再进行评价并导出数据。
         if result['record']['manifest']['mode'] != 'stream':
             continue
         sources_for_delay = [candidate for candidate in cache
@@ -49,7 +49,7 @@ def analyze(root=DEFAULT_ROOT, output=None, config=None, make_plots: bool = True
     export_tables(cache, responses, output)
     compare_baseline(output, base / 'matlab')
     export_provenance(output, sources, cfg, model)
-    if make_plots:
+    if make_plots:#根据开关决定是否绘图
         from ...plotting import draw_closeout
         draw_closeout(cache, responses, inventory['selected_record_numbers'],
                       read_numeric(base / 'decode_comparison.csv'), output)

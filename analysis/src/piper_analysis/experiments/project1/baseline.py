@@ -12,6 +12,7 @@ def _read_rows(path: Path) -> list[dict]:
 
 
 def compare_baseline(output: Path, baseline: Path) -> None:
+    #把MATLAB基准适配成表格，并导出对照报告
     checks = []
     for filename in ('run_metrics.csv', 'response_metrics.csv'):
         values = compare_tables(_read_rows(baseline / filename), _read_rows(output / filename))

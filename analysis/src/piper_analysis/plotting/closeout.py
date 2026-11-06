@@ -11,6 +11,7 @@ from .errors import draw_joint_errors, draw_pose_errors
 
 
 def draw_closeout(cache, response, selected, quality, output, show_number=None) -> None:
+    '''## 组织十图绘制，按顺序编号 1..10；show_number 可选，指定只绘制某一张图。'''
     plt = pyplot(interactive=show_number is not None)
     plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10, 'axes.grid': True})
     context = PlotContext(cache, response, selected, quality, Path(output), show_number)

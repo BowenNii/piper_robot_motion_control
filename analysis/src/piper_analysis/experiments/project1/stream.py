@@ -19,6 +19,7 @@ def prepare_stream(z: dict, model) -> None:
     z['refP'] = z['refT'][:, :3, 3] * 1000
     mask = (t >= ct[0]) & (t <= duration)
     z.update(tr=t[mask], qtrace=q[mask], Ttrace=T[mask], ptrace=T[mask, :3, 3]*1000)
+    #ptrace实际路径：反馈对应的位姿 → 筛选 → 位置；refP指令关节角 qc 经 FK 计算希望机械臂走出的参考路径
     z['path_forward'] = path_distance(z['ptrace'], z['refP'])
     z['path_reverse'] = path_distance(z['refP'], z['ptrace'])
 

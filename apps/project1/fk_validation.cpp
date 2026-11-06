@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 #include "hal/can_log_parser.hpp"
@@ -61,10 +62,11 @@ try
     // CSV 格式和独占创建交给工具；主文件只保留实验处理顺序。
     experiment_io::FkCsvWriter csv(csv_path);
     double first_timestamp = 0.0;
+    double previous_timestamp = 0.0;
 
     const PiperModel model = make_piper_model();
-    // 六种反馈 ID 必须重新收齐，且时间跨度不超过 2 ms。
-    hal::PiperFeedbackAssembler assembler(0.002);
+    // 按 0x2A2 -> 0x2A7 顺序收齐，避免跨轮拼帧；跨度仍须不超过 2 ms。
+    hal::PiperFeedbackAssembler assembler(0.002, true);
     std::size_t lines = 0, parsed_count = 0, invalid_count = 0;
     std::size_t ignored_count = 0, sample_count = 0;
     ErrorAccumulator position_stats, rotation_stats; // 内部使用 m、rad。
@@ -102,6 +104,12 @@ try
         {
             continue;
         }
+        // 组帧器每轮会清空时间状态，因此在这里另行检查跨组时间。
+        // 重复时间也拒绝，避免生成不能用于差分/时间对齐的 CSV。
+        if (sample_count > 0 && sample->timestamp_seconds <= previous_timestamp)
+        {
+            throw std::runtime_error("Completed feedback timestamps must be strictly increasing");
+        }
 
         // 第三步：将已经解码的关节角送入 POE 正运动学。
         VecXd q(6);
@@ -134,13 +142,14 @@ try
         result.T_poe = T_poe;
         result.error = error;
         csv.write(result);
+        previous_timestamp = sample->timestamp_seconds;
         // 只打印首组矩阵，避免数百组重复输出影响阅读。
         if (sample_count == 0)
         {
             std::cout << "First sample timestamp (s): " << sample->timestamp_seconds
                       << "\nDecoded q (rad): " << q.transpose()
                       << "\n\nT_POE:\n" << T_poe
-                      << "\n\nT_feedback:\n" << T_feedback
+                      << "\n\nT_feedback:\nhal::PiperFeedbackAssembler assembler(0.002, true);" << T_feedback
                       << "\n\nPosition error: " << position_mm << " mm"
                       << "\nRotation error: " << rotation_deg << " deg\n\n";
         }
@@ -174,7 +183,9 @@ try
               << "\nRestart reasons duplicate / window / reversal / interface / manual: "
               << diagnostic.duplicate_ids << " / " << diagnostic.over_window
               << " / " << diagnostic.time_reversals << " / " << diagnostic.interface_changes
-              << " / " << diagnostic.manual_resets << '\n';
+              << " / " << diagnostic.manual_resets
+              << "\nOrdered cycle resets / unaligned frames: "
+              << diagnostic.cycle_resets << " / " << diagnostic.unaligned_frames << '\n';
     std::cout << "CSV saved: " << csv_path << " (" << sample_count << " rows)\n";
     std::cout << "Position error mean / RMS / max (mm): "
               << p_stats.mean * 1000.0 << " / " << p_stats.rms * 1000.0

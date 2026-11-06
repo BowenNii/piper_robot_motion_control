@@ -17,7 +17,7 @@ class RobotModel:
 
     @property
     def n(self) -> int:
-        return self.S.shape[1]
+        return self.S.shape[1]#返回 self.S 的列数：
 
     @property
     def home(self) -> np.ndarray:
